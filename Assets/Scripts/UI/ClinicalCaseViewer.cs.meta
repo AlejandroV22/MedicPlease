@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7d11c8426d42f3a4fb932ab63790eae1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - clinicalCase: {fileID: 11400000, guid: 4d7b9605aa0fe32418a85a845fa68bdc, type: 2}
+  - patientNameText: {instanceID: 0}
+  - ageText: {instanceID: 0}
+  - sexText: {instanceID: 0}
+  - historyText: {instanceID: 0}
+  - symptomsText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
