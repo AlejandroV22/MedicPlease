@@ -18,9 +18,9 @@ public class ClinicalCaseViewer : MonoBehaviour
 
     public TMP_Text symptomsText;
 
-    void Start()
+  private void Start()
     {
-        ShowClinicalCase();
+        LoadClinicalCase(GameManager.Instance.SelectedCase);
     }
 
     void ShowClinicalCase()
