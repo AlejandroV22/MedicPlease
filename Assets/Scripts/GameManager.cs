@@ -3,9 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
-    public ClinicalCase SelectedCase;
-
+    public ClinicalCase SelectedCase { get; private set; }
     private void Awake()
     {
         if (Instance == null)
@@ -17,5 +15,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);    
         }
+    }
+    public void SelectClinicalCase(ClinicalCase clinicalCase)
+    {
+        SelectedCase = clinicalCase;
     }
 }

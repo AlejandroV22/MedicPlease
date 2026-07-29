@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 292197210}
   - component: {fileID: 292197209}
   - component: {fileID: 292197208}
+  - component: {fileID: 292197211}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -306,7 +307,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 292197209}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 292197211}
+        m_TargetAssemblyTypeName: CaseButton, Assembly-CSharp
+        m_MethodName: SelectCase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &292197209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +358,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292197206}
   m_CullTransparentMesh: 1
+--- !u!114 &292197211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292197206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec329b956e79ce4b8f95bba802d4db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CaseButton
+  clinicalCase: {fileID: 11400000, guid: 868daee1d58082d4c9badd69732bdfc8, type: 2}
+  sceneToLoad: Consultorio
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1039,7 @@ GameObject:
   - component: {fileID: 1851028896}
   - component: {fileID: 1851028895}
   - component: {fileID: 1851028894}
+  - component: {fileID: 1851028897}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1082,7 +1110,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1851028895}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1851028897}
+        m_TargetAssemblyTypeName: CaseButton, Assembly-CSharp
+        m_MethodName: SelectCase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1851028895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,6 +1161,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851028892}
   m_CullTransparentMesh: 1
+--- !u!114 &1851028897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851028892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec329b956e79ce4b8f95bba802d4db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CaseButton
+  clinicalCase: {fileID: 0}
+  sceneToLoad: MainMenu
 --- !u!1 &2038010170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1266,7 @@ GameObject:
   - component: {fileID: 2071458381}
   - component: {fileID: 2071458380}
   - component: {fileID: 2071458379}
+  - component: {fileID: 2071458382}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -1282,7 +1337,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2071458380}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2071458382}
+        m_TargetAssemblyTypeName: CaseButton, Assembly-CSharp
+        m_MethodName: SelectCase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2071458380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1321,6 +1388,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071458377}
   m_CullTransparentMesh: 1
+--- !u!114 &2071458382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071458377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec329b956e79ce4b8f95bba802d4db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CaseButton
+  clinicalCase: {fileID: 11400000, guid: 4d7b9605aa0fe32418a85a845fa68bdc, type: 2}
+  sceneToLoad: Consultorio
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -286,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5460deafd1a20034fabd84f74c2f9f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  SelectedCase: {fileID: 11400000, guid: 4d7b9605aa0fe32418a85a845fa68bdc, type: 2}
 --- !u!4 &756455806
 Transform:
   m_ObjectHideFlags: 0
@@ -355,6 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaseButton
   clinicalCase: {fileID: 11400000, guid: 4d7b9605aa0fe32418a85a845fa68bdc, type: 2}
+  sceneToLoad: CaseSelection
 --- !u!114 &1204807104
 MonoBehaviour:
   m_ObjectHideFlags: 0
