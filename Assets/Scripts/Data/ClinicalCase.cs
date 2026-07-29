@@ -22,4 +22,5 @@ public class ClinicalCase : ScriptableObject
 
     [TextArea(5,10)]
     public string feedback;
+    
 }
