@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClinicalCaseViewer : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class ClinicalCaseViewer : MonoBehaviour
     public TMP_Text historyText;
 
     public TMP_Text symptomsText;
+    public Image patientPhoto;
 
   private void Start()
     {
@@ -34,6 +36,8 @@ public class ClinicalCaseViewer : MonoBehaviour
         historyText.text = clinicalCase.medicalHistory;
 
         symptomsText.text = clinicalCase.symptoms;
+        
+        patientPhoto.sprite = clinicalCase.patientPortrait;
     }
     public void LoadClinicalCase(ClinicalCase newCase)
     {

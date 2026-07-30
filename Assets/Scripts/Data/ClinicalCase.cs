@@ -7,6 +7,7 @@ public class ClinicalCase : ScriptableObject
     public string patientName;
     public int age;
     public string sex;
+    public Sprite patientPortrait;
 
     [TextArea(5,10)]
     public string medicalHistory;

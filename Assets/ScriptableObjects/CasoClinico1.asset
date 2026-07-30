@@ -15,6 +15,7 @@ MonoBehaviour:
   patientName: Alejandro
   age: 21
   sex: Hombre
+  patientPortrait: {fileID: 2985424777010612504, guid: 21ef17552f3c82a39b27f67b056ff2b6, type: 3}
   medicalHistory: "Hola, soy un historial m\xE9dico. Este es mi historial m\xE9dico."
   symptoms: Dolor de cabeza
   correctDiagnosis: "Migra\xF1a"
