@@ -15,7 +15,7 @@ MonoBehaviour:
   patientName: Jhonatan
   age: 23
   sex: porfavor
-  patientPortrait: {fileID: -2023142993419813540, guid: ec06b1c9d614dba5db772ad5e33e0ab7, type: 3}
+  patientPortrait: {fileID: 7541189434026366656, guid: 67418d2177875bfb98712108199dfe96, type: 3}
   medicalHistory: "Desempleo\t\t"
   symptoms: Desempleo
   correctDiagnosis: Desempleado

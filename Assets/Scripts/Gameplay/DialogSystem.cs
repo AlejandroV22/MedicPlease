@@ -5,16 +5,40 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Reflection;
 
 public class DialogSystem : MonoBehaviour
 {
     private Queue <string> queueDialogs = new();
     public Texto texto;
-    private Sprite expretion;
+    // private Sprite expretion;
     [SerializeField] TextMeshProUGUI screenText;
-    [SerializeField] Image screenImage;
+    //[SerializeField] Image screenImage;
+    private string actualPhrase;
+    private bool isWriting = false;
+    private string isWritingPhrase;
+    public ClinicalCase clinicalCase;
+    private string[] textVariables;
+    public int correctAnswer=0;
+    public GameObject typeofChoice;
+    public GameObject choiceBox;
+
     public void Awake(){
         ShowText();
+        GetComponent<Button>().onClick.AddListener(IsPressed);
+
+    }
+    public void GetVariables(){
+        clinicalCase = GameManager.Instance.SelectedCase;
+        transform.GetChild(1).GetComponent<Image>().sprite = clinicalCase.patientPortrait;
+        Type tipo = clinicalCase.GetType();
+        FieldInfo[] campos = tipo.GetFields();
+        List<string> lista = new List<string> {};
+        foreach(FieldInfo campo in campos){
+            lista.Add(campo.Name);
+        }
+        textVariables = lista.ToArray();
+        
     }
     public void ShowText(){
         queueDialogs.Clear();
@@ -27,27 +51,79 @@ public class DialogSystem : MonoBehaviour
         if (queueDialogs.Count == 0){
             return;
         }
-        string actualPhrase = queueDialogs.Dequeue();
-        CheckExpretion(actualPhrase);
-        actualPhrase = actualPhrase[1..^0];
-        screenText.text = actualPhrase;
-        screenImage.sprite = expretion;
-        StartCoroutine(ShowCharts(actualPhrase));
+        Debug.Log(textVariables);
+        if (isWriting==false){
+            actualPhrase = queueDialogs.Dequeue();
+            CheckVariable(actualPhrase);
+      //  CheckExpretion(actualPhrase);
+            //actualPhrase = actualPhrase[1..^0];
+            isWriting=true;
+        //screenImage.sprite = expretion;
+            StartCoroutine(ShowCharts(actualPhrase));
+        }
     }
-    public void CheckExpretion(string actualPhrase){
+    /*public void CheckExpretion(string actualPhrase){
             //Todo agregar comprobacion de que el primer caracter sea numerico
             Debug.Log(actualPhrase.ToCharArray()[0]);
             int expretionIndex = int.Parse(actualPhrase[0].ToString());
             expretion = texto.imageArray[expretionIndex];
-        
-    }
+        isWriting=true;
+    }*/
     IEnumerator ShowCharts(string textToShow){
         screenText.text = "";
+        Debug.Log("corutina iniciada");
+        isWritingPhrase=textToShow;
         foreach (char character in textToShow.ToCharArray()){
+            Debug.Log("corutina iniciada");
             screenText.text+=character;
             yield return new WaitForSeconds(0.02f);
         }
+        isWriting=false;
 
+    }
+    public void IsPressed(){
+        if (isWriting==true){
+            Debug.Log("skipeado");
+            StopAllCoroutines();
+            screenText.text = isWritingPhrase;
+            isWriting=false;
+        }else{
+            NextPhrase();
+        }
+                    
+    }
+    public void CheckVariable(string actualPhrase){
+        GetVariables();
+        foreach (string variable in textVariables){
+            if(actualPhrase.Contains("{"+variable+"}")){
+                FieldInfo field = typeof(ClinicalCase).GetField(variable);
+                if (field != null){
+                    object value = field.GetValue(clinicalCase);
+                    actualPhrase = actualPhrase.Replace("{"+variable+"}", value?.ToString() ?? "");
+                    if(variable=="feedback"){
+                        if(correctAnswer==2){
+                            actualPhrase = actualPhrase.Replace("{"+variable+"}", value?.ToString() ?? "");
+                        }else{
+                            actualPhrase = "El paciente murio";
+                        }
+                    }
+                }
+        }
+        }
+        if(actualPhrase.Contains("{negro}")){
+            actualPhrase = isWritingPhrase;
+            typeofChoice.SetActive(true);
+            gameObject.GetComponent<Button>().interactable = false;
+            choiceBox.SetActive(true);
+        }
+        if(actualPhrase.Contains("{blanco}")){
+            actualPhrase = isWritingPhrase;
+            typeofChoice.SetActive(false);
+            choiceBox.SetActive(true);
+            gameObject.GetComponent<Button>().interactable = false;
+        }
+        
+        this.actualPhrase=actualPhrase;
     }
 
 }

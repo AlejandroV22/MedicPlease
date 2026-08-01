@@ -8,5 +8,5 @@ public class Texto
 {
     [TextArea (2,6)]
     public string[] textArray;
-    public Sprite[] imageArray;
+//    public Sprite[] imageArray;
 }
