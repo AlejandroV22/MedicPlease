@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 113213682d857047890e560193568722
+guid: a74d5f17357a8df5c9c38a5c756bd73b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1461463208688454401
-    second: Persona_5_Hero_0
+      213: 3219666174674217531
+    second: 260804_16h10m31s_screenshot_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Persona_5_Hero_0
+      name: 260804_16h10m31s_screenshot_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2658
-        height: 6285
+        width: 397
+        height: 578
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff472d174f6d7bbe0800000000000000
-      internalID: -1461463208688454401
+      spriteID: b3a2cccc35d8eac20800000000000000
+      internalID: 3219666174674217531
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Persona_5_Hero_0: -1461463208688454401
+      260804_16h10m31s_screenshot_0: 3219666174674217531
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
