@@ -176,12 +176,11 @@ MonoBehaviour:
     - 0Esto es una prueba del sistema de dialogos del juego
     - 1when haces tus momos en el dialogo de texto
     - 2Amongus sussy bakka
-    imageArray:
-    - {fileID: -2023142993419813540, guid: ec06b1c9d614dba5db772ad5e33e0ab7, type: 3}
-    - {fileID: -6551178520618646173, guid: 491eafc3f497cfc82bce9a2ca0e5c6eb, type: 3}
-    - {fileID: 2985424777010612504, guid: 21ef17552f3c82a39b27f67b056ff2b6, type: 3}
   screenText: {fileID: 660400561}
-  screenImage: {fileID: 727126161}
+  clinicalCase: {fileID: 0}
+  correctAnswer: 0
+  typeofChoice: {fileID: 0}
+  choiceBox: {fileID: 0}
 --- !u!114 &60562648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,10 +415,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
