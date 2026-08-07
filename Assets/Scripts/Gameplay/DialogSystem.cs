@@ -62,6 +62,16 @@ public class DialogSystem : MonoBehaviour
             StartCoroutine(ShowCharts(actualPhrase));
         }
     }
+    public void AddPhrase(string newPhrase){
+        Queue <string> modDialogs = new();
+        modDialogs.Enqueue(newPhrase);
+        foreach (string textBuffer in queueDialogs){
+            modDialogs.Enqueue(textBuffer);
+        }
+        queueDialogs.Clear();
+        queueDialogs = modDialogs;
+        NextPhrase();
+    }
     /*public void CheckExpretion(string actualPhrase){
             //Todo agregar comprobacion de que el primer caracter sea numerico
             Debug.Log(actualPhrase.ToCharArray()[0]);

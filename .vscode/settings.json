@@ -68,10 +68,11 @@
         "*.slnx": "*.csproj"
     },
     "dotnet.defaultSolution": "MedicPlease.slnx",
+    "dotnet.enableWorkspaceBasedDevelopment": false,
     "dotrush.roslyn.projectOrSolutionFiles": [
-        "/home/rhp/Documentos/ProyectoDeGrado/MedicPlease/MedicPlease/MedicPlease.slnx",
-        "/home/rhp/Documentos/ProyectoDeGrado/MedicPlease/MedicPlease/Library/PackageCache/com.unity.ai.inference@9a123aee5df7/Runtime/Core/SourceGenerator/SourceGeneratorsProject~/SourceGenerators.sln",
-        "/home/rhp/Documentos/ProyectoDeGrado/MedicPlease/MedicPlease/Assembly-CSharp.csproj",
-        "/home/rhp/Documentos/ProyectoDeGrado/MedicPlease/MedicPlease/Library/PackageCache/com.unity.ai.inference@9a123aee5df7/Runtime/Core/SourceGenerator/SourceGeneratorsProject~/SourceGenerators/SourceGenerators/SourceGenerators.csproj"
+        "/home/rhp/Documentos/ProyectoDeGrado/MedicPlease/MedicPlease.slnx",
+        "/home/rhp/Documentos/ProyectoDeGrado/MedicPlease/Library/PackageCache/com.unity.ai.inference@9a123aee5df7/Runtime/Core/SourceGenerator/SourceGeneratorsProject~/SourceGenerators.sln",
+        "/home/rhp/Documentos/ProyectoDeGrado/MedicPlease/Assembly-CSharp.csproj",
+        "/home/rhp/Documentos/ProyectoDeGrado/MedicPlease/Library/PackageCache/com.unity.ai.inference@9a123aee5df7/Runtime/Core/SourceGenerator/SourceGeneratorsProject~/SourceGenerators/SourceGenerators/SourceGenerators.csproj"
     ]
 }

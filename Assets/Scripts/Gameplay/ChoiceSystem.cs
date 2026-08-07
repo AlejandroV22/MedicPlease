@@ -24,6 +24,9 @@ public class ChoiceSystem : MonoBehaviour
         confirmButton.onClick.AddListener(ConfirmChoice);
         gameObject.SetActive(false);
     }
+    public void GetStart(){
+        Start();
+    }
     private void Update(){
         isInteractable = dialogBox.GetComponent<Button>().interactable;
         if(!isInteractable){
@@ -40,9 +43,10 @@ public class ChoiceSystem : MonoBehaviour
     {
         menuGenerated = false;
     }
-    public void ChoiceMenu(){
+    public void ChoiceMenu(/*TODO hacer que el choiceMenu reciba cualquier opcion a travez del texto*/){
         choiceOptions.ClearOptions();
         Debug.Log("xdxdx");
+        //implementacion temporal, TODO hacer que el tipo de decision sea definida con el texto escrito.
         if(!typeofChoice.activeSelf){
             Debug.Log("holaxd");
             string[] badChoices = {"Descanso", "Comer"};
