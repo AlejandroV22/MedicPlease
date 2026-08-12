@@ -33,7 +33,7 @@ public class ClinicalCaseViewer : MonoBehaviour
 
         sexText.text = clinicalCase.sex;
 
-        historyText.text = clinicalCase.medicalHistory;
+        historyText.text = clinicalCase.consultReason;
 
         symptomsText.text = clinicalCase.symptoms;
         

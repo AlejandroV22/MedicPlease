@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NuevoCasoClinico", menuName = "Clinical Cases/Caso Clínico")]
@@ -9,9 +10,10 @@ public class ClinicalCase : ScriptableObject
     public string sex;
     public Sprite patientPortrait;
 
-    [TextArea(5,10)]
-    public string medicalHistory;
-
+    [Header("Historia Clinica")]
+    public string consultReason;
+    public string personalHistory;
+    public string familyHistory;
     [TextArea(3,8)]
     public string symptoms;
 

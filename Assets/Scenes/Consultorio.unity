@@ -3258,6 +3258,7 @@ MonoBehaviour:
   texto:
     textArray:
     - Hola, mi nombre es {patientName} y tengo {age} y soy {sex}
+    - Vengo a consulta porque {consultReason}
     - Tengo los siguientes sintomas {symptoms}
     - "\xBFQue tengo doctor?"
     - '{negro}'
