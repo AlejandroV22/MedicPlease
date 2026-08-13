@@ -2442,6 +2442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceSystem
   choices: []
+  rawChoices: 
   typeofChoice: {fileID: 1293591937}
 --- !u!1 &1551455901
 GameObject:
@@ -3260,10 +3261,10 @@ MonoBehaviour:
     - Hola, mi nombre es {patientName} y tengo {age} y soy {sex}
     - Vengo a consulta porque {consultReason}
     - Tengo los siguientes sintomas {symptoms}
-    - "\xBFQue tengo doctor?"
-    - '{negro}'
-    - "Entiendo doctor, y \xBFcual seria el tratamiento?"
-    - '{blanco}'
+    - "{choice}{choices b:\"pereza\" \"demencia\" c:\"{correctDiagnosis}\"}\xBFQue
+      tengo doctor?"
+    - "{choice}{choices b:\"Correr\" \"Bailar\" c:\"{correctTreatment}\"}Entiendo
+      doctor, y \xBFcual seria el tratamiento?"
     - '{feedback}'
     - Fin
   screenText: {fileID: 896604742}
@@ -3271,6 +3272,7 @@ MonoBehaviour:
   correctAnswer: 0
   typeofChoice: {fileID: 1293591937}
   choiceBox: {fileID: 1530429805}
+  rawChoices: 
 --- !u!114 &1933745131
 MonoBehaviour:
   m_ObjectHideFlags: 0

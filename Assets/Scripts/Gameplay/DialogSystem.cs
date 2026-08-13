@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 public class DialogSystem : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class DialogSystem : MonoBehaviour
     public int correctAnswer=0;
     public GameObject typeofChoice;
     public GameObject choiceBox;
+    public string rawChoices;
 
     public void Awake(){
         ShowText();
@@ -120,17 +122,13 @@ public class DialogSystem : MonoBehaviour
                 }
         }
         }
-        if(actualPhrase.Contains("{negro}")){
-            actualPhrase = isWritingPhrase;
+        if(actualPhrase.Contains("{choice}")){
+            rawChoices = actualPhrase;
+            var regex = @"\{choice\}\{choices b:""[^""]+""(?:\s+""[^""]+"")* c:""[^""]+""\}";
+            actualPhrase = Regex.Replace(actualPhrase, regex, "");
             typeofChoice.SetActive(true);
             gameObject.GetComponent<Button>().interactable = false;
             choiceBox.SetActive(true);
-        }
-        if(actualPhrase.Contains("{blanco}")){
-            actualPhrase = isWritingPhrase;
-            typeofChoice.SetActive(false);
-            choiceBox.SetActive(true);
-            gameObject.GetComponent<Button>().interactable = false;
         }
         
         this.actualPhrase=actualPhrase;

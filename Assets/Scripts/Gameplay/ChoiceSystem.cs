@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using System.Text.RegularExpressions;
+
 public class ChoiceSystem : MonoBehaviour
 {
     private GameObject dialogBox;
@@ -12,9 +14,10 @@ public class ChoiceSystem : MonoBehaviour
     private TMP_Dropdown choiceOptions;
     private Button confirmButton;
     public List<string> choices;
+    public string rawChoices;
     private string correctAnswer;
     private bool menuGenerated = false;
-    private string[] badChoices= {"a","b"};
+    private List<string> badChoices;
     public GameObject typeofChoice;
 
     private void Start(){
@@ -28,11 +31,12 @@ public class ChoiceSystem : MonoBehaviour
         Start();
     }
     private void Update(){
+        rawChoices = dialogBox.GetComponent<DialogSystem>().rawChoices;
         isInteractable = dialogBox.GetComponent<Button>().interactable;
         if(!isInteractable){
             if(!menuGenerated){
                 Debug.Log("entre *suena musica de hacker*");
-                ChoiceMenu();
+                ChoiceMenu(rawChoices);
                 menuGenerated = true;
             }
             }else{
@@ -43,25 +47,19 @@ public class ChoiceSystem : MonoBehaviour
     {
         menuGenerated = false;
     }
-    public void ChoiceMenu(/*TODO hacer que el choiceMenu reciba cualquier opcion a travez del texto*/){
+    public void ChoiceMenu(string rawChoices){
         choiceOptions.ClearOptions();
         Debug.Log("xdxdx");
-        //implementacion temporal, TODO hacer que el tipo de decision sea definida con el texto escrito.
-        if(!typeofChoice.activeSelf){
-            Debug.Log("holaxd");
-            string[] badChoices = {"Descanso", "Comer"};
-            for (int i = 0; i < badChoices.Length; i++){
-                this.badChoices[i] = badChoices[i]; 
-            }
-            correctAnswer=dialogBox.GetComponent<DialogSystem>().clinicalCase.correctTreatment;
-        }else{
-            Debug.Log("holaxd2");
-            string[] badChoices = {"Cancer Cerebral", "Sindrome del impostor"};
-            for (int i = 0; i < badChoices.Length; i++){
-            this.badChoices[i] = badChoices[i]; 
-            }
-            correctAnswer=dialogBox.GetComponent<DialogSystem>().clinicalCase.correctDiagnosis;
-        }
+        Debug.Log("holaxd");
+        var regexBadChoices = new Regex(@"\{choice\}\{choices b:(.*?) c:");
+        var matchBadChoices = regexBadChoices.Match(rawChoices);
+        List<string> badChoices = Regex.Matches(matchBadChoices.Groups[1].Value, @"""([^""]+)""")
+                    .Select(m => m.Groups[1].Value)
+                    .ToList();
+        this.badChoices = badChoices;
+        var regexCorrectAnswer = new Regex(@"\{choice\}\{choices b:.*? c:""([^""]+)""\}");
+        var matchCorrectAnswer = regexCorrectAnswer.Match(rawChoices);
+        correctAnswer=matchCorrectAnswer.Groups[1].Value;
         Debug.Log(correctAnswer);
         RandomChoices(correctAnswer);
         choiceOptions.AddOptions(choices);
@@ -82,7 +80,7 @@ public class ChoiceSystem : MonoBehaviour
            Debug.Log("respuesta correcta"); 
         }
         dialogBox.GetComponent<Button>().interactable = true;
-        dialogBox.GetComponent<DialogSystem>().NextPhrase();
         gameObject.SetActive(false);
+        dialogBox.GetComponent<DialogSystem>().NextPhrase();
     }
 }
