@@ -19,6 +19,7 @@ public class ClinicalCaseViewer : MonoBehaviour
 
     public TMP_Text symptomsText;
     public Image patientPhoto;
+    
 
   private void Start()
     {

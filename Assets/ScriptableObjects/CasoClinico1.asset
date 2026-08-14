@@ -25,3 +25,4 @@ MonoBehaviour:
   feedback: 'Este es el feedback.
 
 '
+  scriptPath: {fileID: 4900000, guid: a9cd51b969156f75d8eda595a4205a68, type: 3}
