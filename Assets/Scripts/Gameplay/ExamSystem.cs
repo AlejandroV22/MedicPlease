@@ -21,6 +21,6 @@ public class ExamSystem : MonoBehaviour
     }
     public void ExamSelected(){
         choiceBox.GetComponent<ChoiceSystem>().GetStart();
-        //TODO agregar a clinical case los resultados de los examenes
+        //TODO agregar a clinical case los resultados de los examenes.
     }
 }
