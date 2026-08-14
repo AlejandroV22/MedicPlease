@@ -51,6 +51,7 @@ public class ChoiceSystem : MonoBehaviour
         choiceOptions.ClearOptions();
         Debug.Log("xdxdx");
         Debug.Log("holaxd");
+        // TODO hacer que vayan a distintos caminos dependiendo de la decision
         var regexBadChoices = new Regex(@"\{choice\}\{choices b:(.*?) c:");
         var matchBadChoices = regexBadChoices.Match(rawChoices);
         List<string> badChoices = Regex.Matches(matchBadChoices.Groups[1].Value, @"""([^""]+)""")

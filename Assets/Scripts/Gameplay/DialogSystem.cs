@@ -26,6 +26,8 @@ public class DialogSystem : MonoBehaviour
     public string rawChoices;
 
     public void Awake(){
+        GetVariables();
+        texto.GetTextToFile(clinicalCase.scriptPath);
         ShowText();
         GetComponent<Button>().onClick.AddListener(IsPressed);
 
@@ -112,6 +114,7 @@ public class DialogSystem : MonoBehaviour
                 if (field != null){
                     object value = field.GetValue(clinicalCase);
                     actualPhrase = actualPhrase.Replace("{"+variable+"}", value?.ToString() ?? "");
+                    //TODO feedback pero ahora si feedback
                     if(variable=="feedback"){
                         if(correctAnswer==2){
                             actualPhrase = actualPhrase.Replace("{"+variable+"}", value?.ToString() ?? "");
