@@ -52,18 +52,20 @@ public class ChoiceSystem : MonoBehaviour
         Debug.Log("xdxdx");
         Debug.Log("holaxd");
         // TODO hacer que vayan a distintos caminos dependiendo de la decision
-        var regexBadChoices = new Regex(@"\{choice\}\{choices b:(.*?) c:");
-        var matchBadChoices = regexBadChoices.Match(rawChoices);
-        List<string> badChoices = Regex.Matches(matchBadChoices.Groups[1].Value, @"""([^""]+)""")
-                    .Select(m => m.Groups[1].Value)
-                    .ToList();
-        this.badChoices = badChoices;
-        var regexCorrectAnswer = new Regex(@"\{choice\}\{choices b:.*? c:""([^""]+)""\}");
-        var matchCorrectAnswer = regexCorrectAnswer.Match(rawChoices);
-        correctAnswer=matchCorrectAnswer.Groups[1].Value;
-        Debug.Log(correctAnswer);
-        RandomChoices(correctAnswer);
-        choiceOptions.AddOptions(choices);
+        if (rawChoices.Contains("choicest1")){
+            var regexBadChoices = new Regex(@"\{choice\}\{choices b:(.*?) c:");
+            var matchBadChoices = regexBadChoices.Match(rawChoices);
+            List<string> badChoices = Regex.Matches(matchBadChoices.Groups[1].Value, @"""([^""]+)""")
+                        .Select(m => m.Groups[1].Value)
+                        .ToList();
+            this.badChoices = badChoices;
+            var regexCorrectAnswer = new Regex(@"\{choice\}\{choices b:.*? c:""([^""]+)""\}");
+            var matchCorrectAnswer = regexCorrectAnswer.Match(rawChoices);
+            correctAnswer=matchCorrectAnswer.Groups[1].Value;
+            Debug.Log(correctAnswer);
+            RandomChoices(correctAnswer);
+            choiceOptions.AddOptions(choices);
+        }
     }
     public void RandomChoices(string rchoise){
         choices.Clear();
