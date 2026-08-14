@@ -27,11 +27,11 @@ public class ClinicalCaseViewer : MonoBehaviour
 
     void ShowClinicalCase()
     {
-        patientNameText.text = clinicalCase.patientName;
+        patientNameText.text = "Nombre: "+clinicalCase.patientName;
 
-        ageText.text = clinicalCase.age.ToString();
+        ageText.text = "Edad: "+clinicalCase.age.ToString();
 
-        sexText.text = clinicalCase.sex;
+        sexText.text = "Sexo: "+clinicalCase.sex;
 
         historyText.text = clinicalCase.consultReason;
 

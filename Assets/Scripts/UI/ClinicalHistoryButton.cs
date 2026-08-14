@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ClinicalHistoryButton : MonoBehaviour
 {
     public GameObject clinicalHistory;
+    public GameObject generalPanel;
     private GameObject dialogBox;
     private GameObject choiceBox;
     public bool isActive = false;
