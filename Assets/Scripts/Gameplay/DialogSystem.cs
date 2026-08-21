@@ -127,8 +127,17 @@ public class DialogSystem : MonoBehaviour
         }
         if(actualPhrase.Contains("{choice}")){
             rawChoices = actualPhrase;
-            var regex = @"\{choice\}\{choicest1 b:""[^""]+""(?:\s+""[^""]+"")* c:""[^""]+""\}";
-            actualPhrase = Regex.Replace(actualPhrase, regex, "");
+            var regext1 = new Regex(@"\{choice\}\{choicest1\s+b:\s*((?:""[^""]*""\s*)*)c:\s*""[^""]*""\}");
+            Debug.Log("match estado" + regext1.Match(actualPhrase).Success);
+            if (regext1.Match(actualPhrase).Success)
+            {
+             actualPhrase = regext1.Replace(actualPhrase, "");   
+            }
+            var regext2 = new Regex(@"\{choice\}\{choicest2\s+c:\s*((?:""[^""]*""\s*)*)\}");
+            if (regext2.Match(actualPhrase).Success)
+            {
+             actualPhrase = regext2.Replace(actualPhrase, "");   
+            }
             typeofChoice.SetActive(true);
             gameObject.GetComponent<Button>().interactable = false;
             choiceBox.SetActive(true);

@@ -24,7 +24,6 @@ public class ChoiceSystem : MonoBehaviour
         dialogBox = GameObject.Find("DialogBoxImage");
         choiceOptions = gameObject.GetComponentInChildren<TMP_Dropdown>();
         confirmButton = gameObject.GetComponentInChildren<Button>();
-        confirmButton.onClick.AddListener(ConfirmChoice);
         gameObject.SetActive(false);
     }
     public void GetStart(){
@@ -52,20 +51,40 @@ public class ChoiceSystem : MonoBehaviour
         Debug.Log("xdxdx");
         Debug.Log("holaxd");
         // TODO hacer que vayan a distintos caminos dependiendo de la decision
-        if (rawChoices.Contains("choicest1")){
-            var regexBadChoices = new Regex(@"\{choice\}\{choices b:(.*?) c:");
-            var matchBadChoices = regexBadChoices.Match(rawChoices);
-            List<string> badChoices = Regex.Matches(matchBadChoices.Groups[1].Value, @"""([^""]+)""")
-                        .Select(m => m.Groups[1].Value)
-                        .ToList();
-            this.badChoices = badChoices;
-            var regexCorrectAnswer = new Regex(@"\{choice\}\{choices b:.*? c:""([^""]+)""\}");
-            var matchCorrectAnswer = regexCorrectAnswer.Match(rawChoices);
-            correctAnswer=matchCorrectAnswer.Groups[1].Value;
-            Debug.Log(correctAnswer);
-            RandomChoices(correctAnswer);
-            choiceOptions.AddOptions(choices);
-        }
+            if (rawChoices.Contains("choicest1")){
+                confirmButton.onClick.RemoveAllListeners();
+                confirmButton.onClick.AddListener(ConfirmChoice);
+                var regexBadChoices = new Regex(@"\{choice\}\{choicest1 b:(.*?) c:");
+                var matchBadChoices = regexBadChoices.Match(rawChoices);
+                List<string> badChoices = Regex.Matches(matchBadChoices.Groups[1].Value, @"""([^""]+)""")
+                            .Select(m => m.Groups[1].Value)
+                            .ToList();
+                this.badChoices = badChoices;
+                var regexCorrectAnswer = new Regex(@"\{choice\}\{choicest1 b:.*? c:""([^""]+)""\}");
+                var matchCorrectAnswer = regexCorrectAnswer.Match(rawChoices);
+                correctAnswer=matchCorrectAnswer.Groups[1].Value;
+                Debug.Log("momazos entrar al if");
+                RandomChoices(correctAnswer);
+                choiceOptions.AddOptions(choices);
+                foreach (string choice in choices)
+                {
+                    Debug.Log(choice);
+                }
+            } if (rawChoices.Contains("choicest2"))
+            {
+                confirmButton.onClick.RemoveAllListeners();
+                confirmButton.onClick.AddListener(changePath);
+                var regexChoices = new Regex(@"\{choice\}\{choicest2\s+c:\s*(.*?)\}");
+                var matchChoices = regexChoices.Match(rawChoices);
+                choices = Regex.Matches(matchChoices.Groups[1].Value, @"""([^""]*)""")
+                            .Select(m => m.Groups[1].Value)
+                            .ToList();
+                choiceOptions.AddOptions(choices);
+                foreach (string choice in choices)
+                {
+                    Debug.Log(choice);
+                }
+            }
     }
     public void RandomChoices(string rchoise){
         choices.Clear();
@@ -85,5 +104,10 @@ public class ChoiceSystem : MonoBehaviour
         dialogBox.GetComponent<Button>().interactable = true;
         gameObject.SetActive(false);
         dialogBox.GetComponent<DialogSystem>().NextPhrase();
+    }
+    public void changePath()
+    {
+        //TODO agregar un identificador de caminos y un identificador de donde termina el texto
+        Debug.Log("eso boton");
     }
 }
