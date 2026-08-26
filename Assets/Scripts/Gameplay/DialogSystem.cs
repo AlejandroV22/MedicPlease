@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 public class DialogSystem : MonoBehaviour
 {
-    private Queue <string> queueDialogs = new();
+    public Queue <string> queueDialogs = new();
     public Texto texto;
     // private Sprite expretion;
     [SerializeField] TextMeshProUGUI screenText;
@@ -142,8 +142,37 @@ public class DialogSystem : MonoBehaviour
             gameObject.GetComponent<Button>().interactable = false;
             choiceBox.SetActive(true);
         }
+        if (actualPhrase.Contains("{main}"))
+        {
+            int timesToSkip = 0;
+            foreach(string dialog in queueDialogs)
+            {
+                timesToSkip++;
+                if(dialog.Contains("{m}"))
+                {
+                    var regex = new Regex(@"\{m\}");
+                    if (regex.Match(dialog).Success)
+                    {
+                        actualPhrase = regex.Replace(dialog, "");
+                    }
+                    else
+                    {
+                        actualPhrase=dialog;   
+                    }
+                    SkipPhrase(timesToSkip);
+                    break;
+                }
+            }
+        }
         
         this.actualPhrase=actualPhrase;
+    }
+    public void SkipPhrase(int timesToSkip = 1)
+    {
+        for (int i=1; i<=timesToSkip; i++)
+        {
+            queueDialogs.Dequeue();
+        }
     }
 
 }

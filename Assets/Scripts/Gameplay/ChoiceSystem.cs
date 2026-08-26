@@ -108,6 +108,28 @@ public class ChoiceSystem : MonoBehaviour
     public void changePath()
     {
         //TODO agregar un identificador de caminos y un identificador de donde termina el texto
+        Queue <string> queueDialogs = dialogBox.GetComponent<DialogSystem>().queueDialogs;
+        int selectIndex = choiceOptions.value;
+        string selectedOption = choiceOptions.options[selectIndex].text;
+        int timesToSkip = 0;
+        foreach(string dialog in queueDialogs)
+        {
+            timesToSkip++;
+            if(dialog.Contains("{"+selectedOption +"}"))
+            {
+                dialogBox.GetComponent<DialogSystem>().SkipPhrase(timesToSkip);
+                var regex = new Regex(@"\{[^}]+\}");
+                if (regex.Match(dialog).Success)
+                {
+                    dialogBox.GetComponent<DialogSystem>().AddPhrase(regex.Replace(dialog, ""));
+                }
+                break;
+            }
+        }
+        dialogBox.GetComponent<Button>().interactable = true;
+        gameObject.SetActive(false);
+        dialogBox.GetComponent<DialogSystem>().NextPhrase();
+
         Debug.Log("eso boton");
     }
 }
