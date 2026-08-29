@@ -16,6 +16,8 @@ public class ClinicalCase : ScriptableObject
     public string familyHistory;
     [TextArea(3,8)]
     public string symptoms;
+    [Header("Preguntas de interrogacion")]
+    public string[] questions;
 
     [Header("Respuestas correctas")]
     public string correctDiagnosis;

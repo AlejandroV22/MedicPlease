@@ -102,6 +102,10 @@ MonoBehaviour:
     luctus. Sed dignissim diam leo, at venenatis mi tincidunt a. Cras porta sit amet
     elit vitae consequat. Donec viverra maximus dui, in pulvinar sapien lacinia vitae.
     Nulla urna leo, eleifend eu volutpat id, pulvinar sit amet ex.
+  questions:
+  - "\xBFPrueba?"
+  - "\xBFPrueba 2?"
+  - "\xBFPrueba 3?"
   correctDiagnosis: "Migra\xF1a"
   correctTreatment: Pastillas
   feedback: 'Este es el feedback.
