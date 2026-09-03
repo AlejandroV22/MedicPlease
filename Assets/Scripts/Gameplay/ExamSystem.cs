@@ -14,6 +14,7 @@ public class ExamSystem : MonoBehaviour
         choiceOptions=choiceBox.GetComponentInChildren<TMP_Dropdown>();
         choiceButton = GameObject.Find("ChoiceButton").GetComponent<Button>();
         dialogSystem = GameObject.Find("DialogBoxImage");
+        choiceBox.SetActive(true);
         choiceOptions.ClearOptions();
         choiceOptions.AddOptions(exams.ToList());
         choiceButton.onClick.RemoveAllListeners();

@@ -24,6 +24,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject typeofChoice;
     public GameObject choiceBox;
     public string rawChoices;
+    private Coroutine blinkingSprite;
 
     public void Awake(){
         GetVariables();
@@ -57,6 +58,10 @@ public class DialogSystem : MonoBehaviour
         }
         Debug.Log(textVariables);
         if (isWriting==false){
+            if (blinkingSprite != null)
+            {
+              StopCoroutine(blinkingSprite);  
+            } 
             actualPhrase = queueDialogs.Dequeue();
             CheckVariable(actualPhrase);
       //  CheckExpretion(actualPhrase);
@@ -64,6 +69,7 @@ public class DialogSystem : MonoBehaviour
             isWriting=true;
         //screenImage.sprite = expretion;
             StartCoroutine(ShowCharts(actualPhrase));
+                
         }
     }
     public void AddPhrase(string newPhrase){
@@ -93,7 +99,19 @@ public class DialogSystem : MonoBehaviour
             yield return new WaitForSeconds(0.02f);
         }
         isWriting=false;
+        blinkingSprite = StartCoroutine(SpriteBlinking());
 
+    }
+    IEnumerator SpriteBlinking()
+    {
+        while(gameObject.GetComponent<Button>().interactable){
+        string baseText = screenText.text;
+        string spriteName = "<sprite=0>"; 
+        screenText.text += spriteName;
+        yield return new WaitForSeconds(0.5f);
+        screenText.text = baseText;
+        yield return new WaitForSeconds(0.5f);
+    }
     }
     public void IsPressed(){
         if (isWriting==true){
@@ -101,6 +119,7 @@ public class DialogSystem : MonoBehaviour
             StopAllCoroutines();
             screenText.text = isWritingPhrase;
             isWriting=false;
+            blinkingSprite = StartCoroutine(SpriteBlinking());
         }else{
             NextPhrase();
         }
@@ -174,5 +193,5 @@ public class DialogSystem : MonoBehaviour
             queueDialogs.Dequeue();
         }
     }
-
+// TODO que el texto pueda salir a diferentes velocidades
 }
