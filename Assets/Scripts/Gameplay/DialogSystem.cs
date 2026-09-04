@@ -10,10 +10,11 @@ using System.Text.RegularExpressions;
 
 public class DialogSystem : MonoBehaviour
 {
-    public Queue <string> queueDialogs = new();
+    [NonSerialized] public Queue <string> queueDialogs = new();
     public Texto texto;
     // private Sprite expretion;
     [SerializeField] TextMeshProUGUI screenText;
+    [SerializeField] TextMeshProUGUI charTalkNameText;
     //[SerializeField] Image screenImage;
     private string actualPhrase;
     private bool isWriting = false;
@@ -23,6 +24,7 @@ public class DialogSystem : MonoBehaviour
     public int correctAnswer=0;
     public GameObject typeofChoice;
     public GameObject choiceBox;
+    public GameObject interrogationBox;
     public string rawChoices;
     private Coroutine blinkingSprite;
 
@@ -64,6 +66,9 @@ public class DialogSystem : MonoBehaviour
             } 
             actualPhrase = queueDialogs.Dequeue();
             CheckVariable(actualPhrase);
+            if (isWriting){
+                return;
+            }
       //  CheckExpretion(actualPhrase);
             //actualPhrase = actualPhrase[1..^0];
             isWriting=true;
@@ -169,6 +174,7 @@ public class DialogSystem : MonoBehaviour
                 timesToSkip++;
                 if(dialog.Contains("{m}"))
                 {
+                    bool interrogationTime = interrogationBox.GetComponent<InterrogationSystem>().InterrogationLoop();
                     var regex = new Regex(@"\{m\}");
                     if (regex.Match(dialog).Success)
                     {
@@ -176,8 +182,11 @@ public class DialogSystem : MonoBehaviour
                     }
                     else
                     {
-                        actualPhrase=dialog;   
+       
+                         actualPhrase=dialog;   
+                   
                     }
+                    
                     SkipPhrase(timesToSkip);
                     break;
                 }

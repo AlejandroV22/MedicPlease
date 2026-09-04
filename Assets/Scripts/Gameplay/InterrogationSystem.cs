@@ -1,5 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using Unity.AppUI.UI;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class InterrogationSystem : MonoBehaviour
@@ -8,6 +9,9 @@ public class InterrogationSystem : MonoBehaviour
     private GameObject dialogBox;
     private GameObject choiceBox;
     private string rawChoices;
+    private bool interrogationTime;
+    private int interrogationTries=0;
+
     void Start()
     {
         dialogBox = GameObject.Find("DialogBoxImage");
@@ -15,6 +19,7 @@ public class InterrogationSystem : MonoBehaviour
     }
     public void InterrogationChoice()
         {
+            interrogationTime = true;
             string[] interrogationQuestions=dialogBox.GetComponent<DialogSystem>().clinicalCase.questions;
             rawChoices = "{choice}{choicest2 c:";
             foreach(string question in interrogationQuestions)
@@ -22,12 +27,24 @@ public class InterrogationSystem : MonoBehaviour
                 rawChoices = @rawChoices + "\"" + question + "\"" + " "; 
             }
             rawChoices = rawChoices + "} ";
+            
             choiceBox.SetActive(true);
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
+            dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué deberia preguntarle al paciente?)");
+            
         }
-    public void InterrogationLoop()
+    public bool InterrogationLoop()
     {
-        
+        if(interrogationTime == true && interrogationTries <=2){
+                interrogationTries++;
+                InterrogationChoice();
+                return interrogationTime;
+        }
+        else
+        {
+            interrogationTime=false;
+            return interrogationTime;
+        }
     }
     // Update is called once per frame
     void Update()

@@ -85,6 +85,8 @@ public class ChoiceSystem : MonoBehaviour
                     Debug.Log(choice);
                 }
             }
+            dialogBox.GetComponent<Button>().interactable = false;
+            menuGenerated = true;
     }
     public void RandomChoices(string rchoise){
         choices.Clear();

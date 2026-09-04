@@ -4381,6 +4381,7 @@ MonoBehaviour:
   correctAnswer: 0
   typeofChoice: {fileID: 1293591937}
   choiceBox: {fileID: 1530429805}
+  interrogationBox: {fileID: 144633046}
   rawChoices: 
 --- !u!114 &1933745131
 MonoBehaviour:
