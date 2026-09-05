@@ -11,7 +11,7 @@ public class InterrogationSystem : MonoBehaviour
     public GameObject choiceBox;
     private string rawChoices;
     private bool interrogationTime;
-    private int interrogationTries=0;
+    private int interrogationTries=1;
 
     void Start()
     {
@@ -34,17 +34,15 @@ public class InterrogationSystem : MonoBehaviour
             dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué deberia preguntarle al paciente?)");
             
         }
-    public bool InterrogationLoop()
+    public void InterrogationLoop()
     {
-        if(interrogationTime == true && interrogationTries <=2){
+        if(interrogationTime == true && interrogationTries <=3){
                 interrogationTries++;
                 InterrogationChoice();
-                return interrogationTime;
         }
         else
         {
             interrogationTime=false;
-            return interrogationTime;
         }
     }
     // Update is called once per frame

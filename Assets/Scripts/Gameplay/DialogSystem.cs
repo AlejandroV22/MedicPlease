@@ -48,6 +48,9 @@ public class DialogSystem : MonoBehaviour
         
     }
     public void ShowText(){
+        if(charTalkNameText != null){
+            charTalkNameText.text = "??????";
+        }
         queueDialogs.Clear();
         foreach (string textBuffer in texto.textArray){
             queueDialogs.Enqueue(textBuffer);
@@ -66,6 +69,7 @@ public class DialogSystem : MonoBehaviour
             } 
             actualPhrase = queueDialogs.Dequeue();
             CheckVariable(actualPhrase);
+            CheckTalker();
             if (isWriting){
                 return;
             }
@@ -174,7 +178,7 @@ public class DialogSystem : MonoBehaviour
                 timesToSkip++;
                 if(dialog.Contains("{m}"))
                 {
-                    bool interrogationTime = interrogationBox.GetComponent<InterrogationSystem>().InterrogationLoop();
+                    interrogationBox.GetComponent<InterrogationSystem>().InterrogationLoop();
                     var regex = new Regex(@"\{m\}");
                     if (regex.Match(dialog).Success)
                     {
@@ -201,6 +205,36 @@ public class DialogSystem : MonoBehaviour
         {
             queueDialogs.Dequeue();
         }
+    }
+    public void CheckTalker(){
+        if (actualPhrase !=null){
+            var regextNdname = new Regex(@"\{Ndname\}");
+            Debug.Log("match estado Ndname: " + regextNdname.Match(actualPhrase).Success);
+            if (regextNdname.Match(actualPhrase).Success)
+            {
+                //TODO
+                charTalkNameText.text = "??????";
+                actualPhrase = regextNdname.Replace(actualPhrase, "");
+            }
+
+            var regextNpname = new Regex(@"\{Npname\}");
+            Debug.Log("match estado Npname: " + regextNpname.Match(actualPhrase).Success);
+            if (regextNpname.Match(actualPhrase).Success)
+            {
+                GetVariables();
+                FieldInfo field = typeof(ClinicalCase).GetField("patientName");
+                if (field != null)
+                {
+                    object value = field.GetValue(clinicalCase);
+                    if (charTalkNameText != null)
+                    {
+                        charTalkNameText.text = value.ToString();
+                    }
+                }
+                actualPhrase = regextNpname.Replace(actualPhrase, "");
+            }
+                }
+        
     }
 // TODO que el texto pueda salir a diferentes velocidades
 }
