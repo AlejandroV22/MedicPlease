@@ -2,20 +2,21 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 using UnityEngine;
+using Unity.AppUI.UI;
 
 public class InterrogationSystem : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private GameObject dialogBox;
-    private GameObject choiceBox;
+    public GameObject dialogBox;
+    public GameObject choiceBox;
     private string rawChoices;
     private bool interrogationTime;
     private int interrogationTries=0;
 
     void Start()
     {
-        dialogBox = GameObject.Find("DialogBoxImage");
-        choiceBox = GameObject.Find("ChoiceBox");
+        //dialogBox = GameObject.Find("DialogBoxImage");
+        //choiceBox = GameObject.Find("ChoiceBox");
     }
     public void InterrogationChoice()
         {

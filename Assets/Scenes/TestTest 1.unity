@@ -3366,7 +3366,7 @@ GameObject:
   - component: {fileID: 1502329938}
   - component: {fileID: 1502329940}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelHistorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4376,6 +4376,7 @@ MonoBehaviour:
     - '{feedback}'
     - Fin
   screenText: {fileID: 896604742}
+  charTalkNameText: {fileID: 0}
   clinicalCase: {fileID: 0}
   correctAnswer: 0
   typeofChoice: {fileID: 1293591937}
