@@ -18,7 +18,7 @@ MonoBehaviour:
   ocupacion: "mec\xE1nico (cl\xE1sico) automotriz "
   lugarProcedencia: Floridablanca
   retratoPaciente: {fileID: -398683985530898636, guid: d55a04b7e085eaf4eaa8c681142b925b, type: 3}
-  motivoConsulta: siento rara la cara.
+  motivoConsulta: Siento rara la cara.
   enfermedadActual: 
   questions:
   - "\xBFHace cuanto se siente asi?"
