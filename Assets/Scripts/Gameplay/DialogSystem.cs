@@ -37,7 +37,7 @@ public class DialogSystem : MonoBehaviour
     }
     public void GetVariables(){
         clinicalCase = GameManager.Instance.SelectedCase;
-        transform.GetChild(1).GetComponent<Image>().sprite = clinicalCase.patientPortrait;
+        transform.GetChild(1).GetComponent<Image>().sprite = clinicalCase.retratoPaciente;
         Type tipo = clinicalCase.GetType();
         FieldInfo[] campos = tipo.GetFields();
         List<string> lista = new List<string> {};
@@ -222,7 +222,7 @@ public class DialogSystem : MonoBehaviour
             if (regextNpname.Match(actualPhrase).Success)
             {
                 GetVariables();
-                FieldInfo field = typeof(ClinicalCase).GetField("patientName");
+                FieldInfo field = typeof(ClinicalCase).GetField("nombrePaciente");
                 if (field != null)
                 {
                     object value = field.GetValue(clinicalCase);

@@ -5,17 +5,17 @@ using UnityEngine;
 public class ClinicalCase : ScriptableObject
 {
     [Header("Información del paciente")]
-    public string patientName;
-    public int age;
-    public string sex;
-    public Sprite patientPortrait;
+    public string nombrePaciente;
+    public int edad;
+    public string sexo;
+    public string ocupacion;
+    public string lugarProcedencia;
+    public Sprite retratoPaciente;
 
     [Header("Historia Clinica")]
-    public string consultReason;
-    public string personalHistory;
-    public string familyHistory;
+    public string motivoConsulta;
+    public string enfermedadActual;
     [TextArea(3,8)]
-    public string symptoms;
     [Header("Preguntas de interrogacion")]
     public string[] questions;
 

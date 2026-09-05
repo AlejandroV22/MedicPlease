@@ -8,38 +8,36 @@ public class ClinicalCaseViewer : MonoBehaviour
     public ClinicalCase clinicalCase;
 
     [Header("UI")]
+    public TMP_Text nombrePacienteTexto;
+    public TMP_Text edadTexto;
+    public TMP_Text sexoTexto;
+    public TMP_Text lugarProcedenciaTexto;
+    public TMP_Text motivoConsultaTexto;
+    public TMP_Text enfermedadActualTexto;
+    public Image pacienteFoto;
 
-    public TMP_Text patientNameText;
-
-    public TMP_Text ageText;
-
-    public TMP_Text sexText;
-
-    public TMP_Text historyText;
-
-    public TMP_Text symptomsText;
-    public Image patientPhoto;
-    
-
-  private void Start()
+    private void Start()
     {
         LoadClinicalCase(GameManager.Instance.SelectedCase);
     }
 
-    void ShowClinicalCase()
+    private void ShowClinicalCase()
     {
-        patientNameText.text = "Nombre: "+clinicalCase.patientName;
+        nombrePacienteTexto.text = "Nombre: " + clinicalCase.nombrePaciente;
 
-        ageText.text = "Edad: "+clinicalCase.age.ToString();
+        edadTexto.text = "Edad: " + clinicalCase.edad.ToString();
 
-        sexText.text = "Sexo: "+clinicalCase.sex;
+        sexoTexto.text = "Sexo: " + clinicalCase.sexo;
 
-        historyText.text = clinicalCase.consultReason;
-
-        symptomsText.text = clinicalCase.symptoms;
+        motivoConsultaTexto.text = clinicalCase.motivoConsulta;
         
-        patientPhoto.sprite = clinicalCase.patientPortrait;
+        lugarProcedenciaTexto.text = "Lugar de procedencia: " + clinicalCase.lugarProcedencia;
+
+        enfermedadActualTexto.text = clinicalCase.enfermedadActual;
+
+        pacienteFoto.sprite = clinicalCase.retratoPaciente;
     }
+
     public void LoadClinicalCase(ClinicalCase newCase)
     {
         clinicalCase = newCase;

@@ -12,16 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b78f49bd330594faca30e030b9579c, type: 3}
   m_Name: Situacion1
   m_EditorClassIdentifier: Assembly-CSharp::ClinicalCase
-  patientName: Isaac Newton
-  age: 65
-  sex: Masculino
-  patientPortrait: {fileID: -398683985530898636, guid: d55a04b7e085eaf4eaa8c681142b925b, type: 3}
-  consultReason: Siento rara la cara
-  personalHistory: Este es el historial personal
-  familyHistory: Este es el historial familiar
-  symptoms: "Procedencia: Floridablanca\r\nOcupaci\xF3n: mec\xE1nico (cl\xE1sico)
-    automotriz \r\n"
-  correctDiagnosis: 
-  correctTreatment: 
-  feedback: 
+  nombrePaciente: Isaac Newton
+  edad: 65
+  sexo: Hombre
+  ocupacion: "mec\xE1nico (cl\xE1sico) automotriz "
+  lugarProcedencia: Floridablanca
+  retratoPaciente: {fileID: -398683985530898636, guid: d55a04b7e085eaf4eaa8c681142b925b, type: 3}
+  motivoConsulta: siento rara la cara.
+  enfermedadActual: 
+  questions:
+  - "\xBFHace cuanto se siente asi?"
+  - "\xBFPuede describir la sensacion?"
+  - "\xBFHa notado una sensacion similar en el otro lado de la cara?"
+  - "\xBFHa notado cambios en su estado de animo?"
+  - "\xBFHa notado cambios importantes en su peso?"
+  - "\xBFRecuerda si la sensacion inicio por alguna situacion especifica?"
+  correctDiagnosis: "Este es el diagn\xF3stico correcto"
+  correctTreatment: Este es el tratamiento correcto
+  feedback: Hola soy la realimentacion
   scriptPath: {fileID: 4900000, guid: aa8a7faa94af4284bb830f78089372f3, type: 3}
