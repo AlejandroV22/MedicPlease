@@ -26,6 +26,8 @@ public class DialogSystem : MonoBehaviour
     public GameObject choiceBox;
     public GameObject interrogationBox;
     public string rawChoices;
+    public GameData saveFile = new GameData();
+    public GameDataController saveFileController;
     private Coroutine blinkingSprite;
 
     public void Awake(){
@@ -36,6 +38,7 @@ public class DialogSystem : MonoBehaviour
 
     }
     public void GetVariables(){
+        saveFile = saveFileController.LoadData(saveFile);
         clinicalCase = GameManager.Instance.SelectedCase;
         transform.GetChild(1).GetComponent<Image>().sprite = clinicalCase.retratoPaciente;
         Type tipo = clinicalCase.GetType();
@@ -153,6 +156,9 @@ public class DialogSystem : MonoBehaviour
                 }
         }
         }
+        if (actualPhrase.Contains("{dname}")){
+            actualPhrase = actualPhrase.Replace("{dname}",saveFile.playerName);
+        }
         if(actualPhrase.Contains("{choice}")){
             rawChoices = actualPhrase;
             var regext1 = new Regex(@"\{choice\}\{choicest1\s+b:\s*((?:""[^""]*""\s*)*)c:\s*""[^""]*""\}");
@@ -213,7 +219,7 @@ public class DialogSystem : MonoBehaviour
             if (regextNdname.Match(actualPhrase).Success)
             {
                 //TODO
-                charTalkNameText.text = "??????";
+                charTalkNameText.text = saveFile.playerName;
                 actualPhrase = regextNdname.Replace(actualPhrase, "");
             }
 

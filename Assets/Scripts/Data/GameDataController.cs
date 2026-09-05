@@ -6,13 +6,12 @@ using UnityEngine.InputSystem;
 public class GameDataController : MonoBehaviour
 {
     public string saveFile;
-    public GameData gameData = new GameData();
-    public GameObject dataObject;
+    public GameData defaultGameData;
 
     private void Awake(){
         saveFile = Application.dataPath + "/saveFile.json";
-        dataObject = GameObject.FindGameObjectWithTag("DataObject");
         Debug.Log("arriba los logs");
+        defaultGameData.playerName = "Mitzune";
     }
    /* private void Update()
     {
@@ -24,13 +23,15 @@ public class GameDataController : MonoBehaviour
         }    
     }
     */
-    private void LoadData(){
+    public GameData LoadData(GameData gameData){
         if(File.Exists(saveFile)){
             string fileContent = File.ReadAllText(saveFile);
             gameData = JsonUtility.FromJson<GameData>(fileContent);
             Debug.Log("Nombre del papu :v" + gameData.playerName);
+            return gameData;
         }else{
             Debug.Log("Y el archivo de guardado papu");
+            return gameData;
         }
     }
 
