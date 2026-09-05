@@ -19,6 +19,7 @@ public class ChoiceSystem : MonoBehaviour
     private bool menuGenerated = false;
     private List<string> badChoices;
     public GameObject typeofChoice;
+    int searchTimes = 0;
 
     private void Start(){
         dialogBox = GameObject.Find("DialogBoxImage");
@@ -109,7 +110,7 @@ public class ChoiceSystem : MonoBehaviour
     }
     public void changePath()
     {
-        //TODO agregar un identificador de caminos y un identificador de donde termina el texto
+        searchTimes++;//TODO agregar un identificador de caminos y un identificador de donde termina el texto
         Texto fullText= dialogBox.GetComponent<DialogSystem>().texto;
         Queue <string> queueDialogs = dialogBox.GetComponent<DialogSystem>().queueDialogs;
         int selectIndex = choiceOptions.value;
@@ -140,7 +141,9 @@ public class ChoiceSystem : MonoBehaviour
                 queueDialogs.Enqueue(textBuffer);
             }
             dialogBox.GetComponent<DialogSystem>().queueDialogs= queueDialogs;
-            changePath();
+            if(searchTimes < 10){
+                changePath();
+            }
             dialogBox.GetComponent<Button>().interactable = true;
             gameObject.SetActive(false);
             dialogBox.GetComponent<DialogSystem>().NextPhrase();

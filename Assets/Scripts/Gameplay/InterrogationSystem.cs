@@ -20,7 +20,8 @@ public class InterrogationSystem : MonoBehaviour
     }
     public void InterrogationChoice()
         {
-            interrogationTime = true;
+            if(interrogationTries <=3){
+                interrogationTime = true;
             string[] interrogationQuestions=dialogBox.GetComponent<DialogSystem>().clinicalCase.questions;
             rawChoices = "{choice}{choicest2 c:";
             foreach(string question in interrogationQuestions)
@@ -32,6 +33,9 @@ public class InterrogationSystem : MonoBehaviour
             choiceBox.SetActive(true);
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
             dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué deberia preguntarle al paciente?)");
+            }else{
+                dialogBox.GetComponent<DialogSystem>().AddPhrase("(El paciente no respondera mas preguntas)");
+            }
             
         }
     public void InterrogationLoop()

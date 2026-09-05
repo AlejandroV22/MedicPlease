@@ -16,7 +16,7 @@ public class Texto
     public void GetTextToFile(TextAsset csvFile){
         string[] lines = csvFile.text.Split('\n');
         for(int i=0; i<lines.Length;i++){
-            var rows = lines[i].Split(',');
+            var rows = lines[i].Split(';');
             textArray = rows;
         }
         
