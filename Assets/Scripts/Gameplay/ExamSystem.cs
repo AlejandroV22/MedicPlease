@@ -4,21 +4,21 @@ using System.Linq;
 using UnityEngine.UI;
 public class ExamSystem : MonoBehaviour
 {
-    private GameObject choiceBox;
+    public GameObject choiceBox;
     private TMP_Dropdown choiceOptions;
     public string[] exams;
-    private Button choiceButton;
-    private GameObject dialogSystem;
+    public GameObject dialogSystem;
     public void ShowExam(){
-        choiceBox = GameObject.Find("ChoiceBox");
-        choiceOptions=choiceBox.GetComponentInChildren<TMP_Dropdown>();
-        choiceButton = GameObject.Find("ChoiceButton").GetComponent<Button>();
-        dialogSystem = GameObject.Find("DialogBoxImage");
-        choiceBox.SetActive(true);
-        choiceOptions.ClearOptions();
-        choiceOptions.AddOptions(exams.ToList());
-        choiceButton.onClick.RemoveAllListeners();
-        choiceButton.onClick.AddListener(ExamSelected);
+        string rawChoices = "{choice}{choicest2 c:";
+            foreach(string exam in exams)
+            {
+                rawChoices = @rawChoices + "\"" + exam + "\"" + " "; 
+            }
+            rawChoices = rawChoices + "} ";
+            
+            choiceBox.SetActive(true);
+            choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
+                       
     }
     public void ExamSelected(){
         choiceBox.GetComponent<ChoiceSystem>().GetStart();
