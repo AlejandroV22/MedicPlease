@@ -48,7 +48,10 @@ public class ChoiceSystem : MonoBehaviour
         menuGenerated = false;
     }
     public void ChoiceMenu(string rawChoices){
-        choiceOptions.ClearOptions();
+        if(choiceOptions != null)
+        {
+         choiceOptions.ClearOptions();   
+        }
         Debug.Log("xdxdx");
         Debug.Log("holaxd");
         // TODO hacer que vayan a distintos caminos dependiendo de la decision
