@@ -12,6 +12,7 @@ public class InterrogationSystem : MonoBehaviour
     private string rawChoices;
     private bool interrogationTime;
     private int interrogationTries=1;
+    public GameObject actionMenu;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class InterrogationSystem : MonoBehaviour
             dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué deberia preguntarle al paciente?)");
             }else{
                 dialogBox.GetComponent<DialogSystem>().AddPhrase("(El paciente no respondera mas preguntas)");
+                dialogBox.GetComponent<DialogSystem>().AddPhrase("{main}");
             }
             
         }
@@ -42,7 +44,7 @@ public class InterrogationSystem : MonoBehaviour
     {
         if(interrogationTime == true && interrogationTries <=3){
                 interrogationTries++;
-                InterrogationChoice();
+                actionMenu.SetActive(true);
         }
         else
         {

@@ -29,6 +29,9 @@ public class DialogSystem : MonoBehaviour
     public GameData saveFile = new GameData();
     public GameDataController saveFileController;
     private Coroutine blinkingSprite;
+    public GameObject inspectionBox;
+    public GameObject listeningBox;
+    public GameObject touchingBox;
 
     public void Awake(){
         GetVariables();
@@ -185,6 +188,9 @@ public class DialogSystem : MonoBehaviour
                 if(dialog.Contains("{m}"))
                 {
                     interrogationBox.GetComponent<InterrogationSystem>().InterrogationLoop();
+                    inspectionBox.GetComponent<ExamSystem>().ExamLoop();
+                    touchingBox.GetComponent<ExamSystem>().ExamLoop();
+                    listeningBox.GetComponent<ExamSystem>().ExamLoop();
                     var regex = new Regex(@"\{m\}");
                     if (regex.Match(dialog).Success)
                     {

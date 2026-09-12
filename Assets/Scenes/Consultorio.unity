@@ -173,12 +173,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
   exams:
-  - Rostro
-  - "T\xF3rax"
-  - Abdomen
-  - Postura
-  - Marcha
+  - Observar el Rostro
+  - "Observar el T\xF3rax"
+  - Observar el Abdomen
+  - Observar la Postura
+  - Observar la Marcha
   dialogSystem: {fileID: 579118547}
+  examTime: 0
+  actionMenu: {fileID: 1665938181}
 --- !u!114 &129051943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +246,31 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "(\xBFQu\xE9 Deberia Inspeccionar?)"
+          m_StringArgument: "(\xBFQu\xE9 deber\xEDa observar?)"
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1665938181}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1191500783}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &129051944
@@ -545,7 +571,7 @@ GameObject:
   - component: {fileID: 306905415}
   - component: {fileID: 306905414}
   - component: {fileID: 306905413}
-  - component: {fileID: 306905412}
+  - component: {fileID: 306905416}
   m_Layer: 5
   m_Name: ListeningButton
   m_TagString: Untagged
@@ -573,20 +599,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &306905412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 306905410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a89a144a622b7408b113e6b0a06e18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
-  dialogBox: {fileID: 0}
-  choiceBox: {fileID: 769830926}
 --- !u!114 &306905413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,10 +643,46 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 306905412}
-        m_TargetAssemblyTypeName: InterrogationSystem, Assembly-CSharp
-        m_MethodName: InterrogationChoice
+      - m_Target: {fileID: 579118550}
+        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
+        m_MethodName: AddPhrase
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\xBFQu\xE9 deber\xEDa auscultar?"
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 306905416}
+        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
+        m_MethodName: ShowExam
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1665938181}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1191500783}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -681,6 +729,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306905410}
   m_CullTransparentMesh: 1
+--- !u!114 &306905416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306905410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c796989aab716a49beedcf49051693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
+  choiceBox: {fileID: 769830926}
+  exams:
+  - "Auscultar coraz\xF3n"
+  - Auscultar pulmones
+  dialogSystem: {fileID: 579118547}
+  examTime: 0
+  actionMenu: {fileID: 1665938181}
 --- !u!1 &322902392
 GameObject:
   m_ObjectHideFlags: 0
@@ -2049,6 +2116,9 @@ MonoBehaviour:
   saveFile:
     playerName: 
   saveFileController: {fileID: 1503416845}
+  inspectionBox: {fileID: 129051940}
+  listeningBox: {fileID: 306905410}
+  touchingBox: {fileID: 739864174}
 --- !u!114 &579118551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2281,7 +2351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ascultar
+  m_text: Auscultar
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2373,7 +2443,7 @@ GameObject:
   - component: {fileID: 739864179}
   - component: {fileID: 739864178}
   - component: {fileID: 739864177}
-  - component: {fileID: 739864176}
+  - component: {fileID: 739864180}
   m_Layer: 5
   m_Name: TouchingButton
   m_TagString: Untagged
@@ -2401,20 +2471,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &739864176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739864174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a89a144a622b7408b113e6b0a06e18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
-  dialogBox: {fileID: 0}
-  choiceBox: {fileID: 769830926}
 --- !u!114 &739864177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2459,10 +2515,46 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 739864176}
-        m_TargetAssemblyTypeName: InterrogationSystem, Assembly-CSharp
-        m_MethodName: InterrogationChoice
+      - m_Target: {fileID: 579118550}
+        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
+        m_MethodName: AddPhrase
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "\xBFQu\xE9 deberia palpar?"
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 739864180}
+        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
+        m_MethodName: ShowExam
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1665938181}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1191500783}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2509,6 +2601,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739864174}
   m_CullTransparentMesh: 1
+--- !u!114 &739864180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739864174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c796989aab716a49beedcf49051693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
+  choiceBox: {fileID: 769830926}
+  exams:
+  - "Palpar t\xF3rax"
+  - Palpar abdomen
+  - Palpar cuello
+  - Palpar miembro superior
+  - Palpar miembro inferior
+  dialogSystem: {fileID: 579118547}
+  examTime: 0
+  actionMenu: {fileID: 1665938181}
 --- !u!1 &740102468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4410,6 +4524,8 @@ MonoBehaviour:
   - Examen de sangre
   - Examen de trabajo
   dialogSystem: {fileID: 0}
+  examTime: 0
+  actionMenu: {fileID: 0}
 --- !u!114 &1371277635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4820,6 +4936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
   dialogBox: {fileID: 0}
   choiceBox: {fileID: 769830926}
+  actionMenu: {fileID: 0}
 --- !u!114 &1418570440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5577,6 +5694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
+  actionMenu: {fileID: 1665938181}
 --- !u!114 &1540525727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5625,6 +5743,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: InterrogationSystem, Assembly-CSharp
         m_MethodName: InterrogationChoice
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1665938181}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
