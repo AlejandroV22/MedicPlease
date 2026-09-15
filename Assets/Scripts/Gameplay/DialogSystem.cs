@@ -32,6 +32,8 @@ public class DialogSystem : MonoBehaviour
     public GameObject inspectionBox;
     public GameObject listeningBox;
     public GameObject touchingBox;
+    public GameObject actionMenu;
+    public GameObject bgController;
 
     public void Awake(){
         GetVariables();
@@ -207,6 +209,25 @@ public class DialogSystem : MonoBehaviour
                     break;
                 }
             }
+        }
+        if (actualPhrase.Contains("{a}"))
+        {
+           actionMenu.SetActive(true);
+           actualPhrase = actualPhrase.Replace("{a}","");
+        }
+        if (actualPhrase.Contains("{bg:"))
+        {
+            Debug.Log("prueba de actual phrase"+actualPhrase);
+            var regex = new Regex(@"\{bg:\s*""([^""]*)""\s*\}");
+            var match = regex.Match(actualPhrase);
+            string bgValue = String.Empty;
+            if (match.Success)
+            {
+                bgValue = match.Groups[1].Value; 
+                actualPhrase = regex.Replace(actualPhrase, ""); 
+            }
+            Debug.Log("bgValue " + bgValue);
+            bgController.GetComponent<BackgroundSystem>().ChangeBg(bgValue);
         }
         
         this.actualPhrase=actualPhrase;
