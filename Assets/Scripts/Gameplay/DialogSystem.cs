@@ -197,7 +197,7 @@ public class DialogSystem : MonoBehaviour
                 timesToSkip++;
                 if(dialog.Contains("{m}"))
                 {
-                    interrogationBox.GetComponent<InterrogationSystem>().InterrogationLoop();
+                    
                     inspectionBox.GetComponent<ExamSystem>().ExamLoop();
                     touchingBox.GetComponent<ExamSystem>().ExamLoop();
                     listeningBox.GetComponent<ExamSystem>().ExamLoop();
@@ -212,15 +212,19 @@ public class DialogSystem : MonoBehaviour
                          actualPhrase=dialog;   
                    
                     }
-                    
+                    interrogationBox.GetComponent<InterrogationSystem>().InterrogationLoop();
                     SkipPhrase(timesToSkip);
                     break;
                 }
             }
         }
+        //chapuza historica
+        if(actualPhrase.Contains("{m}")){
+            actualPhrase = actualPhrase.Replace("{m}","");
+        }
         if (actualPhrase.Contains("{a}"))
         {
-            if(interrogationBox.GetComponent<InterrogationSystem>().getInterrogationTime() == false)
+            if(interrogationBox.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
             {
              actionMenu.SetActive(true);   
             }

@@ -20,7 +20,7 @@ public class InterrogationSystem : MonoBehaviour
         //dialogBox = GameObject.Find("DialogBoxImage");
         //choiceBox = GameObject.Find("ChoiceBox");
     }
-    public bool getInterrogationTime()
+    public bool GetInterrogationTime()
     {
         return interrogationTime;
     }
@@ -38,11 +38,12 @@ public class InterrogationSystem : MonoBehaviour
             
             choiceBox.SetActive(true);
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-            dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué deberia preguntarle al paciente?)");
+            dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué debería preguntarle al paciente?)");
             }else{
                 interrogationTime = false;
                 dialogBox.GetComponent<DialogSystem>().AddPhrase("(El paciente no respondera mas preguntas)");
-                dialogBox.GetComponent<DialogSystem>().AddPhrase("{main}");
+                //chapuza historica parte 2
+                dialogBox.GetComponent<DialogSystem>().AddPhrase("{a}¿Qué debería hacer?");
             }
             
         }
