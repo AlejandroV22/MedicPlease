@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 using UnityEngine;
 using Unity.AppUI.UI;
+using System;
 
 public class InterrogationSystem : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class InterrogationSystem : MonoBehaviour
     {
         //dialogBox = GameObject.Find("DialogBoxImage");
         //choiceBox = GameObject.Find("ChoiceBox");
+    }
+    public bool getInterrogationTime()
+    {
+        return interrogationTime;
     }
     public void InterrogationChoice()
         {
@@ -35,6 +40,7 @@ public class InterrogationSystem : MonoBehaviour
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
             dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué deberia preguntarle al paciente?)");
             }else{
+                interrogationTime = false;
                 dialogBox.GetComponent<DialogSystem>().AddPhrase("(El paciente no respondera mas preguntas)");
                 dialogBox.GetComponent<DialogSystem>().AddPhrase("{main}");
             }
@@ -44,7 +50,8 @@ public class InterrogationSystem : MonoBehaviour
     {
         if(interrogationTime == true && interrogationTries <=3){
                 interrogationTries++;
-                actionMenu.SetActive(true);
+                InterrogationChoice();
+                actionMenu.SetActive(false);
         }
         else
         {

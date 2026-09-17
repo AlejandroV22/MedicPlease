@@ -34,6 +34,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject touchingBox;
     public GameObject actionMenu;
     public GameObject bgController;
+    public GameObject audioController;
 
     public void Awake(){
         GetVariables();
@@ -110,9 +111,16 @@ public class DialogSystem : MonoBehaviour
         screenText.text = "";
         Debug.Log("corutina iniciada");
         isWritingPhrase=textToShow;
+         int characterCount = 0;
         foreach (char character in textToShow.ToCharArray()){
             Debug.Log("corutina iniciada");
             screenText.text+=character;
+            if (character != ' ' && characterCount % 2 == 0)
+            {
+                audioController.GetComponent<AudioSystem>().PlayCharSound();
+            }
+
+            characterCount++;
             yield return new WaitForSeconds(0.02f);
         }
         isWriting=false;
@@ -131,15 +139,15 @@ public class DialogSystem : MonoBehaviour
     }
     }
     public void IsPressed(){
-        if (isWriting==true){
+        /*if (isWriting==true){
             Debug.Log("skipeado");
             StopAllCoroutines();
             screenText.text = isWritingPhrase;
             isWriting=false;
             blinkingSprite = StartCoroutine(SpriteBlinking());
-        }else{
+        }else{*/
             NextPhrase();
-        }
+        //}
                     
     }
     public void CheckVariable(string actualPhrase){
@@ -212,12 +220,14 @@ public class DialogSystem : MonoBehaviour
         }
         if (actualPhrase.Contains("{a}"))
         {
-           actionMenu.SetActive(true);
+            if(interrogationBox.GetComponent<InterrogationSystem>().getInterrogationTime() == false)
+            {
+             actionMenu.SetActive(true);   
+            }
            actualPhrase = actualPhrase.Replace("{a}","");
         }
         if (actualPhrase.Contains("{bg:"))
         {
-            Debug.Log("prueba de actual phrase"+actualPhrase);
             var regex = new Regex(@"\{bg:\s*""([^""]*)""\s*\}");
             var match = regex.Match(actualPhrase);
             string bgValue = String.Empty;
@@ -229,6 +239,20 @@ public class DialogSystem : MonoBehaviour
             Debug.Log("bgValue " + bgValue);
             bgController.GetComponent<BackgroundSystem>().ChangeBg(bgValue);
         }
+        if (actualPhrase.Contains("{ch:"))
+        {
+            var regex = new Regex(@"\{ch:\s*""([^""]*)""\s*\}");
+            var match = regex.Match(actualPhrase);
+            string chValue = String.Empty;
+            if (match.Success)
+            {
+                chValue = match.Groups[1].Value; 
+                actualPhrase = regex.Replace(actualPhrase, ""); 
+            }
+            Debug.Log("chValue " + chValue);
+            bgController.GetComponent<BackgroundSystem>().ChangeCh(chValue);
+        }
+        
         
         this.actualPhrase=actualPhrase;
     }
@@ -245,7 +269,6 @@ public class DialogSystem : MonoBehaviour
             Debug.Log("match estado Ndname: " + regextNdname.Match(actualPhrase).Success);
             if (regextNdname.Match(actualPhrase).Success)
             {
-                //TODO
                 charTalkNameText.text = saveFile.playerName;
                 actualPhrase = regextNdname.Replace(actualPhrase, "");
             }
@@ -261,6 +284,7 @@ public class DialogSystem : MonoBehaviour
                     object value = field.GetValue(clinicalCase);
                     if (charTalkNameText != null)
                     {
+                        Debug.Log("cambio de nombre de paciente");
                         charTalkNameText.text = value.ToString();
                     }
                 }

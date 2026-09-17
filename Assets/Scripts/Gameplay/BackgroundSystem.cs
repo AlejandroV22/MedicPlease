@@ -2,11 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Unity.AppUI.UI;
 
 public class BackgroundSystem : MonoBehaviour
 {
     public Texture bg;
     public GameObject canva;
+    public GameObject charaImage;
 
     public void ChangeBg(string bgName)
     {
@@ -20,5 +22,15 @@ public class BackgroundSystem : MonoBehaviour
         }
 
         canva.GetComponent<RawImage>().texture = bg;
+    }
+    public void ChangeCh(string chName)
+    {
+        if(chName == "disable")
+        {
+            charaImage.SetActive(false);
+        }else if (chName == "enable")
+        {
+            charaImage.SetActive(true);
+        }
     }
 }
