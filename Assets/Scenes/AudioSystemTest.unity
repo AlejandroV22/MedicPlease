@@ -179,7 +179,6 @@ MonoBehaviour:
   - Observar la Postura
   - Observar la Marcha
   dialogSystem: {fileID: 579118547}
-  examTime: 0
   actionMenu: {fileID: 1665938181}
 --- !u!114 &129051943
 MonoBehaviour:
@@ -746,7 +745,6 @@ MonoBehaviour:
   - "Auscultar coraz\xF3n"
   - Auscultar pulmones
   dialogSystem: {fileID: 579118547}
-  examTime: 0
   actionMenu: {fileID: 1665938181}
 --- !u!1 &322902392
 GameObject:
@@ -2671,7 +2669,6 @@ MonoBehaviour:
   - Palpar miembro superior
   - Palpar miembro inferior
   dialogSystem: {fileID: 579118547}
-  examTime: 0
   actionMenu: {fileID: 1665938181}
 --- !u!1 &740102468
 GameObject:
@@ -4717,7 +4714,6 @@ MonoBehaviour:
   - Examen de sangre
   - Examen de trabajo
   dialogSystem: {fileID: 0}
-  examTime: 0
   actionMenu: {fileID: 0}
 --- !u!114 &1371277635
 MonoBehaviour:
@@ -5127,9 +5123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a89a144a622b7408b113e6b0a06e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
-  dialogBox: {fileID: 0}
+  dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
-  actionMenu: {fileID: 0}
+  actionMenu: {fileID: 1665938181}
 --- !u!114 &1418570440
 MonoBehaviour:
   m_ObjectHideFlags: 0

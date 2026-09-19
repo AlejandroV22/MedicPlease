@@ -9,12 +9,13 @@ public class ExamSystem : MonoBehaviour
     private TMP_Dropdown choiceOptions;
     public string[] exams;
     public GameObject dialogSystem;
-
-    public bool examTime;
+    private int examinationTries;
+    private bool examTime;
 
     public GameObject actionMenu;
     
     public void ShowExam(){
+        if(examinationTries <=5){
         examTime = true;
         string rawChoices = "{choice}{choicest2 c:";
             foreach(string exam in exams)
@@ -25,14 +26,23 @@ public class ExamSystem : MonoBehaviour
             
             choiceBox.SetActive(true);
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-                       
+        }else{
+                examTime = false;
+                dialogSystem.GetComponent<DialogSystem>().AddPhrase("(No puedo realizarle mas examenes al paciente)");
+                //chapuza historica parte 3
+                dialogSystem.GetComponent<DialogSystem>().AddPhrase("Fin del prototipo 1");
+        }
     }
     public void ExamLoop()
     {
-        if(examTime == true)
+        if(examTime == true && examinationTries <=5)
         {
+            examinationTries++;
             Debug.Log("examTimeValue " + examTime);
             actionMenu.SetActive(true);
+        }else
+        {
+            examTime=false;
         }
     }
     public void ExamSelected(){
