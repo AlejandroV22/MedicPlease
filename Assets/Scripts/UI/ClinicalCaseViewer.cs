@@ -44,4 +44,9 @@ public class ClinicalCaseViewer : MonoBehaviour
 
         ShowClinicalCase();
     }
+    public void SetEnfermedadActual(string enfermedad)
+    {
+        clinicalCase.enfermedadActual = enfermedad;
+        enfermedadActualTexto.text = enfermedad;
+    }
 }
