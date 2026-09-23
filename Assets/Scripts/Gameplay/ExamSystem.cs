@@ -15,7 +15,7 @@ public class ExamSystem : MonoBehaviour
     public GameObject actionMenu;
     
     public void ShowExam(){
-        if(examinationTries <=5){
+        if(examinationTries <=6){
         examTime = true;
         string rawChoices = "{choice}{choicest2 c:";
             foreach(string exam in exams)
@@ -35,7 +35,7 @@ public class ExamSystem : MonoBehaviour
     }
     public void ExamLoop()
     {
-        if(examTime == true && examinationTries <=5)
+        if(examTime == true && examinationTries <=6)
         {
             examinationTries++;
             Debug.Log("examTimeValue " + examTime);

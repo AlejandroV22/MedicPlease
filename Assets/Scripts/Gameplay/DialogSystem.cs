@@ -35,6 +35,8 @@ public class DialogSystem : MonoBehaviour
     public GameObject actionMenu;
     public GameObject bgController;
     public GameObject audioController;
+    public float texSpeed = 0.05f;
+    public GameObject clinicalHistoryButton;
 
     public void Awake(){
         GetVariables();
@@ -86,7 +88,7 @@ public class DialogSystem : MonoBehaviour
             //actualPhrase = actualPhrase[1..^0];
             isWriting=true;
         //screenImage.sprite = expretion;
-            StartCoroutine(ShowCharts(actualPhrase));
+            StartCoroutine(ShowCharts(actualPhrase, texSpeed));
                 
         }
     }
@@ -107,7 +109,7 @@ public class DialogSystem : MonoBehaviour
             expretion = texto.imageArray[expretionIndex];
         isWriting=true;
     }*/
-    IEnumerator ShowCharts(string textToShow){
+    IEnumerator ShowCharts(string textToShow, float textSpeed){
         screenText.text = "";
         Debug.Log("corutina iniciada");
         isWritingPhrase=textToShow;
@@ -121,7 +123,7 @@ public class DialogSystem : MonoBehaviour
             }
 
             characterCount++;
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(textSpeed);
         }
         isWriting=false;
         blinkingSprite = StartCoroutine(SpriteBlinking());
@@ -197,7 +199,7 @@ public class DialogSystem : MonoBehaviour
                 timesToSkip++;
                 if(dialog.Contains("{m}"))
                 {
-                    
+                    //TODO refactorizar todo el sistema de examenes para integrar los limites de examenes
                     inspectionBox.GetComponent<ExamSystem>().ExamLoop();
                     touchingBox.GetComponent<ExamSystem>().ExamLoop();
                     listeningBox.GetComponent<ExamSystem>().ExamLoop();
@@ -228,6 +230,7 @@ public class DialogSystem : MonoBehaviour
             {
              actionMenu.SetActive(true);   
             }
+            clinicalHistoryButton.SetActive(true);
            actualPhrase = actualPhrase.Replace("{a}","");
         }
         if (actualPhrase.Contains("{bg:"))
