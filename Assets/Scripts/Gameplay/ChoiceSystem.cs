@@ -144,7 +144,7 @@ public class ChoiceSystem : MonoBehaviour
                 queueDialogs.Enqueue(textBuffer);
             }
             dialogBox.GetComponent<DialogSystem>().queueDialogs= queueDialogs;
-            if(searchTimes < 10){
+            if(searchTimes < 100){
                 changePath();
             }
             dialogBox.GetComponent<Button>().interactable = true;
