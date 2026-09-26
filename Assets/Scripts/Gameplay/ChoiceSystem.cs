@@ -126,7 +126,7 @@ public class ChoiceSystem : MonoBehaviour
             if(dialog.Contains("{"+selectedOption +"}"))
             {
                 dialogBox.GetComponent<DialogSystem>().SkipPhrase(timesToSkip);
-                var regex = new Regex(@"\{[^}]+\}");
+                var regex = new Regex(@"\{" + Regex.Escape(selectedOption) + @"\}");
                 if (regex.Match(dialog).Success)
                 {
                     dialogFound = true;

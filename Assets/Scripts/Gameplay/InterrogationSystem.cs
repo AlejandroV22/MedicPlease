@@ -12,6 +12,7 @@ public class InterrogationSystem : MonoBehaviour
     public GameObject choiceBox;
     private string rawChoices;
     private bool interrogationTime;
+    private bool interrogationOver= false;
     private int interrogationTries=1;
     public GameObject actionMenu;
 
@@ -23,6 +24,9 @@ public class InterrogationSystem : MonoBehaviour
     public bool GetInterrogationTime()
     {
         return interrogationTime;
+    }
+    public bool GetInterrogationOver(){
+        return interrogationOver;
     }
     public void InterrogationChoice()
         {
@@ -40,6 +44,7 @@ public class InterrogationSystem : MonoBehaviour
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
             dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué debería preguntarle al paciente?)");
             }else{
+                interrogationOver = true;
                 interrogationTime = false;
                 dialogBox.GetComponent<DialogSystem>().AddPhrase("(El paciente no respondera mas preguntas)");
                 //chapuza historica parte 2
@@ -57,6 +62,7 @@ public class InterrogationSystem : MonoBehaviour
         else
         {
             interrogationTime=false;
+            
         }
     }
     // Update is called once per frame

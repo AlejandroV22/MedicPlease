@@ -1,5 +1,6 @@
+using UnityEngine.UI;
 using UnityEngine;
-
+using TMPro;
 
 public class ExamManager : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class ExamManager : MonoBehaviour
 
     public int examinationTries;
     private bool examTime;
-
+    public GameObject examMenu;
     public int ExaminationTries => examinationTries;
     public bool ExamTime => examTime;
     public int MaxExamTries => maxExamTries;
+    public GameObject interrogationSystem;
+    public GameObject dialogSystem;
 
     private void Awake()
     {
@@ -62,5 +65,15 @@ public class ExamManager : MonoBehaviour
     {
         examinationTries = 0;
         examTime = false;
+    }
+    public void IsInterrogationOver(){
+        if(interrogationSystem.GetComponent<InterrogationSystem>().GetInterrogationOver() == true){
+            Debug.Log("duro dos");
+            examMenu.SetActive(true);
+            examMenu.transform.GetChild(0).gameObject.SetActive(true);
+        }else{
+            Debug.Log("horas haciendolo bien rico");
+            dialogSystem.GetComponent<DialogSystem>().AddPhrase("{Ndname}(Necesito interrogar primero)");
+        }
     }
 }
