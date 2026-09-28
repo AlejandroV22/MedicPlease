@@ -1241,12 +1241,14 @@ MonoBehaviour:
   saveFile:
     playerName: 
   saveFileController: {fileID: 1503416845}
-  inspectionBox: {fileID: 0}
+  inspectionBox: {fileID: 1564724743}
   listeningBox: {fileID: 0}
   touchingBox: {fileID: 0}
-  actionMenu: {fileID: 0}
+  actionMenu: {fileID: 1564724743}
   bgController: {fileID: 0}
   audioController: {fileID: 0}
+  texSpeed: 0.05
+  clinicalHistoryButton: {fileID: 0}
 --- !u!114 &407016037
 MonoBehaviour:
   m_ObjectHideFlags: 0

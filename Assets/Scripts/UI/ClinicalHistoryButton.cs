@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class ClinicalHistoryButton : MonoBehaviour
@@ -7,8 +8,8 @@ public class ClinicalHistoryButton : MonoBehaviour
     public GameObject clinicalHistory;
     public Button exitCaseButton;
 
-    private GameObject dialogBox;
-    private GameObject choiceBox;
+    public GameObject dialogBox;
+    public GameObject choiceBox;
 
     public bool isActive = false;
 
@@ -31,5 +32,7 @@ public class ClinicalHistoryButton : MonoBehaviour
         }
 
         exitCaseButton.interactable = !shouldOpen;
+        Debug.Log(dialogBox);
+        Debug.Log(choiceBox);
     }
 }
