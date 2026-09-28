@@ -2121,7 +2121,7 @@ GameObject:
   - component: {fileID: 579118550}
   - component: {fileID: 579118549}
   m_Layer: 5
-  m_Name: DialogBoxImage
+  m_Name: DialogBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7660,8 +7660,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClinicalHistoryButton
   clinicalHistory: {fileID: 2029118704}
   exitCaseButton: {fileID: 518420800}
-  dialogBox: {fileID: 0}
-  choiceBox: {fileID: 0}
+  dialogBox: {fileID: 579118547}
+  choiceBox: {fileID: 769830926}
   isActive: 0
 --- !u!114 &1970883124
 MonoBehaviour:

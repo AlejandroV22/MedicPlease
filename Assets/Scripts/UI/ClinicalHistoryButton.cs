@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ClinicalHistoryButton : MonoBehaviour
 {
+    [Header("Referencias UI")]
     public GameObject clinicalHistory;
     public Button exitCaseButton;
 
@@ -13,26 +14,31 @@ public class ClinicalHistoryButton : MonoBehaviour
 
     public bool isActive = false;
 
-    private void Start()
-    {
-        dialogBox = GameObject.Find("DialogBoxImage");
-        choiceBox = GameObject.Find("ChoiceBox");
-    }
 
     public void ActiveChange()
     {
+        if (clinicalHistory == null || dialogBox == null)
+        {
+            Debug.LogError("Faltan referencias por asignar en el Inspector de " + gameObject.name);
+            return;
+        }
+
         bool shouldOpen = !clinicalHistory.activeSelf;
 
         clinicalHistory.SetActive(shouldOpen);
         dialogBox.SetActive(!shouldOpen);
 
-        if (!dialogBox.GetComponent<Button>().interactable)
+        if (choiceBox != null && dialogBox.TryGetComponent<Button>(out Button dialogBtn))
         {
-            choiceBox.SetActive(!shouldOpen);
+            if (!dialogBtn.interactable)
+            {
+                choiceBox.SetActive(!shouldOpen);
+            }
         }
 
-        exitCaseButton.interactable = !shouldOpen;
-        Debug.Log(dialogBox);
-        Debug.Log(choiceBox);
+        if (exitCaseButton != null)
+        {
+            exitCaseButton.interactable = !shouldOpen;
+        }
     }
 }
