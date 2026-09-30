@@ -1,6 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class ExamManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class ExamManager : MonoBehaviour
     public int MaxExamTries => maxExamTries;
     public GameObject interrogationSystem;
     public GameObject dialogSystem;
+    public GameObject actionMenu;
 
     private void Awake()
     {
@@ -76,4 +78,5 @@ public class ExamManager : MonoBehaviour
             dialogSystem.GetComponent<DialogSystem>().AddPhrase("{Ndname}(Necesito interrogar primero)");
         }
     }
+
 }

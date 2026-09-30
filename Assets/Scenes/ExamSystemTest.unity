@@ -226,29 +226,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 129051942}
         m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
-        m_MethodName: ShowExam
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 579118550}
-        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
-        m_MethodName: AddPhrase
+        m_MethodName: IsExaminationOver
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "(\xBFQu\xE9 deber\xEDa observar?)"
+          m_StringArgument: observar
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1665938181}
+      - m_Target: {fileID: 1191500783}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -260,7 +248,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1191500783}
+      - m_Target: {fileID: 1665938181}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -422,28 +410,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 579118550}
-        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
-        m_MethodName: AddPhrase
+      - m_Target: {fileID: 136591762}
+        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
+        m_MethodName: IsExaminationOver
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "(\xBFQu\xE9 deber\xEDa examinar?)"
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 136591762}
-        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
-        m_MethodName: ShowExam
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: examinar
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1665938181}
@@ -961,31 +937,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 579118550}
-        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
-        m_MethodName: AddPhrase
+      - m_Target: {fileID: 306905416}
+        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
+        m_MethodName: IsExaminationOver
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "(\xBFQu\xE9 deber\xEDa auscultar?)"
+          m_StringArgument: auscultar
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 306905416}
-        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
-        m_MethodName: ShowExam
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1665938181}
+      - m_Target: {fileID: 1191500783}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -997,7 +961,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1191500783}
+      - m_Target: {fileID: 1665938181}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -1908,26 +1872,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 431179337}
         m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
-        m_MethodName: ShowExam
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 579118550}
-        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
-        m_MethodName: AddPhrase
+        m_MethodName: IsExaminationOver
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "(\xBFQu\xE9 deber\xEDa examinar?)"
+          m_StringArgument: examinar
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1665938181}
@@ -2851,28 +2803,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 579118550}
-        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
-        m_MethodName: AddPhrase
+      - m_Target: {fileID: 661758674}
+        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
+        m_MethodName: IsExaminationOver
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "(\xBFQu\xE9 deber\xEDa examinar?)"
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 661758674}
-        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
-        m_MethodName: ShowExam
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: examinar
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1665938181}
@@ -3342,28 +3282,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 579118550}
-        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
-        m_MethodName: AddPhrase
+      - m_Target: {fileID: 739864180}
+        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
+        m_MethodName: IsExaminationOver
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "(\xBFQu\xE9 deberia palpar?)"
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 739864180}
-        m_TargetAssemblyTypeName: ExamSystem, Assembly-CSharp
-        m_MethodName: ShowExam
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: palpar
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1665938181}
@@ -8594,6 +8522,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClinicalHistoryButton
   clinicalHistory: {fileID: 2029118704}
   exitCaseButton: {fileID: 518420800}
+  dialogBox: {fileID: 0}
+  choiceBox: {fileID: 0}
   isActive: 0
 --- !u!114 &1970883124
 MonoBehaviour:
@@ -9418,6 +9348,7 @@ MonoBehaviour:
   examMenu: {fileID: 1191500783}
   interrogationSystem: {fileID: 1540525724}
   dialogSystem: {fileID: 579118547}
+  actionMenu: {fileID: 1665938181}
 --- !u!4 &2084163065
 Transform:
   m_ObjectHideFlags: 0

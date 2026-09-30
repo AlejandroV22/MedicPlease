@@ -50,7 +50,14 @@ public class ExamSystem : MonoBehaviour
             ExamManager.Instance.StopExam();
         }
     }
-
+    public void IsExaminationOver(string examinationType){
+        if (ExamManager.Instance.CanStartExam()){
+            dialogSystem.GetComponent<DialogSystem>().AddPhrase("¿Qué debería "+ examinationType +"?");
+            ShowExam();
+        }else{
+            ShowExam();
+        }
+    }
     public void ExamSelected()
     {
         choiceBox.GetComponent<ChoiceSystem>().GetStart();
