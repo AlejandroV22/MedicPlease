@@ -11,7 +11,7 @@ public class ClinicalHistoryButton : MonoBehaviour
 
     public GameObject dialogBox;
     public GameObject choiceBox;
-
+    public bool isActiveFirstTime;
     public bool isActive = false;
 
 
@@ -22,7 +22,7 @@ public class ClinicalHistoryButton : MonoBehaviour
             Debug.LogError("Faltan referencias por asignar en el Inspector de " + gameObject.name);
             return;
         }
-
+        ActiveFirstTime();
         bool shouldOpen = !clinicalHistory.activeSelf;
 
         clinicalHistory.SetActive(shouldOpen);
@@ -39,6 +39,11 @@ public class ClinicalHistoryButton : MonoBehaviour
         if (exitCaseButton != null)
         {
             exitCaseButton.interactable = !shouldOpen;
+        }
+    }
+    public void ActiveFirstTime(){
+        if(isActiveFirstTime == false){
+            isActiveFirstTime = true;
         }
     }
 }

@@ -15,7 +15,7 @@ public class InterrogationSystem : MonoBehaviour
     private bool interrogationOver= false;
     private int interrogationTries=1;
     public GameObject actionMenu;
-
+    public GameObject ClinicalCaseButton;
     void Start()
     {
         //dialogBox = GameObject.Find("DialogBoxImage");
@@ -31,18 +31,23 @@ public class InterrogationSystem : MonoBehaviour
     public void InterrogationChoice()
         {
             if(interrogationTries <=3){
+                if(ClinicalCaseButton.GetComponent<ClinicalHistoryButton>().isActiveFirstTime == false){
+                    dialogBox.GetComponent<DialogSystem>().AddPhrase("(Debería revisar primero la historia del paciente)");
+                    dialogBox.GetComponent<DialogSystem>().AddPhrase("{a}¿Qué debería hacer?");
+                }else{
                 interrogationTime = true;
-            string[] interrogationQuestions=dialogBox.GetComponent<DialogSystem>().clinicalCase.questions;
-            rawChoices = "{choice}{choicest2 c:";
-            foreach(string question in interrogationQuestions)
-            {
-                rawChoices = @rawChoices + "\"" + question + "\"" + " "; 
-            }
-            rawChoices = rawChoices + "} ";
+                string[] interrogationQuestions=dialogBox.GetComponent<DialogSystem>().clinicalCase.questions;
+                rawChoices = "{choice}{choicest2 c:";
+                foreach(string question in interrogationQuestions)
+                {
+                    rawChoices = @rawChoices + "\"" + question + "\"" + " "; 
+                }
+                rawChoices = rawChoices + "} ";
             
-            choiceBox.SetActive(true);
-            choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-            dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué debería preguntarle al paciente?)");
+                choiceBox.SetActive(true);
+                choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
+                dialogBox.GetComponent<DialogSystem>().AddPhrase("(¿Qué debería preguntarle al paciente?)");
+                }
             }else{
                 interrogationOver = true;
                 interrogationTime = false;

@@ -19,7 +19,9 @@ public class ChoiceSystem : MonoBehaviour
     private bool menuGenerated = false;
     private List<string> badChoices;
     public GameObject typeofChoice;
+    public GameObject gameDataController;
     int searchTimes = 0;
+    public List<string> decisionsMade = new List<string>();
 
     private void Start(){
         dialogBox = GameObject.Find("DialogBoxImage");
@@ -113,46 +115,54 @@ public class ChoiceSystem : MonoBehaviour
     }
     public void changePath()
     {
-        searchTimes++;//TODO agregar un identificador de caminos y un identificador de donde termina el texto
-        Texto fullText= dialogBox.GetComponent<DialogSystem>().texto;
-        Queue <string> queueDialogs = dialogBox.GetComponent<DialogSystem>().queueDialogs;
-        int selectIndex = choiceOptions.value;
-        string selectedOption = choiceOptions.options[selectIndex].text;
-        int timesToSkip = 0;
-        bool dialogFound = false;
-        foreach(string dialog in queueDialogs)
-        {
-            timesToSkip++;
-            if(dialog.Contains("{"+selectedOption +"}"))
-            {
-                dialogBox.GetComponent<DialogSystem>().SkipPhrase(timesToSkip);
-                var regex = new Regex(@"\{" + Regex.Escape(selectedOption) + @"\}");
-                if (regex.Match(dialog).Success)
-                {
-                    dialogFound = true;
-                    dialogBox.GetComponent<DialogSystem>().AddPhrase(regex.Replace(dialog, ""));
-                    dialogBox.GetComponent<Button>().interactable = true;
-                    gameObject.SetActive(false);
-                    dialogBox.GetComponent<DialogSystem>().NextPhrase();
-                }
-                break;
-            }
-        }
-        if(dialogFound == false)
-        {
-            foreach (string textBuffer in fullText.textArray){
-                queueDialogs.Enqueue(textBuffer);
-            }
-            dialogBox.GetComponent<DialogSystem>().queueDialogs= queueDialogs;
-            if(searchTimes < 100){
-                changePath();
-            }
-            dialogBox.GetComponent<Button>().interactable = true;
-            gameObject.SetActive(false);
-            dialogBox.GetComponent<DialogSystem>().NextPhrase();
-        }
+        string selectedOption = choiceOptions.options[choiceOptions.value].text;
+        decisionsMade.Add(selectedOption);
+        gameDataController.GetComponent<GameDataController>().SaveData(decisionsMadeReceived: decisionsMade);
+        searchTimes = 0;
 
-
-        Debug.Log("eso boton");
+        SearchPath(selectedOption);
     }
+    public void SearchPath(string selectedOption)
+    {
+        searchTimes++;//TODO agregar un identificador de caminos y un identificador de donde termina el texto
+            Texto fullText = dialogBox.GetComponent<DialogSystem>().texto;
+    Queue<string> queueDialogs = dialogBox.GetComponent<DialogSystem>().queueDialogs;
+    int timesToSkip = 0;
+    bool dialogFound = false;
+
+    foreach (string dialog in queueDialogs)
+    {
+        timesToSkip++;
+        if (dialog.Contains("{" + selectedOption + "}"))
+        {
+            dialogBox.GetComponent<DialogSystem>().SkipPhrase(timesToSkip);
+            var regex = new Regex(@"\{" + Regex.Escape(selectedOption) + @"\}");
+            if (regex.Match(dialog).Success)
+            {
+                dialogFound = true;
+                dialogBox.GetComponent<DialogSystem>().AddPhrase(regex.Replace(dialog, ""));
+                dialogBox.GetComponent<Button>().interactable = true;
+                gameObject.SetActive(false);
+                dialogBox.GetComponent<DialogSystem>().NextPhrase();
+            }
+            break;
+        }
+    }
+
+    if (dialogFound == false)
+    {
+        foreach (string textBuffer in fullText.textArray)
+        {
+            queueDialogs.Enqueue(textBuffer);
+        }
+        dialogBox.GetComponent<DialogSystem>().queueDialogs = queueDialogs;
+        if (searchTimes < 100)
+        {
+            SearchPath(selectedOption);
+        }
+        dialogBox.GetComponent<Button>().interactable = true;
+        gameObject.SetActive(false);
+        dialogBox.GetComponent<DialogSystem>().NextPhrase();
+    }
+}
 }

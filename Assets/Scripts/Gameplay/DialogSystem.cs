@@ -46,7 +46,7 @@ public class DialogSystem : MonoBehaviour
 
     }
     public void GetVariables(){
-        saveFile = saveFileController.LoadData(saveFile);
+        saveFile = saveFileController.LoadData();
         clinicalCase = GameManager.Instance.SelectedCase;
         transform.GetChild(1).GetComponent<Image>().sprite = clinicalCase.retratoPaciente;
         Type tipo = clinicalCase.GetType();
