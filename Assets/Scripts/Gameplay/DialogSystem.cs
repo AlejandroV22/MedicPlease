@@ -22,16 +22,15 @@ public class DialogSystem : MonoBehaviour
     public ClinicalCase clinicalCase;
     private string[] textVariables;
     public int correctAnswer=0;
-    public GameObject typeofChoice;
     public GameObject choiceBox;
-    public GameObject interrogationBox;
+    public GameObject interrogationButton;
     public string rawChoices;
     public GameData saveFile = new GameData();
     public GameDataController saveFileController;
     private Coroutine blinkingSprite;
-    public GameObject inspectionBox;
-    public GameObject listeningBox;
-    public GameObject touchingBox;
+    public GameObject inspectionButton;
+    public GameObject listeningButton;
+    public GameObject touchingButton;
     public GameObject actionMenu;
     public GameObject bgController;
     public GameObject audioController;
@@ -187,7 +186,7 @@ public class DialogSystem : MonoBehaviour
             {
              actualPhrase = regext2.Replace(actualPhrase, "");   
             }
-            typeofChoice.SetActive(true);
+            
             gameObject.GetComponent<Button>().interactable = false;
             choiceBox.SetActive(true);
         }
@@ -200,9 +199,9 @@ public class DialogSystem : MonoBehaviour
                 if(dialog.Contains("{m}"))
                 {
                     //TODO refactorizar todo el sistema de examenes para integrar los limites de examenes
-                    inspectionBox.GetComponent<ExamSystem>().ExamLoop();
-                    touchingBox.GetComponent<ExamSystem>().ExamLoop();
-                    listeningBox.GetComponent<ExamSystem>().ExamLoop();
+                    inspectionButton.GetComponent<ExamSystem>().ExamLoop();
+                    touchingButton.GetComponent<ExamSystem>().ExamLoop();
+                    listeningButton.GetComponent<ExamSystem>().ExamLoop();
                     var regex = new Regex(@"\{m\}");
                     if (regex.Match(dialog).Success)
                     {
@@ -214,7 +213,7 @@ public class DialogSystem : MonoBehaviour
                          actualPhrase=dialog;   
                    
                     }
-                    interrogationBox.GetComponent<InterrogationSystem>().InterrogationLoop();
+                    interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
                     SkipPhrase(timesToSkip);
                     break;
                 }
@@ -226,7 +225,7 @@ public class DialogSystem : MonoBehaviour
         }
         if (actualPhrase.Contains("{a}"))
         {
-            if(interrogationBox.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
+            if(interrogationButton.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
             {
              actionMenu.SetActive(true);   
             }

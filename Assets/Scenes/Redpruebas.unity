@@ -1960,7 +1960,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceSystem
   choices: []
   rawChoices: 
-  typeofChoice: {fileID: 1609247917}
+  typeofChoice: {fileID: 0}
+  gameDataController: {fileID: 0}
+  decisionsMade: []
 --- !u!114 &537508770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2219,16 +2221,16 @@ MonoBehaviour:
   charTalkNameText: {fileID: 1591111620}
   clinicalCase: {fileID: 11400000, guid: 4d7b9605aa0fe32418a85a845fa68bdc, type: 2}
   correctAnswer: 0
-  typeofChoice: {fileID: 1609247917}
   choiceBox: {fileID: 769830926}
-  interrogationBox: {fileID: 1540525724}
+  interrogationButton: {fileID: 0}
   rawChoices: 
   saveFile:
     playerName: 
+    decisionsMade: []
   saveFileController: {fileID: 1503416845}
-  inspectionBox: {fileID: 129051940}
-  listeningBox: {fileID: 306905410}
-  touchingBox: {fileID: 739864174}
+  inspectionButton: {fileID: 0}
+  listeningButton: {fileID: 0}
+  touchingButton: {fileID: 0}
   actionMenu: {fileID: 1665938181}
   bgController: {fileID: 716670067}
   audioController: {fileID: 992738930}
@@ -2975,7 +2977,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceSystem
   choices: []
   rawChoices: 
-  typeofChoice: {fileID: 1609247917}
+  typeofChoice: {fileID: 0}
+  gameDataController: {fileID: 0}
+  decisionsMade: []
 --- !u!114 &769830928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5242,6 +5246,7 @@ MonoBehaviour:
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
   actionMenu: {fileID: 1665938181}
+  ClinicalCaseButton: {fileID: 0}
 --- !u!114 &1418570440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5930,6 +5935,7 @@ MonoBehaviour:
   saveFile: 
   defaultGameData:
     playerName: 
+    decisionsMade: []
 --- !u!4 &1503416846
 Transform:
   m_ObjectHideFlags: 0
@@ -6137,6 +6143,7 @@ MonoBehaviour:
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
   actionMenu: {fileID: 1665938181}
+  ClinicalCaseButton: {fileID: 0}
 --- !u!114 &1540525727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6672,7 +6679,6 @@ RectTransform:
   - {fileID: 518420804}
   - {fileID: 579118548}
   - {fileID: 1970883122}
-  - {fileID: 1609247918}
   - {fileID: 769830930}
   - {fileID: 1665938182}
   - {fileID: 1191500784}
@@ -6682,41 +6688,6 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 41.245422, y: -41.850067}
   m_SizeDelta: {x: 1456.4908, y: 744.0653}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1609247917
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1609247918}
-  m_Layer: 5
-  m_Name: TypeofChoice
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1609247918
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609247917}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1592640731}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -48.481125, y: 171.84998}
-  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1625670205
 GameObject:
@@ -7662,6 +7633,7 @@ MonoBehaviour:
   exitCaseButton: {fileID: 518420800}
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
+  isActiveFirstTime: 0
   isActive: 0
 --- !u!114 &1970883124
 MonoBehaviour:
@@ -8380,6 +8352,7 @@ MonoBehaviour:
   exitCaseButton: {fileID: 518420800}
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
+  isActiveFirstTime: 0
   isActive: 0
 --- !u!114 &2034665927
 MonoBehaviour:

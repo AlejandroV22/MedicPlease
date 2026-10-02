@@ -815,6 +815,8 @@ MonoBehaviour:
   choices: []
   rawChoices: 
   typeofChoice: {fileID: 1609247917}
+  gameDataController: {fileID: 0}
+  decisionsMade: []
 --- !u!114 &229505335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2312,6 +2314,8 @@ MonoBehaviour:
   choices: []
   rawChoices: 
   typeofChoice: {fileID: 1609247917}
+  gameDataController: {fileID: 0}
+  decisionsMade: []
 --- !u!114 &537508770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2572,14 +2576,15 @@ MonoBehaviour:
   correctAnswer: 0
   typeofChoice: {fileID: 1609247917}
   choiceBox: {fileID: 769830926}
-  interrogationBox: {fileID: 1540525724}
+  interrogationButton: {fileID: 1540525724}
   rawChoices: 
   saveFile:
     playerName: 
+    decisionsMade: []
   saveFileController: {fileID: 1503416845}
-  inspectionBox: {fileID: 129051940}
-  listeningBox: {fileID: 306905410}
-  touchingBox: {fileID: 739864174}
+  inspectionButton: {fileID: 129051940}
+  listeningButton: {fileID: 306905410}
+  touchingButton: {fileID: 739864174}
   actionMenu: {fileID: 1665938181}
   bgController: {fileID: 716670067}
   audioController: {fileID: 992738930}
@@ -3569,6 +3574,8 @@ MonoBehaviour:
   choices: []
   rawChoices: 
   typeofChoice: {fileID: 1609247917}
+  gameDataController: {fileID: 0}
+  decisionsMade: []
 --- !u!114 &769830928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6791,6 +6798,7 @@ MonoBehaviour:
   saveFile: 
   defaultGameData:
     playerName: 
+    decisionsMade: []
 --- !u!4 &1503416846
 Transform:
   m_ObjectHideFlags: 0
@@ -6861,6 +6869,7 @@ MonoBehaviour:
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
   actionMenu: {fileID: 1665938181}
+  ClinicalCaseButton: {fileID: 1970883121}
 --- !u!114 &1540525727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8522,8 +8531,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClinicalHistoryButton
   clinicalHistory: {fileID: 2029118704}
   exitCaseButton: {fileID: 518420800}
-  dialogBox: {fileID: 0}
-  choiceBox: {fileID: 0}
+  dialogBox: {fileID: 579118547}
+  choiceBox: {fileID: 769830926}
+  isActiveFirstTime: 0
   isActive: 0
 --- !u!114 &1970883124
 MonoBehaviour:

@@ -75,7 +75,9 @@ public class ExamManager : MonoBehaviour
             examMenu.transform.GetChild(0).gameObject.SetActive(true);
         }else{
             Debug.Log("horas haciendolo bien rico");
+            actionMenu.SetActive(false);
             dialogSystem.GetComponent<DialogSystem>().AddPhrase("{Ndname}(Necesito interrogar primero)");
+            dialogSystem.GetComponent<DialogSystem>().AddPhrase("{a}(¿Qué debería hacer?)");
         }
     }
 
