@@ -2217,25 +2217,28 @@ MonoBehaviour:
     - '{blanco}'
     - '{feedback}'
     - Fin
+    lines: []
+    lineIndex: 0
   screenText: {fileID: 1329691528}
   charTalkNameText: {fileID: 1591111620}
   clinicalCase: {fileID: 11400000, guid: 4d7b9605aa0fe32418a85a845fa68bdc, type: 2}
   correctAnswer: 0
   choiceBox: {fileID: 769830926}
-  interrogationButton: {fileID: 0}
+  interrogationButton: {fileID: 1540525724}
   rawChoices: 
   saveFile:
     playerName: 
     decisionsMade: []
   saveFileController: {fileID: 1503416845}
-  inspectionButton: {fileID: 0}
-  listeningButton: {fileID: 0}
-  touchingButton: {fileID: 0}
+  inspectionButton: {fileID: 129051940}
+  listeningButton: {fileID: 306905410}
+  touchingButton: {fileID: 739864174}
   actionMenu: {fileID: 1665938181}
   bgController: {fileID: 716670067}
   audioController: {fileID: 992738930}
   texSpeed: 0.05
   clinicalHistoryButton: {fileID: 1970883121}
+  extraMenu: {fileID: 0}
 --- !u!114 &579118551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2441,6 +2444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackgroundSystem
   bg: {fileID: 0}
+  ch: {fileID: 0}
   canva: {fileID: 1625670205}
   charaImage: {fileID: 1656998240}
 --- !u!4 &716670069
@@ -2978,7 +2982,7 @@ MonoBehaviour:
   choices: []
   rawChoices: 
   typeofChoice: {fileID: 0}
-  gameDataController: {fileID: 0}
+  gameDataController: {fileID: 1503416844}
   decisionsMade: []
 --- !u!114 &769830928
 MonoBehaviour:
@@ -6250,6 +6254,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540525724}
   m_CullTransparentMesh: 1
+--- !u!1 &1557059212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1557059214}
+  - component: {fileID: 1557059213}
+  m_Layer: 0
+  m_Name: ExamManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1557059213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557059212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71085d4b6118bf45b8da39a318c1c0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamManager
+  maxExamTries: 18
+  examinationTries: 0
+  examMenu: {fileID: 1191500783}
+  interrogationSystem: {fileID: 1540525724}
+  dialogSystem: {fileID: 579118547}
+  actionMenu: {fileID: 1665938181}
+--- !u!4 &1557059214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557059212}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 872.7166, y: 515.8245, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1573837314
 GameObject:
   m_ObjectHideFlags: 0
@@ -9012,3 +9066,4 @@ SceneRoots:
   - {fileID: 1503416846}
   - {fileID: 716670069}
   - {fileID: 992738933}
+  - {fileID: 1557059214}
