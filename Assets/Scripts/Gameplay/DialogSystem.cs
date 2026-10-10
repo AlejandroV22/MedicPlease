@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using UnityEditor.Rendering;
 
 public class DialogSystem : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject audioController;
     public float texSpeed = 0.05f;
     public GameObject clinicalHistoryButton;
+    public GameObject extraMenu;
 
     public void Awake(){
         GetVariables();
@@ -232,6 +234,15 @@ public class DialogSystem : MonoBehaviour
             clinicalHistoryButton.SetActive(true);
            actualPhrase = actualPhrase.Replace("{a}","");
         }
+        if (actualPhrase.Contains("{extra}"))
+        {
+            if(interrogationButton.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
+            {
+             extraMenu.SetActive(true);   
+            }
+            clinicalHistoryButton.SetActive(true);
+           actualPhrase = actualPhrase.Replace("{extra}","");
+        }
         if (actualPhrase.Contains("{bg:"))
         {
             var regex = new Regex(@"\{bg:\s*""([^""]*)""\s*\}");
@@ -244,7 +255,7 @@ public class DialogSystem : MonoBehaviour
             }
             Debug.Log("bgValue " + bgValue);
             bgController.GetComponent<BackgroundSystem>().ChangeBg(bgValue);
-        }
+        }//https://www.twitch.tv/doctorfefe
         if (actualPhrase.Contains("{ch:"))
         {
             var regex = new Regex(@"\{ch:\s*""([^""]*)""\s*\}");
@@ -257,6 +268,9 @@ public class DialogSystem : MonoBehaviour
             }
             Debug.Log("chValue " + chValue);
             bgController.GetComponent<BackgroundSystem>().ChangeCh(chValue);
+        }
+        if(actualPhrase.ContainsAny("{nLine}")){
+            NextLine();
         }
         
         
@@ -296,8 +310,19 @@ public class DialogSystem : MonoBehaviour
                 }
                 actualPhrase = regextNpname.Replace(actualPhrase, "");
             }
+            var regextNoname = new Regex(@"\{Noname\}");
+           
+            if (regextNoname.Match(actualPhrase).Success)
+            {
+                charTalkNameText.text = "??????";
+                actualPhrase = regextNoname.Replace(actualPhrase, "");
+            }
                 }
         
+    }
+    public void NextLine(){
+            texto.ChangeLine(clinicalCase.scriptPath);
+            ShowText();
     }
 // TODO que el texto pueda salir a diferentes velocidades
 }

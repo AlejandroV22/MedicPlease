@@ -7,6 +7,7 @@ using Unity.AppUI.UI;
 public class BackgroundSystem : MonoBehaviour
 {
     public Texture bg;
+    public Texture2D ch;
     public GameObject canva;
     public GameObject charaImage;
 
@@ -31,6 +32,24 @@ public class BackgroundSystem : MonoBehaviour
         }else if (chName == "enable")
         {
             charaImage.SetActive(true);
-        }
+        }else{
+            var handle = Addressables.LoadAssetAsync<Texture2D>("Assets/Art/" + chName + ".png");
+            ch = handle.WaitForCompletion();
+
+            if (handle.Status != AsyncOperationStatus.Succeeded || ch == null)
+            {
+                Debug.LogError($"No se cargó: {chName}");
+                return;
+            }
+            Sprite chSprite = ConvertTextureToSprite(ch);
+            charaImage.GetComponent<Image>().sprite = chSprite;
+            }
+    }
+    public Sprite ConvertTextureToSprite(Texture2D texture)
+    {
+        Rect rect = new Rect(0, 0, texture.width, texture.height);
+        Vector2 pivot = new Vector2(0.5f, 0.5f);
+
+        return Sprite.Create(texture, rect, pivot);
     }
 }

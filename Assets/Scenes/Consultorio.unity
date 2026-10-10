@@ -2570,11 +2570,12 @@ MonoBehaviour:
     - '{blanco}'
     - '{feedback}'
     - Fin
+    lines: []
+    lineIndex: 0
   screenText: {fileID: 1329691528}
   charTalkNameText: {fileID: 1591111620}
   clinicalCase: {fileID: 0}
   correctAnswer: 0
-  typeofChoice: {fileID: 1609247917}
   choiceBox: {fileID: 769830926}
   interrogationButton: {fileID: 1540525724}
   rawChoices: 
@@ -3574,7 +3575,7 @@ MonoBehaviour:
   choices: []
   rawChoices: 
   typeofChoice: {fileID: 1609247917}
-  gameDataController: {fileID: 0}
+  gameDataController: {fileID: 1503416844}
   decisionsMade: []
 --- !u!114 &769830928
 MonoBehaviour:

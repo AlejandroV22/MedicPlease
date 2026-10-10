@@ -34,7 +34,7 @@ public class ExamSystem : MonoBehaviour
             ExamManager.Instance.StopExam();
             dialogSystem.GetComponent<DialogSystem>().AddPhrase("(No puedo realizarle mas examenes al paciente)");
             //chapuza historica parte 3
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("Fin del prototipo 1");
+            dialogSystem.GetComponent<DialogSystem>().AddPhrase("{nLine}");
         }
     }
 
@@ -57,6 +57,7 @@ public class ExamSystem : MonoBehaviour
         }else{
             ShowExam();
         }
+    
     }
     public void ExamSelected()
     {

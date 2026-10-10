@@ -11,14 +11,24 @@ public class Texto
 {
     [TextArea (2,6)]
     public string[] textArray;
+    public string[] lines;
+    public int lineIndex = 0;
 //    public Sprite[] imageArray;
 // TODO hacer que vayan a distintos caminos dependiendo de la decision
     public void GetTextToFile(TextAsset csvFile){
-        string[] lines = csvFile.text.Split('\n');
-        for(int i=0; i<lines.Length;i++){
-            var rows = lines[i].Split(';');
-            textArray = rows;
-        }
+        lines = csvFile.text.Split('\n');
+        var rows = lines[lineIndex].Split(';');
+        textArray = rows;
+     
+
         
+    }
+    public void ChangeLine(TextAsset csvFile){
+        lineIndex ++;
+        if(lineIndex>lines.Length){
+            lineIndex = 0;
+        }
+        GetTextToFile(csvFile);
+
     }
 }
