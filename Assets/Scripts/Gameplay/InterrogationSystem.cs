@@ -28,6 +28,9 @@ public class InterrogationSystem : MonoBehaviour
     public bool GetInterrogationOver(){
         return interrogationOver;
     }
+    public void SetInterrogationTime(bool value){
+        interrogationTime = value;
+    }
     public void InterrogationChoice()
         {
             if(interrogationTries <=3){

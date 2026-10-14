@@ -18,13 +18,12 @@ public class ChoiceSystem : MonoBehaviour
     private string correctAnswer;
     private bool menuGenerated = false;
     private List<string> badChoices;
-    public GameObject typeofChoice;
     public GameObject gameDataController;
     int searchTimes = 0;
     public List<string> decisionsMade = new List<string>();
 
     private void Start(){
-        dialogBox = GameObject.Find("DialogBoxImage");
+        dialogBox = GameObject.Find("DialogBox");
         choiceOptions = gameObject.GetComponentInChildren<TMP_Dropdown>();
         confirmButton = gameObject.GetComponentInChildren<Button>();
         gameObject.SetActive(false);
