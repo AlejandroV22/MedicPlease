@@ -11,7 +11,7 @@ using UnityEditor.Rendering;
 
 public class DialogSystem : MonoBehaviour
 {
-    [NonSerialized] public Queue <string> queueDialogs = new();
+    [NonSerialized] public Queue<string> queueDialogs = new();
     public Texto texto;
     // private Sprite expretion;
     [SerializeField] TextMeshProUGUI screenText;
@@ -22,7 +22,7 @@ public class DialogSystem : MonoBehaviour
     private string isWritingPhrase;
     public ClinicalCase clinicalCase;
     private string[] textVariables;
-    public int correctAnswer=0;
+    public int correctAnswer = 0;
     public GameObject choiceBox;
     public GameObject interrogationButton;
     public string rawChoices;
@@ -32,6 +32,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject inspectionButton;
     public GameObject listeningButton;
     public GameObject touchingButton;
+    public GameObject extraExamButton;
     public GameObject actionMenu;
     public GameObject bgController;
     public GameObject audioController;
@@ -39,64 +40,76 @@ public class DialogSystem : MonoBehaviour
     public GameObject clinicalHistoryButton;
     public GameObject extraMenu;
 
-    public void Awake(){
+    public void Awake()
+    {
         GetVariables();
         texto.GetTextToFile(clinicalCase.scriptPath);
         ShowText();
         GetComponent<Button>().onClick.AddListener(IsPressed);
 
     }
-    public void GetVariables(){
+    public void GetVariables()
+    {
         saveFile = saveFileController.LoadData();
         clinicalCase = GameManager.Instance.SelectedCase;
         transform.GetChild(1).GetComponent<Image>().sprite = clinicalCase.retratoPaciente;
         Type tipo = clinicalCase.GetType();
         FieldInfo[] campos = tipo.GetFields();
-        List<string> lista = new List<string> {};
-        foreach(FieldInfo campo in campos){
+        List<string> lista = new List<string> { };
+        foreach (FieldInfo campo in campos)
+        {
             lista.Add(campo.Name);
         }
         textVariables = lista.ToArray();
-        
+
     }
-    public void ShowText(){
-        if(charTalkNameText != null){
+    public void ShowText()
+    {
+        if (charTalkNameText != null)
+        {
             charTalkNameText.text = "??????";
         }
         queueDialogs.Clear();
-        foreach (string textBuffer in texto.textArray){
+        foreach (string textBuffer in texto.textArray)
+        {
             queueDialogs.Enqueue(textBuffer);
         }
         NextPhrase();
     }
-    public void NextPhrase(){
-        if (queueDialogs.Count == 0){
+    public void NextPhrase()
+    {
+        if (queueDialogs.Count == 0)
+        {
             return;
         }
         Debug.Log(textVariables);
-        if (isWriting==false){
+        if (isWriting == false)
+        {
             if (blinkingSprite != null)
             {
-              StopCoroutine(blinkingSprite);  
-            } 
+                StopCoroutine(blinkingSprite);
+            }
             actualPhrase = queueDialogs.Dequeue();
             CheckVariable(actualPhrase);
             CheckTalker();
-            if (isWriting){
+            if (isWriting)
+            {
                 return;
             }
-      //  CheckExpretion(actualPhrase);
+            //  CheckExpretion(actualPhrase);
             //actualPhrase = actualPhrase[1..^0];
-            isWriting=true;
-        //screenImage.sprite = expretion;
+            isWriting = true;
+            //screenImage.sprite = expretion;
             StartCoroutine(ShowCharts(actualPhrase, texSpeed));
-                
+
         }
     }
-    public void AddPhrase(string newPhrase){
-        Queue <string> modDialogs = new();
+    public void AddPhrase(string newPhrase)
+    {
+        Queue<string> modDialogs = new();
         modDialogs.Enqueue(newPhrase);
-        foreach (string textBuffer in queueDialogs){
+        foreach (string textBuffer in queueDialogs)
+        {
             modDialogs.Enqueue(textBuffer);
         }
         queueDialogs.Clear();
@@ -110,14 +123,16 @@ public class DialogSystem : MonoBehaviour
             expretion = texto.imageArray[expretionIndex];
         isWriting=true;
     }*/
-    IEnumerator ShowCharts(string textToShow, float textSpeed){
+    IEnumerator ShowCharts(string textToShow, float textSpeed)
+    {
         screenText.text = "";
         Debug.Log("corutina iniciada");
-        isWritingPhrase=textToShow;
-         int characterCount = 0;
-        foreach (char character in textToShow.ToCharArray()){
+        isWritingPhrase = textToShow;
+        int characterCount = 0;
+        foreach (char character in textToShow.ToCharArray())
+        {
             Debug.Log("corutina iniciada");
-            screenText.text+=character;
+            screenText.text += character;
             if (character != ' ' && characterCount % 2 == 0)
             {
                 audioController.GetComponent<AudioSystem>().PlayCharSound();
@@ -126,22 +141,24 @@ public class DialogSystem : MonoBehaviour
             characterCount++;
             yield return new WaitForSeconds(textSpeed);
         }
-        isWriting=false;
+        isWriting = false;
         blinkingSprite = StartCoroutine(SpriteBlinking());
 
     }
     IEnumerator SpriteBlinking()
     {
-        while(gameObject.GetComponent<Button>().interactable){
-        string baseText = screenText.text;
-        string spriteName = "<sprite=0>"; 
-        screenText.text += spriteName;
-        yield return new WaitForSeconds(0.5f);
-        screenText.text = baseText;
-        yield return new WaitForSeconds(0.5f);
+        while (gameObject.GetComponent<Button>().interactable)
+        {
+            string baseText = screenText.text;
+            string spriteName = "<sprite=0>";
+            screenText.text += spriteName;
+            yield return new WaitForSeconds(0.5f);
+            screenText.text = baseText;
+            yield return new WaitForSeconds(0.5f);
+        }
     }
-    }
-    public void IsPressed(){
+    public void IsPressed()
+    {
         /*if (isWriting==true){
             Debug.Log("skipeado");
             StopAllCoroutines();
@@ -149,61 +166,72 @@ public class DialogSystem : MonoBehaviour
             isWriting=false;
             blinkingSprite = StartCoroutine(SpriteBlinking());
         }else{*/
-            NextPhrase();
+        NextPhrase();
         //}
-                    
+
     }
-    public void CheckVariable(string actualPhrase){
+    public void CheckVariable(string actualPhrase)
+    {
         GetVariables();
-        foreach (string variable in textVariables){
-            if(actualPhrase.Contains("{"+variable+"}")){
+        foreach (string variable in textVariables)
+        {
+            if (actualPhrase.Contains("{" + variable + "}"))
+            {
                 FieldInfo field = typeof(ClinicalCase).GetField(variable);
-                if (field != null){
+                if (field != null)
+                {
                     object value = field.GetValue(clinicalCase);
-                    actualPhrase = actualPhrase.Replace("{"+variable+"}", value?.ToString() ?? "");
+                    actualPhrase = actualPhrase.Replace("{" + variable + "}", value?.ToString() ?? "");
                     //TODO feedback pero ahora si feedback
-                    if(variable=="feedback"){
-                        if(correctAnswer==2){
-                            actualPhrase = actualPhrase.Replace("{"+variable+"}", value?.ToString() ?? "");
-                        }else{
+                    if (variable == "feedback")
+                    {
+                        if (correctAnswer == 2)
+                        {
+                            actualPhrase = actualPhrase.Replace("{" + variable + "}", value?.ToString() ?? "");
+                        }
+                        else
+                        {
                             actualPhrase = "El paciente murio";
                         }
                     }
                 }
+            }
         }
+        if (actualPhrase.Contains("{dname}"))
+        {
+            actualPhrase = actualPhrase.Replace("{dname}", saveFile.playerName);
         }
-        if (actualPhrase.Contains("{dname}")){
-            actualPhrase = actualPhrase.Replace("{dname}",saveFile.playerName);
-        }
-        if(actualPhrase.Contains("{choice}")){
+        if (actualPhrase.Contains("{choice}"))
+        {
             rawChoices = actualPhrase;
             var regext1 = new Regex(@"\{choice\}\{choicest1\s+b:\s*((?:""[^""]*""\s*)*)c:\s*""[^""]*""\}");
             Debug.Log("match estado" + regext1.Match(actualPhrase).Success);
             if (regext1.Match(actualPhrase).Success)
             {
-             actualPhrase = regext1.Replace(actualPhrase, "");   
+                actualPhrase = regext1.Replace(actualPhrase, "");
             }
             var regext2 = new Regex(@"\{choice\}\{choicest2\s+c:\s*((?:""[^""]*""\s*)*)\}");
             if (regext2.Match(actualPhrase).Success)
             {
-             actualPhrase = regext2.Replace(actualPhrase, "");   
+                actualPhrase = regext2.Replace(actualPhrase, "");
             }
-            
+
             gameObject.GetComponent<Button>().interactable = false;
             choiceBox.SetActive(true);
         }
         if (actualPhrase.Contains("{main}"))
         {
             int timesToSkip = 0;
-            foreach(string dialog in queueDialogs)
+            foreach (string dialog in queueDialogs)
             {
                 timesToSkip++;
-                if(dialog.Contains("{m}"))
+                if (dialog.Contains("{m}"))
                 {
                     //TODO refactorizar todo el sistema de examenes para integrar los limites de examenes
                     inspectionButton.GetComponent<ExamSystem>().ExamLoop();
                     touchingButton.GetComponent<ExamSystem>().ExamLoop();
                     listeningButton.GetComponent<ExamSystem>().ExamLoop();
+                    extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
                     var regex = new Regex(@"\{m\}");
                     if (regex.Match(dialog).Success)
                     {
@@ -211,9 +239,9 @@ public class DialogSystem : MonoBehaviour
                     }
                     else
                     {
-       
-                         actualPhrase=dialog;   
-                   
+
+                        actualPhrase = dialog;
+
                     }
                     interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
                     SkipPhrase(timesToSkip);
@@ -222,26 +250,27 @@ public class DialogSystem : MonoBehaviour
             }
         }
         //chapuza historica
-        if(actualPhrase.Contains("{m}")){
-            actualPhrase = actualPhrase.Replace("{m}","");
+        if (actualPhrase.Contains("{m}"))
+        {
+            actualPhrase = actualPhrase.Replace("{m}", "");
         }
         if (actualPhrase.Contains("{a}"))
         {
-            if(interrogationButton.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
+            if (interrogationButton.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
             {
-             actionMenu.SetActive(true);   
+                actionMenu.SetActive(true);
             }
             clinicalHistoryButton.SetActive(true);
-           actualPhrase = actualPhrase.Replace("{a}","");
+            actualPhrase = actualPhrase.Replace("{a}", "");
         }
         if (actualPhrase.Contains("{extra}"))
         {
-            if(interrogationButton.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
+            if (interrogationButton.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
             {
-             extraMenu.SetActive(true);   
+                extraMenu.SetActive(true);
             }
             clinicalHistoryButton.SetActive(true);
-           actualPhrase = actualPhrase.Replace("{extra}","");
+            actualPhrase = actualPhrase.Replace("{extra}", "");
         }
         if (actualPhrase.Contains("{bg:"))
         {
@@ -250,41 +279,56 @@ public class DialogSystem : MonoBehaviour
             string bgValue = String.Empty;
             if (match.Success)
             {
-                bgValue = match.Groups[1].Value; 
-                actualPhrase = regex.Replace(actualPhrase, ""); 
+                bgValue = match.Groups[1].Value;
+                actualPhrase = regex.Replace(actualPhrase, "");
             }
             Debug.Log("bgValue " + bgValue);
             bgController.GetComponent<BackgroundSystem>().ChangeBg(bgValue);
         }//https://www.twitch.tv/doctorfefe
-        if (actualPhrase.Contains("{ch:"))
-        {
-            var regex = new Regex(@"\{ch:\s*""([^""]*)""\s*\}");
-            var match = regex.Match(actualPhrase);
-            string chValue = String.Empty;
-            if (match.Success)
-            {
-                chValue = match.Groups[1].Value; 
-                actualPhrase = regex.Replace(actualPhrase, ""); 
-            }
-            Debug.Log("chValue " + chValue);
-            bgController.GetComponent<BackgroundSystem>().ChangeCh(chValue);
+if (actualPhrase.Contains("{ch:"))
+{
+    var regex = new Regex(@"\{ch:\s*""([^""]*)""\s*\}");
+    var match = regex.Match(actualPhrase);
+
+    var regexVisibility = new Regex(@"\{ch:\s*""([^""]*)""\s+([01])\s*\}");
+    var matchVisibility = regexVisibility.Match(actualPhrase);
+
+    string chValue = String.Empty;
+    bool chVisibility = true;
+
+    if (match.Success)
+    {
+        chValue = match.Groups[1].Value;
+        actualPhrase = regex.Replace(actualPhrase, "");
+    }
+
+    if (matchVisibility.Success)
+    {
+        chValue = matchVisibility.Groups[1].Value; // si también quieres el valor
+        chVisibility = matchVisibility.Groups[2].Value == "1";
+        actualPhrase = regexVisibility.Replace(actualPhrase, "");
+    }
+            bgController.GetComponent<BackgroundSystem>().ChangeCh(chValue, chVisibility);
         }
-        if(actualPhrase.ContainsAny("{nLine}")){
+        if (actualPhrase.ContainsAny("{nLine}"))
+        {
             NextLine();
         }
-        
-        
-        this.actualPhrase=actualPhrase;
+
+
+        this.actualPhrase = actualPhrase;
     }
     public void SkipPhrase(int timesToSkip = 1)
     {
-        for (int i=1; i<=timesToSkip; i++)
+        for (int i = 1; i <= timesToSkip; i++)
         {
             queueDialogs.Dequeue();
         }
     }
-    public void CheckTalker(){
-        if (actualPhrase !=null){
+    public void CheckTalker()
+    {
+        if (actualPhrase != null)
+        {
             var regextNdname = new Regex(@"\{Ndname\}");
             Debug.Log("match estado Ndname: " + regextNdname.Match(actualPhrase).Success);
             if (regextNdname.Match(actualPhrase).Success)
@@ -311,18 +355,19 @@ public class DialogSystem : MonoBehaviour
                 actualPhrase = regextNpname.Replace(actualPhrase, "");
             }
             var regextNoname = new Regex(@"\{Noname\}");
-           
+
             if (regextNoname.Match(actualPhrase).Success)
             {
                 charTalkNameText.text = "??????";
                 actualPhrase = regextNoname.Replace(actualPhrase, "");
             }
-                }
-        
+        }
+
     }
-    public void NextLine(){
-            texto.ChangeLine(clinicalCase.scriptPath);
-            ShowText();
+    public void NextLine()
+    {
+        texto.ChangeLine(clinicalCase.scriptPath);
+        ShowText();
     }
-// TODO que el texto pueda salir a diferentes velocidades
+    // TODO que el texto pueda salir a diferentes velocidades
 }

@@ -18,11 +18,13 @@ public class ClinicalCase : ScriptableObject
     [TextArea(3,8)]
     [Header("Preguntas de interrogacion")]
     public string[] questions;
+    public bool[] relevantQuestions;
 
     [Header("Respuestas correctas")]
     public string correctDiagnosis;
     public string correctTreatment;
-
+    [Header("Diagnosticos incorrectos")]
+    public string[] wrongDiagnosis;
     [Header("Retroalimentación")]
 
     [TextArea(5,10)]

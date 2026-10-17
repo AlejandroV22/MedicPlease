@@ -10,6 +10,14 @@ public class BackgroundSystem : MonoBehaviour
     public Texture2D ch;
     public GameObject canva;
     public GameObject charaImage;
+    public ClinicalCase clinicalCase;
+    private Sprite defaultCh;
+
+    private void Start()
+    {
+        clinicalCase = GameManager.Instance.SelectedCase;
+        defaultCh = clinicalCase.retratoPaciente;  
+    }
 
     public void ChangeBg(string bgName)
     {
@@ -24,26 +32,29 @@ public class BackgroundSystem : MonoBehaviour
 
         canva.GetComponent<RawImage>().texture = bg;
     }
-    public void ChangeCh(string chName)
+    public void ChangeCh(string chName, bool chVisibility = true)
     {
-        if(chName == "disable")
+        if(chVisibility == false)
         {
             charaImage.SetActive(false);
-        }else if (chName == "enable")
+        }else if (chVisibility == true)
         {
             charaImage.SetActive(true);
-        }else{
-            var handle = Addressables.LoadAssetAsync<Texture2D>("Assets/Art/" + chName + ".png");
-            ch = handle.WaitForCompletion();
+        }
+    if(chName == "default"){
+       charaImage.GetComponent<Image>().sprite = defaultCh;
+    }else{
+        var handle = Addressables.LoadAssetAsync<Texture2D>("Assets/Art/" + chName + ".png");
+        ch = handle.WaitForCompletion();
 
-            if (handle.Status != AsyncOperationStatus.Succeeded || ch == null)
-            {
-                Debug.LogError($"No se cargó: {chName}");
-                return;
-            }
-            Sprite chSprite = ConvertTextureToSprite(ch);
-            charaImage.GetComponent<Image>().sprite = chSprite;
-            }
+        if (handle.Status != AsyncOperationStatus.Succeeded || ch == null)
+        {
+            Debug.LogError($"No se cargó: {chName}");
+            return;
+        }
+        Sprite chSprite = ConvertTextureToSprite(ch);
+        charaImage.GetComponent<Image>().sprite = chSprite;
+    }
     }
     public Sprite ConvertTextureToSprite(Texture2D texture)
     {

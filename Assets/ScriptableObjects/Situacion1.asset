@@ -27,7 +27,9 @@ MonoBehaviour:
   - "\xBFHa notado cambios en su estado de animo?"
   - "\xBFHa notado cambios importantes en su peso?"
   - "\xBFRecuerda si la sensacion inicio por alguna situacion especifica?"
+  relevantQuestions: 0000000000
   correctDiagnosis: "Este es el diagn\xF3stico correcto"
   correctTreatment: Este es el tratamiento correcto
+  wrongDiagnosis: []
   feedback: Hola soy la realimentacion
   scriptPath: {fileID: 4900000, guid: aa8a7faa94af4284bb830f78089372f3, type: 3}

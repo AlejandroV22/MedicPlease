@@ -2160,7 +2160,7 @@ MonoBehaviour:
   actionMenu: {fileID: 1665938181}
   bgController: {fileID: 716670067}
   audioController: {fileID: 992738930}
-  texSpeed: 0.05
+  texSpeed: 0.035
   clinicalHistoryButton: {fileID: 1970883121}
   extraMenu: {fileID: 0}
 --- !u!114 &579118551
@@ -6583,6 +6583,8 @@ MonoBehaviour:
   interrogationSystem: {fileID: 1540525724}
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
+  extraExamTime: 0
+  extraExaminationTries: 0
 --- !u!4 &1557059214
 Transform:
   m_ObjectHideFlags: 0

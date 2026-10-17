@@ -6,8 +6,8 @@ using Unity.VisualScripting;
 public class ExamManager : MonoBehaviour
 {
     public static ExamManager Instance { get; private set; }
- // Chapuza historica parte 6 es 18 porque cada que pasaba un examen sumaba 3 intentos en vez de uno xd
-    [SerializeField] private int maxExamTries = 18;
+ // Chapuza historica parte 6 es 18 porque cada que pasaba un examen sumaba 3 intentos en vez de uno xd (esto se arreglo por arte de magia)
+    [SerializeField] private int maxExamTries = 5;
 
     public int examinationTries;
     private bool examTime;
@@ -18,6 +18,9 @@ public class ExamManager : MonoBehaviour
     public GameObject interrogationSystem;
     public GameObject dialogSystem;
     public GameObject actionMenu;
+    public int maxExtraExamTries = 2;
+    public bool extraExamTime;
+    public int extraExaminationTries;
 
     private void Awake()
     {
@@ -36,6 +39,17 @@ public class ExamManager : MonoBehaviour
     {
         return examinationTries <= maxExamTries;
     }
+    public bool CanStartExtraExam()
+    {
+        return extraExaminationTries <= maxExtraExamTries;
+    }
+    public void StartExtraExam(){
+        extraExamTime = true;
+    }
+       public void StopExtraExam(){
+        examTime = false;
+    }
+
 
 
     public void StartExam()
@@ -50,6 +64,15 @@ public class ExamManager : MonoBehaviour
         {
             examinationTries++;
             Debug.Log("examTimeValue " + examTime);
+        }
+        else
+        {
+            examTime = false;
+        }
+        if (extraExamTime && extraExaminationTries <= maxExtraExamTries)
+        {
+            extraExaminationTries++;
+            Debug.Log("extraExamTimeValue " + extraExamTime);
         }
         else
         {
