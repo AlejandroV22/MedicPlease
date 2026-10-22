@@ -39,6 +39,7 @@ public class DialogSystem : MonoBehaviour
     public float texSpeed = 0.05f;
     public GameObject clinicalHistoryButton;
     public GameObject extraMenu;
+    public GameObject diagnosisController;
 
     public void Awake()
     {
@@ -271,6 +272,14 @@ public class DialogSystem : MonoBehaviour
             }
             clinicalHistoryButton.SetActive(true);
             actualPhrase = actualPhrase.Replace("{extra}", "");
+        }
+        if(actualPhrase.Contains("{end}")){
+            //programar el final del juego
+            AddPhrase("Fin del prototipo 2");
+        }
+        if(actualPhrase.Contains("{diag}")){
+            diagnosisController.GetComponent<DiagnosisSystem>().SelectDiagnosis();
+            actualPhrase = actualPhrase.Replace("{diag}", "");
         }
         if (actualPhrase.Contains("{bg:"))
         {

@@ -178,7 +178,7 @@ MonoBehaviour:
   - Observar el Abdomen
   - Observar la Postura
   - Observar la Marcha
-  revelantExams: 0000000000
+  revelantExams: 0100000101
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
 --- !u!114 &129051943
@@ -443,7 +443,7 @@ MonoBehaviour:
   - Vago
   - Accesorio
   - Hipogloso
-  revelantExams: 000000000000000000000000
+  revelantExams: 000001000100010101010001
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
 --- !u!114 &136591763
@@ -1348,7 +1348,7 @@ MonoBehaviour:
   exams:
   - "Auscultar coraz\xF3n"
   - Auscultar pulmones
-  revelantExams: 0000
+  revelantExams: 0100
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
 --- !u!1 &322902392
@@ -2146,7 +2146,7 @@ MonoBehaviour:
   - Juicio
   - Pensamiento abstracto
   - "C\xE1lculo"
-  revelantExams: 000000000000
+  revelantExams: 010100000000
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
 --- !u!114 &431179338
@@ -3050,6 +3050,7 @@ MonoBehaviour:
   texSpeed: 0.035
   clinicalHistoryButton: {fileID: 1970883121}
   extraMenu: {fileID: 132145215}
+  diagnosisController: {fileID: 1919622047}
 --- !u!114 &579118551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3360,7 +3361,7 @@ MonoBehaviour:
   exams:
   - Columna dorsal
   - Dolor y temperatura
-  revelantExams: 0000
+  revelantExams: 0101
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
 --- !u!114 &661758675
@@ -3981,7 +3982,7 @@ MonoBehaviour:
   - Palpar cuello
   - Palpar miembro superior
   - Palpar miembro inferior
-  revelantExams: 0000000000
+  revelantExams: 0000010000
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
 --- !u!1 &740102468
@@ -9125,6 +9126,60 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1919622047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1919622049}
+  - component: {fileID: 1919622048}
+  m_Layer: 0
+  m_Name: DiagnosisController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1919622048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919622047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c809a4eabf71c7fb360d38a77b234d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DiagnosisSystem
+  clinicalCase: {fileID: 0}
+  gameDataController: {fileID: 1503416845}
+  relevantDecisionMade: []
+  inspectionButton: {fileID: 129051940}
+  listeningButton: {fileID: 306905410}
+  touchingButton: {fileID: 739864174}
+  mentalButton: {fileID: 431179335}
+  nervesButton: {fileID: 136591760}
+  sensitivityButton: {fileID: 661758672}
+  choiceBox: {fileID: 769830926}
+--- !u!4 &1919622049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919622047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1009.17035, y: 476.12128, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1943048231
 GameObject:
   m_ObjectHideFlags: 0
@@ -10501,13 +10556,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71085d4b6118bf45b8da39a318c1c0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamManager
-  maxExamTries: 18
+  maxExamTries: 5
   examinationTries: 0
   examMenu: {fileID: 1191500783}
   interrogationSystem: {fileID: 1540525724}
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
-  maxExtraExamTries: 3
+  maxExtraExamTries: 2
   extraExamTime: 0
   extraExaminationTries: 0
 --- !u!4 &2084163065
@@ -10800,3 +10855,4 @@ SceneRoots:
   - {fileID: 716670069}
   - {fileID: 992738933}
   - {fileID: 2084163065}
+  - {fileID: 1919622049}

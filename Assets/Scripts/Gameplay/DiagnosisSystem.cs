@@ -22,8 +22,8 @@ public class DiagnosisSystem : MonoBehaviour
     public GameObject sensitivityButton;
     public GameObject choiceBox;
     private string rawChoices;
-    private List<string> diagnosisWithCorrect;
-    private List<string> diagnosisWithoutCorrect;
+    private List<string> diagnosisWithCorrect = new List<string>();
+    private List<string> diagnosisWithoutCorrect= new List<string>();
     void Start()
     {
         clinicalCase = GameManager.Instance.SelectedCase;
@@ -63,6 +63,8 @@ public class DiagnosisSystem : MonoBehaviour
         }.SelectMany(arr => arr).ToArray();
     }
     public void OptainDiagnosis(){
+        diagnosisWithCorrect.Clear();
+        diagnosisWithoutCorrect.Clear();
        string[] wrongs = clinicalCase.wrongDiagnosis;
        string correct = clinicalCase.correctDiagnosis;
        for(int i =0; i<wrongs.Length; i++){
@@ -74,10 +76,11 @@ public class DiagnosisSystem : MonoBehaviour
        diagnosisWithCorrect.Add(correct);
     }
     public void SelectDiagnosis(){
+        relevantDecisionMade.Clear();
         OptainDiagnosis();
         gameData=gameDataController.LoadData();
         decisionMade = gameData.decisionsMade;
-        int totalRelevant = isRelevantExams.Count(x => x) + isRelevantQuestions.Count(x => x);
+        int totalRelevant = 10;//isRelevantExams.Count(x => x) + isRelevantQuestions.Count(x => x);
         foreach(string decision in decisionMade){
             for(int i = 0; i< exams.Length; i++){
                 if(decision == exams[i]){
@@ -94,20 +97,26 @@ public class DiagnosisSystem : MonoBehaviour
                 }
             }
         }
+        rawChoices = "{choice}{choicest2 c:";
         if(relevantDecisionMade.Count()>=totalRelevant*0.80f){
                 foreach(string diagnosis in diagnosisWithCorrect)
                 {
                     rawChoices = @rawChoices + "\"" + diagnosis + "\"" + " "; 
                 }
                 rawChoices = rawChoices + "} ";
+                Debug.Log(rawChoices);
+            choiceBox.SetActive(true);
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-        }else if(relevantDecisionMade.Count()<=totalRelevant*0.80f){
+        }else{
                 foreach(string diagnosis in diagnosisWithoutCorrect)
                 {
                     rawChoices = @rawChoices + "\"" + diagnosis + "\"" + " "; 
                 }
                 rawChoices = rawChoices + "} ";
+                Debug.Log(rawChoices);
+                choiceBox.SetActive(true);
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
+            
         }
 
     }

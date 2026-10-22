@@ -27,9 +27,13 @@ MonoBehaviour:
   - "\xBFHa notado cambios en su estado de animo?"
   - "\xBFHa notado cambios importantes en su peso?"
   - "\xBFRecuerda si la sensacion inicio por alguna situacion especifica?"
-  relevantQuestions: 0000000000
-  correctDiagnosis: "Este es el diagn\xF3stico correcto"
+  relevantQuestions: 010001000001
+  correctDiagnosis: Sindrome de Wallenberg
   correctTreatment: Este es el tratamiento correcto
-  wrongDiagnosis: []
+  wrongDiagnosis:
+  - "Resfriado Com\xFAn"
+  - "Neuralgia del trig\xE9mio"
+  - "Par\xE1lisis de Bell"
+  - "Migra\xF1a con aura"
   feedback: Hola soy la realimentacion
   scriptPath: {fileID: 4900000, guid: aa8a7faa94af4284bb830f78089372f3, type: 3}
