@@ -32,6 +32,7 @@ public class CerrarBoton : MonoBehaviour
             }
             objetoACerrar.SetActive(false);
             dialogSystem?.GetComponent<DialogSystem>().AddPhrase("{a}(¿Qué debería hacer?)");
+            dialogSystem.GetComponent<Button>().interactable = true;
             
             
         }
@@ -45,6 +46,7 @@ public class CerrarBoton : MonoBehaviour
             }
             gameObject.SetActive(false);
             dialogSystem?.GetComponent<DialogSystem>().AddPhrase("{a}(¿Qué debería hacer?)");
+            dialogSystem.GetComponent<Button>().interactable = true;
         }
     }
 }
