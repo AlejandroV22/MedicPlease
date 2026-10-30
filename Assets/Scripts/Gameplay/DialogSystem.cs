@@ -277,6 +277,7 @@ public class DialogSystem : MonoBehaviour
         }
         if(actualPhrase.Contains("{end}")){
             //programar el final del juego
+            saveFileController.GetComponent<SaveUploader>().Upload();
             queueDialogs.Clear();
             AddPhrase("Fin del prototipo 2");
         }

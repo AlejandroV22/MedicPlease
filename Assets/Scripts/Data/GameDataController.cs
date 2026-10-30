@@ -3,6 +3,7 @@ using System.IO;
 using TMPro;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using NUnit.Framework;
 
 public class GameDataController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameDataController : MonoBehaviour
         defaultGameData.playerName = "Mitzune";
         defaultGameData.decisionsMade = new List<string>();
         defaultGameData.actualCase = "Situacion 1";
+        defaultGameData.relevantDecisionMade = new List<string>();
     }
    /* private void Update()
     {
@@ -40,7 +42,7 @@ public class GameDataController : MonoBehaviour
         }
     }
 
-    public void SaveData(string playerNameReceived=null, List<string> decisionsMadeReceived=null, string actualCaseReceived = null){
+    public void SaveData(string playerNameReceived=null, List<string> decisionsMadeReceived=null, string actualCaseReceived = null, List<string> relevantDecisionMadeReceived = null){
         if (string.IsNullOrEmpty(saveFile))
         {
             saveFile = Application.persistentDataPath + "/saveFile.json";
@@ -57,10 +59,14 @@ public class GameDataController : MonoBehaviour
         {
             actualCaseReceived = LoadData().actualCase;
         }
+        if(relevantDecisionMadeReceived == null){
+            relevantDecisionMadeReceived = LoadData().relevantDecisionMade;
+        }
         GameData newData = new GameData(){
             playerName = playerNameReceived, //remplazar por el valor a guardar por el objeto encargado
             decisionsMade = decisionsMadeReceived,
-            actualCase = actualCaseReceived
+            actualCase = actualCaseReceived,
+            relevantDecisionMade = relevantDecisionMadeReceived
         };
         string jsonChain = JsonUtility.ToJson(newData);
         File.WriteAllText(saveFile, jsonChain);

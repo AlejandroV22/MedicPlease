@@ -94,6 +94,7 @@ public class DiagnosisSystem : MonoBehaviour
         gameData = gameDataController.LoadData();
         decisionMade = gameData.decisionsMade;
         totalRelevant = clinicalCase.minimumCorrectExams;//isRelevantExams.Count(x => x) + isRelevantQuestions.Count(x => x);
+        gameDataController.SaveData(relevantDecisionMadeReceived: relevantDecisionMade);
         foreach (string decision in decisionMade)
         {
             for (int i = 0; i < exams.Length; i++)

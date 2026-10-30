@@ -2602,6 +2602,7 @@ MonoBehaviour:
     playerName: 
     actualCase: 
     decisionsMade: []
+    relevantDecisionMade: []
   saveFileController: {fileID: 1503416845}
   inspectionButton: {fileID: 129051940}
   listeningButton: {fileID: 306905410}
@@ -4858,6 +4859,7 @@ MonoBehaviour:
     playerName: 
     actualCase: 
     decisionsMade: []
+    relevantDecisionMade: []
   clinicalCase: {fileID: 0}
   guion:
     textArray: []
@@ -7381,6 +7383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1503416846}
   - component: {fileID: 1503416845}
+  - component: {fileID: 1503416847}
   m_Layer: 0
   m_Name: GameDataController
   m_TagString: Untagged
@@ -7405,6 +7408,7 @@ MonoBehaviour:
     playerName: 
     actualCase: 
     decisionsMade: []
+    relevantDecisionMade: []
 --- !u!4 &1503416846
 Transform:
   m_ObjectHideFlags: 0
@@ -7420,6 +7424,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1503416847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503416844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b653ba24bcc985c9ba6220e982a63cc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveUploader
+  endpointUrl: http://localhost/api/saves/
+  apiKey: 6e1921b0bbab43550592c4c394ee74bf449e128b3108177a
+  fileName: saveFile.json
+  timeoutSeconds: 10
 --- !u!1 &1527133901
 GameObject:
   m_ObjectHideFlags: 0
