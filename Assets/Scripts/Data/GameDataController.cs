@@ -10,10 +10,11 @@ public class GameDataController : MonoBehaviour
     public GameData defaultGameData;
 
     private void Awake(){
-        saveFile = Application.dataPath + "/saveFile.json";
+        saveFile = Application.persistentDataPath + "/saveFile.json";
         Debug.Log("arriba los logs");
         defaultGameData.playerName = "Mitzune";
         defaultGameData.decisionsMade = new List<string>();
+        defaultGameData.actualCase = "Situacion 1";
     }
    /* private void Update()
     {
@@ -39,7 +40,11 @@ public class GameDataController : MonoBehaviour
         }
     }
 
-    public void SaveData(string playerNameReceived=null, List<string> decisionsMadeReceived=null){
+    public void SaveData(string playerNameReceived=null, List<string> decisionsMadeReceived=null, string actualCaseReceived = null){
+        if (string.IsNullOrEmpty(saveFile))
+        {
+            saveFile = Application.persistentDataPath + "/saveFile.json";
+        }
         if (string.IsNullOrEmpty(playerNameReceived))
         {
             playerNameReceived = LoadData().playerName;
@@ -48,9 +53,14 @@ public class GameDataController : MonoBehaviour
         {
             decisionsMadeReceived = LoadData().decisionsMade;
         }
+        if (actualCaseReceived==null)
+        {
+            actualCaseReceived = LoadData().actualCase;
+        }
         GameData newData = new GameData(){
             playerName = playerNameReceived, //remplazar por el valor a guardar por el objeto encargado
-            decisionsMade = decisionsMadeReceived
+            decisionsMade = decisionsMadeReceived,
+            actualCase = actualCaseReceived
         };
         string jsonChain = JsonUtility.ToJson(newData);
         File.WriteAllText(saveFile, jsonChain);

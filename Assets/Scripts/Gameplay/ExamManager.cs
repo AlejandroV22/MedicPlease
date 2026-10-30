@@ -18,7 +18,7 @@ public class ExamManager : MonoBehaviour
     public GameObject interrogationSystem;
     public GameObject dialogSystem;
     public GameObject actionMenu;
-    public int maxExtraExamTries = 2;
+    public int maxExtraExamTries = 0;
     public bool extraExamTime;
     public int extraExaminationTries;
 

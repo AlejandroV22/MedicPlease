@@ -44,9 +44,11 @@ public class DialogSystem : MonoBehaviour
     public void Awake()
     {
         GetVariables();
+        saveFileController.SaveData(actualCaseReceived: clinicalCase.name);
         texto.GetTextToFile(clinicalCase.scriptPath);
         ShowText();
         GetComponent<Button>().onClick.AddListener(IsPressed);
+        choiceBox.transform.GetChild(2).gameObject.SetActive(true);
 
     }
     public void GetVariables()
@@ -275,9 +277,11 @@ public class DialogSystem : MonoBehaviour
         }
         if(actualPhrase.Contains("{end}")){
             //programar el final del juego
+            queueDialogs.Clear();
             AddPhrase("Fin del prototipo 2");
         }
         if(actualPhrase.Contains("{diag}")){
+            choiceBox.transform.GetChild(2).gameObject.SetActive(false);
             diagnosisController.GetComponent<DiagnosisSystem>().SelectDiagnosis();
             actualPhrase = actualPhrase.Replace("{diag}", "");
         }

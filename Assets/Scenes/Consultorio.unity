@@ -183,8 +183,9 @@ MonoBehaviour:
   - Observar el Abdomen
   - Observar la Postura
   - Observar la Marcha
-  revelantExams: 0100000101
+  relevantExams: 0100000000
   dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
 --- !u!114 &129051943
 MonoBehaviour:
@@ -863,8 +864,9 @@ MonoBehaviour:
   exams:
   - "Auscultar coraz\xF3n"
   - Auscultar pulmones
-  revelantExams: 0100
+  relevantExams: 0000
   dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
 --- !u!1 &322902392
 GameObject:
@@ -1585,8 +1587,9 @@ MonoBehaviour:
   - ECG
   - "Punci\xF3n lumbar"
   - EEG
-  revelantExams: 
+  relevantExams: 
   dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
   actionMenu: {fileID: 1429336728}
 --- !u!114 &386338098
 MonoBehaviour:
@@ -2597,6 +2600,7 @@ MonoBehaviour:
   rawChoices: 
   saveFile:
     playerName: 
+    actualCase: 
     decisionsMade: []
   saveFileController: {fileID: 1503416845}
   inspectionButton: {fileID: 129051940}
@@ -2714,8 +2718,9 @@ MonoBehaviour:
   - Vago
   - Accesorio
   - Hipogloso
-  revelantExams: 000001000100010101010001
+  relevantExams: 000000000100000000000001
   dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
 --- !u!114 &666488047
 MonoBehaviour:
@@ -3335,8 +3340,9 @@ MonoBehaviour:
   - Palpar cuello
   - Palpar miembro superior
   - Palpar miembro inferior
-  revelantExams: 0000010000
+  relevantExams: 0000000000
   dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
 --- !u!1 &740102468
 GameObject:
@@ -4847,9 +4853,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b70cfc2cd536d9428b987e05b250944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PostInformationSystem
-  gameDataController: {fileID: 0}
+  gameDataController: {fileID: 1503416844}
   saveData:
     playerName: 
+    actualCase: 
     decisionsMade: []
   clinicalCase: {fileID: 0}
   guion:
@@ -7396,6 +7403,7 @@ MonoBehaviour:
   saveFile: 
   defaultGameData:
     playerName: 
+    actualCase: 
     decisionsMade: []
 --- !u!4 &1503416846
 Transform:
@@ -7746,7 +7754,7 @@ MonoBehaviour:
   interrogationSystem: {fileID: 1540525724}
   dialogSystem: {fileID: 579118547}
   actionMenu: {fileID: 1665938181}
-  maxExtraExamTries: 2
+  maxExtraExamTries: 0
   extraExamTime: 0
   extraExaminationTries: 0
 --- !u!4 &1557059214
@@ -8938,6 +8946,9 @@ MonoBehaviour:
   nervesButton: {fileID: 666488044}
   sensitivityButton: {fileID: 1937649409}
   choiceBox: {fileID: 769830926}
+  extraExamButton: {fileID: 386338095}
+  totalRelevant: 0
+  totalRelevantBeforeExtraExams: 0
 --- !u!4 &1919622049
 Transform:
   m_ObjectHideFlags: 0
@@ -9009,8 +9020,9 @@ MonoBehaviour:
   exams:
   - Columna dorsal
   - Dolor y temperatura
-  revelantExams: 0101
+  relevantExams: 0001
   dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
 --- !u!114 &1937649412
 MonoBehaviour:
@@ -9522,8 +9534,9 @@ MonoBehaviour:
   - Juicio
   - Pensamiento abstracto
   - "C\xE1lculo"
-  revelantExams: 010100000000
+  relevantExams: 000000000000
   dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
 --- !u!114 &1969399737
 MonoBehaviour:

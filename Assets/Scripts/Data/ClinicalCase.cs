@@ -23,8 +23,14 @@ public class ClinicalCase : ScriptableObject
     [Header("Respuestas correctas")]
     public string correctDiagnosis;
     public string correctTreatment;
+    public int minimumCorrectExams;
     [Header("Diagnosticos incorrectos")]
     public string[] wrongDiagnosis;
+    [Header("Exámenes del diagnostico")]
+    public string[] correctExtraExams;
+    public bool[] extraExamsNecessaryForDiagnosis;
+    [Header("Exámenes distractores")]
+    public string[] wrongExtraExams;
     [Header("Retroalimentación")]
 
     [TextArea(5,10)]

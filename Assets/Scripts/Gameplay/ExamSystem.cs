@@ -3,15 +3,16 @@ using TMPro;
 using System.Linq;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class ExamSystem : MonoBehaviour
 {
     public GameObject choiceBox;
     private TMP_Dropdown choiceOptions;
     public string[] exams;
-    public bool[] revelantExams;
+    public bool[] relevantExams;
     public GameObject dialogSystem;
-
+    public GameObject diagnosisController;
     public GameObject actionMenu;
 
     public void ShowExam()
@@ -86,7 +87,21 @@ public class ExamSystem : MonoBehaviour
         if (ExamManager.Instance.CanStartExtraExam())
         {
             ExamManager.Instance.StartExtraExam();
-
+            ClinicalCase clinicalCase = GameManager.Instance.SelectedCase;
+            diagnosisController.GetComponent<DiagnosisSystem>().GetRelevantDecisions();
+            if(diagnosisController.GetComponent<DiagnosisSystem>().relevantDecisionMade.Count() >= clinicalCase.minimumCorrectExams){
+                exams = clinicalCase.correctExtraExams;
+                relevantExams = clinicalCase.extraExamsNecessaryForDiagnosis;
+                diagnosisController.GetComponent<DiagnosisSystem>().totalRelevantBeforeExtraExams = diagnosisController.GetComponent<DiagnosisSystem>().relevantDecisionMade.Count();
+            }else{
+                exams = clinicalCase.wrongExtraExams;
+                List<bool> tempRelevantExams = new List<bool>();
+                for(int i = 0; i<= exams.Count();i++){
+                    tempRelevantExams.Add(false);
+                }
+                relevantExams = tempRelevantExams.ToArray();
+            }
+            
             string rawChoices = "{choice}{choicest2 c:";
             foreach (string exam in exams)
             {

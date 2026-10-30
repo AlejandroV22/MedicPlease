@@ -27,13 +27,21 @@ MonoBehaviour:
   - "\xBFHa notado cambios en su estado de animo?"
   - "\xBFHa notado cambios importantes en su peso?"
   - "\xBFRecuerda si la sensacion inicio por alguna situacion especifica?"
-  relevantQuestions: 010001000001
-  correctDiagnosis: Sindrome de Wallenberg
+  relevantQuestions: 000001000001
+  correctDiagnosis: "S\xEDndrome de Wallenberg"
   correctTreatment: Este es el tratamiento correcto
+  minimumCorrectExams: 4
   wrongDiagnosis:
-  - "Resfriado Com\xFAn"
-  - "Neuralgia del trig\xE9mio"
-  - "Par\xE1lisis de Bell"
-  - "Migra\xF1a con aura"
+  - "Malformaci\xF3n de Chiari tipo 2"
+  - "S\xEDndrome de bulbar mediano"
+  correctExtraExams:
+  - "AngioTC de cuello y cr\xE1neo"
+  - Electroencefalograma
+  - "Resonancia magn\xE9tica de columna vertebral"
+  extraExamsNecessaryForDiagnosis: 010000
+  wrongExtraExams:
+  - Cuadro Hematico
+  - "Tomograf\xEDa de cr\xE1neo simple"
+  - "Gammagraf\xEDa de perfusi\xF3n pulmonar"
   feedback: Hola soy la realimentacion
   scriptPath: {fileID: 4900000, guid: aa8a7faa94af4284bb830f78089372f3, type: 3}
