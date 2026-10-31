@@ -282,7 +282,7 @@ public class DialogSystem : MonoBehaviour
             AddPhrase("Fin del prototipo 2");
         }
         if(actualPhrase.Contains("{diag}")){
-            choiceBox.transform.GetChild(2).gameObject.SetActive(false);
+            choiceBox.transform.GetChild(1).gameObject.SetActive(false);
             diagnosisController.GetComponent<DiagnosisSystem>().SelectDiagnosis();
             actualPhrase = actualPhrase.Replace("{diag}", "");
         }
@@ -298,7 +298,7 @@ public class DialogSystem : MonoBehaviour
             }
             Debug.Log("bgValue " + bgValue);
             bgController.GetComponent<BackgroundSystem>().ChangeBg(bgValue);
-        }//https://www.twitch.tv/doctorfefe
+        }//https://www.twitch.tv/CriticalRed22
 if (actualPhrase.Contains("{ch:"))
 {
     var regex = new Regex(@"\{ch:\s*""([^""]*)""\s*\}");

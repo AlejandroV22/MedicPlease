@@ -8,7 +8,6 @@ public class CerrarBoton : MonoBehaviour
     public GameObject objetoACerrar;
     public GameObject dialogSystem;
     public GameObject interrogationSystem;
-    public GameObject examSystem;
 
     private void Start()
     {
