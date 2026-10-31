@@ -93,8 +93,7 @@ public class DiagnosisSystem : MonoBehaviour
         OptainDiagnosis();
         gameData = gameDataController.LoadData();
         decisionMade = gameData.decisionsMade;
-        totalRelevant = clinicalCase.minimumCorrectExams;//isRelevantExams.Count(x => x) + isRelevantQuestions.Count(x => x);
-        gameDataController.SaveData(relevantDecisionMadeReceived: relevantDecisionMade);
+        totalRelevant = clinicalCase.minimumCorrectExams;//isRelevantExams.Count(x => x) + isRelevantQuestions.Count(x => x)
         foreach (string decision in decisionMade)
         {
             for (int i = 0; i < exams.Length; i++)
@@ -123,6 +122,7 @@ public class DiagnosisSystem : MonoBehaviour
     {
         Start();
         GetRelevantDecisions();
+        gameDataController.SaveData(relevantDecisionMadeReceived: relevantDecisionMade);
         rawChoices = "{choice}{choicest2 c:";
         if (relevantDecisionMade.Count() == totalRelevantBeforeExtraExams + 1)
         {
