@@ -48,7 +48,7 @@ public class DialogSystem : MonoBehaviour
         texto.GetTextToFile(clinicalCase.scriptPath);
         ShowText();
         GetComponent<Button>().onClick.AddListener(IsPressed);
-        choiceBox.transform.GetChild(2).gameObject.SetActive(true);
+        choiceBox.transform.GetChild(1).gameObject.SetActive(true);
 
     }
     public void GetVariables()
