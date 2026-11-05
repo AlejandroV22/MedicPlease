@@ -1,14 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class DiagnosisSystem : MonoBehaviour
 {
     public ClinicalCase clinicalCase;
     public GameDataController gameDataController;
-    private GameData gameData;
-    private List<string> decisionMade;
     private bool[] isRelevantExams;
     private string[] exams;
     private string[] questions;
@@ -22,19 +19,21 @@ public class DiagnosisSystem : MonoBehaviour
     public GameObject sensitivityButton;
     public GameObject choiceBox;
     public GameObject extraExamButton;
+    public bool[] relevantDiagnosis;
     public int totalRelevant = 0;
     public int totalRelevantBeforeExtraExams = 0;
     private string rawChoices;
     private List<string> diagnosisWithCorrect = new List<string>();
     private List<string> diagnosisWithoutCorrect = new List<string>();
+
     void Start()
     {
         clinicalCase = GameManager.Instance.SelectedCase;
         questions = clinicalCase.questions;
         isRelevantQuestions = clinicalCase.relevantQuestions;
         GetExams();
-
     }
+
     private void GetExams()
     {
         string[] inspectionExams = inspectionButton.GetComponent<ExamSystem>().exams;
@@ -70,12 +69,14 @@ public class DiagnosisSystem : MonoBehaviour
             extraRelevant
         }.SelectMany(arr => arr).ToArray();
     }
+
     public void OptainDiagnosis()
     {
         diagnosisWithCorrect.Clear();
         diagnosisWithoutCorrect.Clear();
         string[] wrongs = clinicalCase.wrongDiagnosis;
         string correct = clinicalCase.correctDiagnosis;
+        List<bool> tempRelevant = new List<bool>();
         for (int i = 0; i < wrongs.Length; i++)
         {
             diagnosisWithoutCorrect.Add(wrongs[i]);
@@ -86,43 +87,103 @@ public class DiagnosisSystem : MonoBehaviour
             }
         }
         diagnosisWithCorrect.Add(correct);
-    }
-    public void GetRelevantDecisions()
-    {
-        relevantDecisionMade.Clear();
-        OptainDiagnosis();
-        gameData = gameDataController.LoadData();
-        decisionMade = gameData.decisionsMade;
-        totalRelevant = clinicalCase.minimumCorrectExams;//isRelevantExams.Count(x => x) + isRelevantQuestions.Count(x => x)
-        foreach (string decision in decisionMade)
-        {
-            for (int i = 0; i < exams.Length; i++)
-            {
-                if (decision == exams[i])
-                {
-                    if (isRelevantExams[i] == true)
-                    {
-                        relevantDecisionMade.Add(decision);
-                    }
-                }
-            }
-            for (int i = 0; i < questions.Length; i++)
-            {
-                if (decision == questions[i])
-                {
-                    if (isRelevantQuestions[i] == true)
-                    {
-                        relevantDecisionMade.Add(decision);
-                    }
-                }
+        for(int i = 0; i< diagnosisWithCorrect.Count(); i++){
+            if(diagnosisWithCorrect[i] == correct){
+                tempRelevant.Add(true);
+            }else{
+                tempRelevant.Add(false);
             }
         }
+        relevantDiagnosis = tempRelevant.ToArray();
     }
+
+    // ───────────────────────── Registro de decisiones ─────────────────────────
+
+    /// <summary>
+    /// Punto unico de registro: guarda la decision en el intento activo junto con su relevancia
+    /// y, si la decision es un diagnostico, cierra el intento indicando si fue el correcto.
+    /// Lo llama ChoiceSystem cada vez que el jugador elige una opcion.
+    /// </summary>
+    public void RegisterDecision(string decision)
+    {
+        EnsureCase();
+        gameDataController.RegisterDecision(decision, IsRelevantDecision(decision));
+
+        if (IsDiagnosisOption(decision))
+        {
+            gameDataController.FinishAttempt(decision == clinicalCase.correctDiagnosis);
+        }
+    }
+
+    /// <summary>True si la decision es un examen o pregunta marcada como relevante en el caso.</summary>
+    public bool IsRelevantDecision(string decision)
+    {
+        EnsureCase();
+        GetExams(); // se vuelve a leer porque los examenes extra cambian durante el caso
+
+        for (int i = 0; i < exams.Length; i++)
+        {
+            if (decision == exams[i] && i < isRelevantExams.Length && isRelevantExams[i])
+            {
+                return true;
+            }
+        }
+        for (int i = 0; i < questions.Length; i++)
+        {
+            if (decision == questions[i] && i < isRelevantQuestions.Length && isRelevantQuestions[i])
+            {
+                return true;
+            }
+        }
+        if(diagnosisWithCorrect !=null){
+            for(int i = 0; i< diagnosisWithCorrect.Count(); i++){
+            if (decision == diagnosisWithCorrect[i] && i < relevantDiagnosis.Length && relevantDiagnosis[i])
+            {
+                return true;
+            }
+            }
+        }
+        return false;
+
+    }
+
+    public bool IsDiagnosisOption(string option)
+    {
+        EnsureCase();
+        return option == clinicalCase.correctDiagnosis || clinicalCase.wrongDiagnosis.Contains(option);
+    }
+
+    private void EnsureCase()
+    {
+        if (clinicalCase == null)
+        {
+            clinicalCase = GameManager.Instance.SelectedCase;
+            questions = clinicalCase.questions;
+            isRelevantQuestions = clinicalCase.relevantQuestions;
+        }
+    }
+
+    // ───────────────────────── Consulta de decisiones relevantes ─────────────────────────
+
+    /// <summary>Llena relevantDecisionMade con las decisiones relevantes del intento activo.</summary>
+    public void GetRelevantDecisions()
+    {
+        EnsureCase();
+        relevantDecisionMade.Clear();
+        OptainDiagnosis();
+        totalRelevant = clinicalCase.minimumCorrectExams;
+
+        AttemptRecord attempt = gameDataController.CurrentAttempt;
+        if (attempt == null) return;
+
+        relevantDecisionMade.AddRange(
+            attempt.decisions.Where(d => d.isRelevant).Select(d => d.decision));
+    }
+
     public void SelectDiagnosis()
     {
         Start();
         GetRelevantDecisions();
-        gameDataController.SaveData(relevantDecisionMadeReceived: relevantDecisionMade);
         rawChoices = "{choice}{choicest2 c:";
         if (relevantDecisionMade.Count() == totalRelevantBeforeExtraExams + 1)
         {
@@ -145,14 +206,6 @@ public class DiagnosisSystem : MonoBehaviour
             Debug.Log(rawChoices);
             choiceBox.SetActive(true);
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

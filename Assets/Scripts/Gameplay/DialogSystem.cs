@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using UnityEditor.Rendering;
 
 public class DialogSystem : MonoBehaviour
 {
@@ -44,7 +43,7 @@ public class DialogSystem : MonoBehaviour
     public void Awake()
     {
         GetVariables();
-        saveFileController.SaveData(actualCaseReceived: clinicalCase.name);
+        saveFileController.StartAttempt(clinicalCase.name);
         texto.GetTextToFile(clinicalCase.scriptPath);
         ShowText();
         GetComponent<Button>().onClick.AddListener(IsPressed);
@@ -53,7 +52,7 @@ public class DialogSystem : MonoBehaviour
     }
     public void GetVariables()
     {
-        saveFile = saveFileController.LoadData();
+        saveFile = saveFileController.Data;
         clinicalCase = GameManager.Instance.SelectedCase;
         transform.GetChild(1).GetComponent<Image>().sprite = clinicalCase.retratoPaciente;
         Type tipo = clinicalCase.GetType();
@@ -324,7 +323,7 @@ if (actualPhrase.Contains("{ch:"))
     }
             bgController.GetComponent<BackgroundSystem>().ChangeCh(chValue, chVisibility);
         }
-        if (actualPhrase.ContainsAny("{nLine}"))
+        if (actualPhrase.Contains("{nLine}"))
         {
             NextLine();
         }

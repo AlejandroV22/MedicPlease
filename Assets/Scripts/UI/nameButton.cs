@@ -5,7 +5,7 @@ public class nameButton : MonoBehaviour
     public GameObject dataObject;
     private string playerName;
     private GameDataController dataMan;
-    const int MaxLenght=24;
+    const int MaxLenght=14;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class nameButton : MonoBehaviour
         this.playerName = playerName;
     }
     public void SaveName(){
-        dataMan.SaveData(playerName); 
+        dataMan.SetPlayerName(playerName);
     }
     
 }

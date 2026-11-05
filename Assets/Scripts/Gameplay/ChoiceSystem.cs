@@ -16,8 +16,6 @@ public class ChoiceSystem : MonoBehaviour
     [Header("Datos")]
     public List<string> choices = new List<string>();
     public string rawChoices;
-    public GameObject gameDataController;
-    public List<string> decisionsMade = new List<string>();
 
     private GameObject dialogBox;
     private bool isInteractable;
@@ -149,8 +147,8 @@ public class ChoiceSystem : MonoBehaviour
 
     public void changePath(string selectedOption)
     {
-        decisionsMade.Add(selectedOption);
-        gameDataController.GetComponent<GameDataController>().SaveData(decisionsMadeReceived: decisionsMade);
+        // Registra la decision (con su relevancia) en el intento activo y, si es un diagnostico, cierra el intento
+        dialogBox.GetComponent<DialogSystem>().diagnosisController.GetComponent<DiagnosisSystem>().RegisterDecision(selectedOption);
         searchTimes = 0;
 
         SearchPath(selectedOption);

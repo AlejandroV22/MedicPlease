@@ -22,7 +22,7 @@ public class PostInformationSystem : MonoBehaviour
     private void Start()
     {
         clinicalCase = GameManager.Instance.SelectedCase;
-        saveData = gameDataController.GetComponent<GameDataController>().LoadData();
+        saveData = gameDataController.GetComponent<GameDataController>().Data;
         guion.GetTextToFile(clinicalCase.scriptPath);
         GetLastDecisions();
     }
@@ -36,8 +36,14 @@ public class PostInformationSystem : MonoBehaviour
 
         if (clinicalCase == null || saveData == null) return;
 
-        foreach (string decision in saveData.decisionsMade)
+        // Solo las decisiones del intento mas reciente de este caso
+        CaseRecord caseRecord = gameDataController.GetComponent<GameDataController>().GetCaseRecord(clinicalCase.name);
+        AttemptRecord attempt = caseRecord?.LastAttempt;
+        List<DecisionRecord> attemptDecisions = attempt != null ? attempt.decisions : new List<DecisionRecord>();
+
+        foreach (DecisionRecord record in attemptDecisions)
         {
+            string decision = record.decision;
             if (clinicalCase.questions.Contains(decision))
             {
                 if (!interrogationQuestions.Contains(decision))
