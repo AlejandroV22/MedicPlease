@@ -50,6 +50,9 @@ public class DialogSystem : MonoBehaviour
         choiceBox.transform.GetChild(1).gameObject.SetActive(true);
 
     }
+    public bool GetIsWriting(){
+        return isWriting;
+    }
     public void GetVariables()
     {
         saveFile = saveFileController.Data;
@@ -171,6 +174,15 @@ public class DialogSystem : MonoBehaviour
         NextPhrase();
         //}
 
+    }
+    public void SkipWriting(){
+        if (isWriting==true){
+            Debug.Log("skipeado");
+            StopAllCoroutines();
+            screenText.text = isWritingPhrase;
+            isWriting=false;
+            blinkingSprite = StartCoroutine(SpriteBlinking());
+        }
     }
     public void CheckVariable(string actualPhrase)
     {

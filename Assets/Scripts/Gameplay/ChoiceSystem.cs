@@ -147,7 +147,9 @@ public class ChoiceSystem : MonoBehaviour
 
     public void changePath(string selectedOption)
     {
-        // Registra la decision (con su relevancia) en el intento activo y, si es un diagnostico, cierra el intento
+        if(dialogBox.GetComponent<DialogSystem>().GetIsWriting()){
+            dialogBox.GetComponent<DialogSystem>().SkipWriting();
+        }// Registra la decision (con su relevancia) en el intento activo y, si es un diagnostico, cierra el intento
         dialogBox.GetComponent<DialogSystem>().diagnosisController.GetComponent<DiagnosisSystem>().RegisterDecision(selectedOption);
         searchTimes = 0;
 

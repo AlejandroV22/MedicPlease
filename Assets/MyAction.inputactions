@@ -1,0 +1,47 @@
+{
+    "version": 1,
+    "name": "MyAction",
+    "maps": [
+        {
+            "name": "DIalog Control",
+            "id": "85424054-175c-4d8b-99e9-9ef87575ab06",
+            "actions": [
+                {
+                    "name": "SkipText",
+                    "type": "Button",
+                    "id": "5fabb477-a8c7-405c-b7f1-37b5045fcce9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "417aafcb-d48d-467e-89be-63d7fd0c14b3",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipText",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

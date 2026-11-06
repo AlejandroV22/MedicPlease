@@ -1713,6 +1713,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1329691526}
     - target: {fileID: 3538664134810866736, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: objetoACerrar
+      value: 
+      objectReference: {fileID: 769830926}
+    - target: {fileID: 3538664134810866736, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
       propertyPath: interrogationSystem
       value: 
       objectReference: {fileID: 1540525724}
@@ -2318,8 +2322,6 @@ MonoBehaviour:
   optionButtonPrefab: {fileID: 0}
   choices: []
   rawChoices: 
-  gameDataController: {fileID: 0}
-  decisionsMade: []
 --- !u!114 &537508770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2557,6 +2559,8 @@ GameObject:
   - component: {fileID: 579118551}
   - component: {fileID: 579118550}
   - component: {fileID: 579118549}
+  - component: {fileID: 579118553}
+  - component: {fileID: 579118554}
   m_Layer: 5
   m_Name: DialogBox
   m_TagString: Untagged
@@ -2664,8 +2668,7 @@ MonoBehaviour:
   saveFile:
     playerName: 
     actualCase: 
-    decisionsMade: []
-    relevantDecisionMade: []
+    caseHistory: []
   saveFileController: {fileID: 1503416845}
   inspectionButton: {fileID: 129051940}
   listeningButton: {fileID: 306905410}
@@ -2716,6 +2719,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579118547}
   m_CullTransparentMesh: 1
+--- !u!114 &579118553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579118547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 29d1f02b5fab1a75580b6e087e8fc4d5, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &579118554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579118547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3b7fc398ca4439681eff9391a45324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameInputController
+  dialogSystem: {fileID: 0}
+  skipText: {fileID: -7047969362784728281, guid: 29d1f02b5fab1a75580b6e087e8fc4d5, type: 3}
 --- !u!1 &666488044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3678,8 +3725,6 @@ MonoBehaviour:
   optionButtonPrefab: {fileID: 1967135811351940474, guid: 6b5453ec9ddb24441bd8e63c435aa5fb, type: 3}
   choices: []
   rawChoices: 
-  gameDataController: {fileID: 1503416844}
-  decisionsMade: []
 --- !u!114 &769830928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5043,8 +5088,7 @@ MonoBehaviour:
   saveData:
     playerName: 
     actualCase: 
-    decisionsMade: []
-    relevantDecisionMade: []
+    caseHistory: []
   clinicalCase: {fileID: 0}
   guion:
     textArray: []
@@ -5328,8 +5372,6 @@ MonoBehaviour:
   optionButtonPrefab: {fileID: 0}
   choices: []
   rawChoices: 
-  gameDataController: {fileID: 0}
-  decisionsMade: []
 --- !u!114 &1226846218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7391,12 +7433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402443946f623154fbd8c6009543a145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameDataController
-  saveFile: 
-  defaultGameData:
-    playerName: 
-    actualCase: 
-    decisionsMade: []
-    relevantDecisionMade: []
+  isSaveFileExist: 0
 --- !u!4 &1503416846
 Transform:
   m_ObjectHideFlags: 0
@@ -8798,6 +8835,7 @@ MonoBehaviour:
   sensitivityButton: {fileID: 1937649409}
   choiceBox: {fileID: 769830926}
   extraExamButton: {fileID: 386338095}
+  relevantDiagnosis: 
   totalRelevant: 0
   totalRelevantBeforeExtraExams: 0
 --- !u!4 &1919622049
