@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using Unity.AppUI.UI;
+
 
 public class BackgroundSystem : MonoBehaviour
 {

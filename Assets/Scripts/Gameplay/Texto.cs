@@ -1,10 +1,7 @@
 using System;
 using System.Data;
-using Mono.Cecil;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
+
 
 [System.Serializable]
 public class Texto

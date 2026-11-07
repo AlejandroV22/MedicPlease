@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 using UnityEngine;
-using Unity.AppUI.UI;
 using System;
 
 public class InterrogationSystem : MonoBehaviour
