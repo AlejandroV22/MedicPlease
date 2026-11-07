@@ -63,7 +63,7 @@ public class ExamManager : MonoBehaviour
         if (examTime && examinationTries <= maxExamTries)
         {
             examinationTries++;
-            Debug.Log("examTimeValue " + examTime);
+//            Debug.Log("examTimeValue " + examTime);
         }
         else
         {
@@ -93,11 +93,11 @@ public class ExamManager : MonoBehaviour
     }
     public void IsInterrogationOver(){
         if(interrogationSystem.GetComponent<InterrogationSystem>().GetInterrogationOver() == true){
-            Debug.Log("duro dos");
+//            Debug.Log("duro dos");
             examMenu.SetActive(true);
             examMenu.transform.GetChild(0).gameObject.SetActive(true);
         }else{
-            Debug.Log("horas haciendolo bien rico");
+//            Debug.Log("horas haciendolo bien rico");
             actionMenu.SetActive(false);
             dialogSystem.GetComponent<DialogSystem>().AddPhrase("{Ndname}(Necesito interrogar primero)");
             dialogSystem.GetComponent<DialogSystem>().AddPhrase("{a}(¿Qué debería hacer?)");

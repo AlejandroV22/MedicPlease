@@ -8,6 +8,7 @@ public class ClinicalHistoryButton : MonoBehaviour
     [Header("Referencias UI")]
     public GameObject clinicalHistory;
     public Button exitCaseButton;
+    public GameObject informationPanel;   // InformationPanel, se activa a la par que clinicalHistory
 
     public GameObject dialogBox;
     public GameObject choiceBox;
@@ -27,6 +28,9 @@ public class ClinicalHistoryButton : MonoBehaviour
 
         SetVisible(clinicalHistory, shouldOpen);
         SetVisible(dialogBox, !shouldOpen);
+
+        if (informationPanel != null)
+            informationPanel.SetActive(shouldOpen);
 
         if (choiceBox != null && dialogBox.TryGetComponent<Button>(out Button dialogBtn))
         {
@@ -49,6 +53,9 @@ public class ClinicalHistoryButton : MonoBehaviour
             isActiveFirstTime = true;
         }
     }
+
+    // Hace visible u oculto un objeto sin desactivarlo.
+    // Oculto: alpha 0, no interactuable y no bloquea raycasts.
     private void SetVisible(GameObject go, bool visible)
     {
         if (go == null) return;
