@@ -10,7 +10,7 @@ public class ContinueButton : MonoBehaviour
     {
         dataObject = GameObject.FindGameObjectWithTag("DataObject");
         dataMan = dataObject.GetComponent<GameDataController>();
-        if(dataMan.isSaveFileExist){
+        if(dataMan.isSaveFileExist && dataMan.isSaveFileDefault==false){
             gameObject.GetComponent<Button>().interactable = true;
         }else{
             gameObject.GetComponent<Button>().interactable = false;
@@ -20,7 +20,7 @@ public class ContinueButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(dataMan.isSaveFileExist){
+        if(dataMan.isSaveFileExist && dataMan.isSaveFileDefault==false){
             gameObject.GetComponent<Button>().interactable = true;
         }else{
             gameObject.GetComponent<Button>().interactable = false;

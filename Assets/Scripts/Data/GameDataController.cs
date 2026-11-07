@@ -6,8 +6,8 @@ using UnityEngine;
 public class GameDataController : MonoBehaviour
 {
     private const string SaveFileName = "saveFile.json";
-    private const string DefaultPlayerName = "Mitzune";
-    private const string DefaultCase = "Situacion 1";
+    private const string DefaultPlayerName = "Esternocleidomastoideo";
+    private const string DefaultCase = "Sivesestohubounerrorenenlosguardadossorry";
 
     private string saveFile;
     private GameData data;
@@ -19,6 +19,7 @@ public class GameDataController : MonoBehaviour
     /// <summary>Intento activo (null si no hay ninguno en curso).</summary>
     public AttemptRecord CurrentAttempt => currentAttempt;
     public bool isSaveFileExist = false;
+    public bool isSaveFileDefault = false;
     private void Awake()
     {
         LoadData();
@@ -40,6 +41,17 @@ public class GameDataController : MonoBehaviour
         {
             data = JsonUtility.FromJson<GameData>(File.ReadAllText(saveFile));
             isSaveFileExist = true;
+            GameData defaultData = new GameData
+            {
+                playerName = DefaultPlayerName,
+                actualCase = DefaultCase
+            };
+            if(data == defaultData){
+                isSaveFileDefault = true;
+            }else{
+                isSaveFileDefault = false;
+            }
+            
             // Los guardados antiguos pueden no traer el historial
             if (data.caseHistory == null) data.caseHistory = new List<CaseRecord>();
         }
@@ -51,6 +63,7 @@ public class GameDataController : MonoBehaviour
                 playerName = DefaultPlayerName,
                 actualCase = DefaultCase
             };
+            isSaveFileDefault = true;
         }
 
         currentAttempt = null;
@@ -59,11 +72,13 @@ public class GameDataController : MonoBehaviour
     public void DeleteData(){
         SetPlayerName(DefaultPlayerName);
         SetActualCase(DefaultCase);
+        isSaveFileDefault = true;
     }
 
     public void SaveData()
     {
         File.WriteAllText(saveFile, JsonUtility.ToJson(Data, true));
+        isSaveFileDefault = false;
     }
 
     // ───────────────────────── Datos generales ─────────────────────────
