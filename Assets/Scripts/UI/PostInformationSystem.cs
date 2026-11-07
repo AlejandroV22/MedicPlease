@@ -4,9 +4,13 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class PostInformationSystem : MonoBehaviour
 {
+    [Header("Scroll")]
+    public ScrollRect scrollRect;
+    public RectTransform contentRect;
     public GameObject gameDataController;
     public GameData saveData;
     public ClinicalCase clinicalCase;
@@ -58,10 +62,26 @@ public class PostInformationSystem : MonoBehaviour
 
         FillAnswers(interrogationQuestions, interrogationQuestionsAnswers);
         FillAnswers(examinationQuestions, examinationQuestionsAnswers);
+        interrogationDecisionsText.text = BuildText(interrogationQuestions, interrogationQuestionsAnswers);
+        examinationDecisionsText.text = BuildText(examinationQuestions, examinationQuestionsAnswers);
+
+        RefreshScroll();
 
         interrogationDecisionsText.text = BuildText(interrogationQuestions, interrogationQuestionsAnswers);
         examinationDecisionsText.text = BuildText(examinationQuestions, examinationQuestionsAnswers);
     }
+
+        private void RefreshScroll()
+        {
+            if (contentRect != null)
+            {
+                Canvas.ForceUpdateCanvases();
+                LayoutRebuilder.ForceRebuildLayoutImmediate(contentRect);
+            }
+
+            if (scrollRect != null)
+                scrollRect.verticalNormalizedPosition = 1f; // 1 = arriba
+        }
 
     private void FillAnswers(List<string> questions, Dictionary<string, string[]> target)
     {

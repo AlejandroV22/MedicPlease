@@ -23,16 +23,16 @@ public class ClinicalHistoryButton : MonoBehaviour
             return;
         }
         ActiveFirstTime();
-        bool shouldOpen = !clinicalHistory.activeSelf;
+        bool shouldOpen = !IsVisible(clinicalHistory);
 
-        clinicalHistory.SetActive(shouldOpen);
-        dialogBox.SetActive(!shouldOpen);
+        SetVisible(clinicalHistory, shouldOpen);
+        SetVisible(dialogBox, !shouldOpen);
 
         if (choiceBox != null && dialogBox.TryGetComponent<Button>(out Button dialogBtn))
         {
             if (!dialogBtn.interactable)
             {
-                choiceBox.SetActive(!shouldOpen);
+                SetVisible(choiceBox, !shouldOpen);
             }
         }
 
@@ -41,9 +41,36 @@ public class ClinicalHistoryButton : MonoBehaviour
             exitCaseButton.interactable = !shouldOpen;
         }
     }
-    public void ActiveFirstTime(){
-        if(isActiveFirstTime == false){
+
+    public void ActiveFirstTime()
+    {
+        if (isActiveFirstTime == false)
+        {
             isActiveFirstTime = true;
         }
+    }
+    private void SetVisible(GameObject go, bool visible)
+    {
+        if (go == null) return;
+
+        go.SetActive(true);
+
+        CanvasGroup cg = go.GetComponent<CanvasGroup>();
+        if (cg == null)
+        {
+            cg = go.AddComponent<CanvasGroup>();
+        }
+
+        cg.alpha = visible ? 1f : 0f;
+        cg.interactable = visible;
+        cg.blocksRaycasts = visible;
+    }
+
+    private bool IsVisible(GameObject go)
+    {
+        if (go == null) return false;
+
+        CanvasGroup cg = go.GetComponent<CanvasGroup>();
+        return cg == null ? go.activeSelf : cg.alpha > 0f;
     }
 }

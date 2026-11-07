@@ -87,7 +87,7 @@ public class DialogSystem : MonoBehaviour
         {
             return;
         }
-        Debug.Log(textVariables);
+//        Debug.Log(textVariables);
         if (isWriting == false)
         {
             if (blinkingSprite != null)
@@ -131,12 +131,12 @@ public class DialogSystem : MonoBehaviour
     IEnumerator ShowCharts(string textToShow, float textSpeed)
     {
         screenText.text = "";
-        Debug.Log("corutina iniciada");
+//        Debug.Log("corutina iniciada");
         isWritingPhrase = textToShow;
         int characterCount = 0;
         foreach (char character in textToShow.ToCharArray())
         {
-            Debug.Log("corutina iniciada");
+//            Debug.Log("corutina iniciada");
             screenText.text += character;
             if (character != ' ' && characterCount % 2 == 0)
             {
@@ -177,7 +177,7 @@ public class DialogSystem : MonoBehaviour
     }
     public void SkipWriting(){
         if (isWriting==true){
-            Debug.Log("skipeado");
+//            Debug.Log("skipeado");
             StopAllCoroutines();
             screenText.text = isWritingPhrase;
             isWriting=false;
@@ -307,7 +307,7 @@ public class DialogSystem : MonoBehaviour
                 bgValue = match.Groups[1].Value;
                 actualPhrase = regex.Replace(actualPhrase, "");
             }
-            Debug.Log("bgValue " + bgValue);
+//            Debug.Log("bgValue " + bgValue);
             bgController.GetComponent<BackgroundSystem>().ChangeBg(bgValue);
         }//https://www.twitch.tv/CriticalRed22
 if (actualPhrase.Contains("{ch:"))
@@ -355,7 +355,7 @@ if (actualPhrase.Contains("{ch:"))
         if (actualPhrase != null)
         {
             var regextNdname = new Regex(@"\{Ndname\}");
-            Debug.Log("match estado Ndname: " + regextNdname.Match(actualPhrase).Success);
+//            Debug.Log("match estado Ndname: " + regextNdname.Match(actualPhrase).Success);
             if (regextNdname.Match(actualPhrase).Success)
             {
                 charTalkNameText.text = saveFile.playerName;
@@ -363,7 +363,7 @@ if (actualPhrase.Contains("{ch:"))
             }
 
             var regextNpname = new Regex(@"\{Npname\}");
-            Debug.Log("match estado Npname: " + regextNpname.Match(actualPhrase).Success);
+//            Debug.Log("match estado Npname: " + regextNpname.Match(actualPhrase).Success);
             if (regextNpname.Match(actualPhrase).Success)
             {
                 GetVariables();
@@ -373,7 +373,7 @@ if (actualPhrase.Contains("{ch:"))
                     object value = field.GetValue(clinicalCase);
                     if (charTalkNameText != null)
                     {
-                        Debug.Log("cambio de nombre de paciente");
+//                        Debug.Log("cambio de nombre de paciente");
                         charTalkNameText.text = value.ToString();
                     }
                 }
