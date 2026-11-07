@@ -1711,7 +1711,7 @@ PrefabInstance:
     - target: {fileID: 3538664134810866736, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
       propertyPath: dialogSystem
       value: 
-      objectReference: {fileID: 1329691526}
+      objectReference: {fileID: 579118547}
     - target: {fileID: 3538664134810866736, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
       propertyPath: objetoACerrar
       value: 
