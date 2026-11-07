@@ -26,6 +26,10 @@ public class PostInformationSystem : MonoBehaviour
         guion.GetTextToFile(clinicalCase.scriptPath);
         GetLastDecisions();
     }
+    private void Update()
+    {
+        GetLastDecisions();
+    }
 
     public void GetLastDecisions()
     {
