@@ -39,6 +39,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject clinicalHistoryButton;
     public GameObject extraMenu;
     public GameObject diagnosisController;
+    public FinalFeedbackSystem finalFeedback; 
 
     public void Awake()
     {
@@ -83,6 +84,7 @@ public class DialogSystem : MonoBehaviour
     }
     public void NextPhrase()
     {
+        if (FinalFeedbackSystem.IsShowing) return;
         if (queueDialogs.Count == 0)
         {
             return;
@@ -286,11 +288,12 @@ public class DialogSystem : MonoBehaviour
             clinicalHistoryButton.SetActive(true);
             actualPhrase = actualPhrase.Replace("{extra}", "");
         }
-        if(actualPhrase.Contains("{end}")){
-            //programar el final del juego
+        if (actualPhrase.Contains("{end}"))
+        {
             saveFileController.GetComponent<SaveUploader>().Upload();
             queueDialogs.Clear();
-            AddPhrase("Fin del prototipo 2");
+            actualPhrase = "";                 
+            finalFeedback.ShowFinalPanel();
         }
         if(actualPhrase.Contains("{diag}")){
             choiceBox.transform.GetChild(1).gameObject.SetActive(false);
