@@ -33,7 +33,6 @@ public class SaveUploader : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>Sube el save actual. Los callbacks son opcionales.</summary>
