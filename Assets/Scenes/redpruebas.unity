@@ -446,6 +446,7 @@ MonoBehaviour:
   - Observar el Abdomen
   - Observar la Postura
   - Observar la Marcha
+  category: 0
   dialogSystem: {fileID: 579118547}
   diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
@@ -1428,6 +1429,7 @@ MonoBehaviour:
   exams:
   - "Auscultar coraz\xF3n"
   - Auscultar pulmones
+  category: 0
   dialogSystem: {fileID: 579118547}
   diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
@@ -2153,6 +2155,7 @@ MonoBehaviour:
   - ECG
   - "Punci\xF3n lumbar"
   - EEG
+  category: 0
   dialogSystem: {fileID: 579118547}
   diagnosisController: {fileID: 1919622047}
   actionMenu: {fileID: 1429336728}
@@ -3022,6 +3025,7 @@ MonoBehaviour:
   optionButtonPrefab: {fileID: 0}
   choices: []
   rawChoices: 
+  currentCategory: 0
 --- !u!114 &537508770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3179,6 +3183,7 @@ GameObject:
   - component: {fileID: 546786147}
   - component: {fileID: 546786149}
   - component: {fileID: 546786148}
+  - component: {fileID: 546786150}
   m_Layer: 5
   m_Name: NeurologicMenu
   m_TagString: Untagged
@@ -3246,6 +3251,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &546786150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546786146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e8e43ade8e1048ac389e0c2e16191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!1 &554731757
 GameObject:
   m_ObjectHideFlags: 0
@@ -3751,6 +3768,7 @@ MonoBehaviour:
   - Vago
   - Accesorio
   - Hipogloso
+  category: 0
   dialogSystem: {fileID: 579118547}
   diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
@@ -4519,6 +4537,7 @@ MonoBehaviour:
   - Palpar cuello
   - Palpar miembro superior
   - Palpar miembro inferior
+  category: 0
   dialogSystem: {fileID: 579118547}
   diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
@@ -4792,6 +4811,7 @@ MonoBehaviour:
   optionButtonPrefab: {fileID: 1967135811351940474, guid: 6b5453ec9ddb24441bd8e63c435aa5fb, type: 3}
   choices: []
   rawChoices: 
+  currentCategory: 0
 --- !u!114 &769830928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6287,6 +6307,7 @@ GameObject:
   - component: {fileID: 1191500784}
   - component: {fileID: 1191500786}
   - component: {fileID: 1191500785}
+  - component: {fileID: 1191500787}
   m_Layer: 5
   m_Name: ExaminationMenu
   m_TagString: Untagged
@@ -6354,6 +6375,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1191500787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191500783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e8e43ade8e1048ac389e0c2e16191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!1 &1226846214
 GameObject:
   m_ObjectHideFlags: 0
@@ -6439,6 +6472,7 @@ MonoBehaviour:
   optionButtonPrefab: {fileID: 0}
   choices: []
   rawChoices: 
+  currentCategory: 0
 --- !u!114 &1226846218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6795,6 +6829,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1226846215}
     m_Modifications:
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 546786150}
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Panel, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5900998477358589107, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
       propertyPath: m_Name
       value: CerrarBoton
@@ -8175,6 +8221,7 @@ GameObject:
   - component: {fileID: 1429336729}
   - component: {fileID: 1429336731}
   - component: {fileID: 1429336730}
+  - component: {fileID: 1429336732}
   m_Layer: 5
   m_Name: ExtraMenu
   m_TagString: Untagged
@@ -8242,6 +8289,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1429336732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429336728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e8e43ade8e1048ac389e0c2e16191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!1 &1449831804
 GameObject:
   m_ObjectHideFlags: 0
@@ -8569,6 +8628,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1557059213}
         m_TargetAssemblyTypeName: ExamManager, Assembly-CSharp
         m_MethodName: IsInterrogationOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1191500787}
+        m_TargetAssemblyTypeName: Panel, Assembly-CSharp
+        m_MethodName: Open
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9853,6 +9924,7 @@ GameObject:
   - component: {fileID: 1665938182}
   - component: {fileID: 1665938184}
   - component: {fileID: 1665938183}
+  - component: {fileID: 1665938185}
   m_Layer: 5
   m_Name: ActionMenu
   m_TagString: Untagged
@@ -9920,6 +9992,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1665938185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665938181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e8e43ade8e1048ac389e0c2e16191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!1 &1678673707
 GameObject:
   m_ObjectHideFlags: 0
@@ -10712,6 +10796,7 @@ MonoBehaviour:
   exams:
   - Columna dorsal
   - Dolor y temperatura
+  category: 0
   dialogSystem: {fileID: 579118547}
   diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
@@ -11138,6 +11223,7 @@ MonoBehaviour:
   - Juicio
   - Pensamiento abstracto
   - "C\xE1lculo"
+  category: 0
   dialogSystem: {fileID: 579118547}
   diagnosisController: {fileID: 0}
   actionMenu: {fileID: 1665938181}
@@ -12630,6 +12716,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 537508767}
     m_Modifications:
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1665938185}
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Panel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538664134810866736, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5900998477358589107, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
       propertyPath: m_Name
       value: CerrarBoton
