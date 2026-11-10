@@ -6,8 +6,6 @@ public class DiagnosisSystem : MonoBehaviour
 {
     public ClinicalCase clinicalCase;
     public GameDataController gameDataController;
-    private bool[] isRelevantExams;
-    private string[] exams;
     private string[] questions;
     private bool[] isRelevantQuestions;
     public List<string> relevantDecisionMade;
@@ -31,43 +29,6 @@ public class DiagnosisSystem : MonoBehaviour
         clinicalCase = GameManager.Instance.SelectedCase;
         questions = clinicalCase.questions;
         isRelevantQuestions = clinicalCase.relevantQuestions;
-        GetExams();
-    }
-
-    private void GetExams()
-    {
-        string[] inspectionExams = inspectionButton.GetComponent<ExamSystem>().exams;
-        string[] listeningExams = listeningButton.GetComponent<ExamSystem>().exams;
-        string[] touchingExams = touchingButton.GetComponent<ExamSystem>().exams;
-        string[] mentalExams = mentalButton.GetComponent<ExamSystem>().exams;
-        string[] nervesExams = nervesButton.GetComponent<ExamSystem>().exams;
-        string[] sensitivityExams = sensitivityButton.GetComponent<ExamSystem>().exams;
-        string[] extraExams = extraExamButton.GetComponent<ExamSystem>().exams;
-        bool[] inspectionRelevant = inspectionButton.GetComponent<ExamSystem>().relevantExams;
-        bool[] listeningRelevant = listeningButton.GetComponent<ExamSystem>().relevantExams;
-        bool[] touchingRelevant = touchingButton.GetComponent<ExamSystem>().relevantExams;
-        bool[] mentalRelevant = mentalButton.GetComponent<ExamSystem>().relevantExams;
-        bool[] nervesRelevant = nervesButton.GetComponent<ExamSystem>().relevantExams;
-        bool[] sensitivityRelevant = sensitivityButton.GetComponent<ExamSystem>().relevantExams;
-        bool[] extraRelevant = extraExamButton.GetComponent<ExamSystem>().relevantExams;
-        exams = new[]{
-            inspectionExams,
-            listeningExams,
-            touchingExams,
-            mentalExams,
-            nervesExams,
-            sensitivityExams,
-            extraExams
-        }.SelectMany(arr => arr).ToArray();
-        isRelevantExams = new[]{
-            inspectionRelevant,
-            listeningRelevant,
-            touchingRelevant,
-            mentalRelevant,
-            nervesRelevant,
-            sensitivityRelevant,
-            extraRelevant
-        }.SelectMany(arr => arr).ToArray();
     }
 
     public void OptainDiagnosis()
@@ -119,15 +80,13 @@ public class DiagnosisSystem : MonoBehaviour
     public bool IsRelevantDecision(string decision)
     {
         EnsureCase();
-        GetExams(); // se vuelve a leer porque los examenes extra cambian durante el caso
 
-        for (int i = 0; i < exams.Length; i++)
+        // Examenes: la relevancia ahora sale del ClinicalCase
+        if (clinicalCase.IsExamRelevant(decision))
         {
-            if (decision == exams[i] && i < isRelevantExams.Length && isRelevantExams[i])
-            {
-                return true;
-            }
+            return true;
         }
+
         for (int i = 0; i < questions.Length; i++)
         {
             if (decision == questions[i] && i < isRelevantQuestions.Length && isRelevantQuestions[i])

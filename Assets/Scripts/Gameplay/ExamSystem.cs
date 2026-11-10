@@ -10,7 +10,6 @@ public class ExamSystem : MonoBehaviour
     public GameObject choiceBox;
     private TMP_Dropdown choiceOptions;
     public string[] exams;
-    public bool[] relevantExams;
     public GameObject dialogSystem;
     public GameObject diagnosisController;
     public GameObject actionMenu;
@@ -91,15 +90,9 @@ public class ExamSystem : MonoBehaviour
             diagnosisController.GetComponent<DiagnosisSystem>().GetRelevantDecisions();
             if(diagnosisController.GetComponent<DiagnosisSystem>().relevantDecisionMade.Count() >= clinicalCase.minimumCorrectExams){
                 exams = clinicalCase.correctExtraExams;
-                relevantExams = clinicalCase.extraExamsNecessaryForDiagnosis;
                 diagnosisController.GetComponent<DiagnosisSystem>().totalRelevantBeforeExtraExams = diagnosisController.GetComponent<DiagnosisSystem>().relevantDecisionMade.Count();
             }else{
                 exams = clinicalCase.wrongExtraExams;
-                List<bool> tempRelevantExams = new List<bool>();
-                for(int i = 0; i<= exams.Count();i++){
-                    tempRelevantExams.Add(false);
-                }
-                relevantExams = tempRelevantExams.ToArray();
             }
             
             string rawChoices = "{choice}{choicest2 c:";
