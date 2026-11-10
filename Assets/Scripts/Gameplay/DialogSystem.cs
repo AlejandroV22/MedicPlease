@@ -292,8 +292,8 @@ public class DialogSystem : MonoBehaviour
         {
             saveFileController.GetComponent<SaveUploader>().Upload();
             queueDialogs.Clear();
-            actualPhrase = "";                 
-            finalFeedback.ShowFinalPanel();
+            actualPhrase = "";
+            finalFeedback.ShowFinalPanel(correctAnswer == 2);
         }
         if(actualPhrase.Contains("{diag}")){
             choiceBox.transform.GetChild(1).gameObject.SetActive(false);
