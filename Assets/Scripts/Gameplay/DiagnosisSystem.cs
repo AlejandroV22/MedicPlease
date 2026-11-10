@@ -65,10 +65,10 @@ public class DiagnosisSystem : MonoBehaviour
     /// y, si la decision es un diagnostico, cierra el intento indicando si fue el correcto.
     /// Lo llama ChoiceSystem cada vez que el jugador elige una opcion.
     /// </summary>
-    public void RegisterDecision(string decision)
+    public void RegisterDecision(string decision, ExamCategory category = ExamCategory.None)
     {
         EnsureCase();
-        gameDataController.RegisterDecision(decision, IsRelevantDecision(decision));
+        gameDataController.RegisterDecision(decision, IsRelevantDecision(decision, category));
 
         if (IsDiagnosisOption(decision))
         {
@@ -77,12 +77,12 @@ public class DiagnosisSystem : MonoBehaviour
     }
 
     /// <summary>True si la decision es un examen o pregunta marcada como relevante en el caso.</summary>
-    public bool IsRelevantDecision(string decision)
+    public bool IsRelevantDecision(string decision, ExamCategory category = ExamCategory.None)
     {
         EnsureCase();
 
         // Examenes: la relevancia ahora sale del ClinicalCase
-        if (clinicalCase.IsExamRelevant(decision))
+        if (clinicalCase.IsExamRelevant(category, decision))
         {
             return true;
         }
