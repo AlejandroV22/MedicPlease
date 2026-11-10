@@ -25,6 +25,9 @@ public class ChoiceSystem : MonoBehaviour
     private readonly List<Button> spawnedButtons = new List<Button>();
     private int searchTimes = 0;
 
+    // Categoria del examen que abrio este menu (la fija ExamSystem antes de llamar a ChoiceMenu)
+    public ExamCategory currentCategory = ExamCategory.None;
+
     private void Start()
     {
         dialogBox = GameObject.Find("DialogBox");
@@ -44,6 +47,7 @@ public class ChoiceSystem : MonoBehaviour
         {
             if (!menuGenerated)
             {
+                currentCategory = ExamCategory.None; // menu que viene del dialogo, no de un examen
                 ChoiceMenu(rawChoices);
                 menuGenerated = true;
             }
@@ -150,7 +154,8 @@ public class ChoiceSystem : MonoBehaviour
         if(dialogBox.GetComponent<DialogSystem>().GetIsWriting()){
             dialogBox.GetComponent<DialogSystem>().SkipWriting();
         }// Registra la decision (con su relevancia) en el intento activo y, si es un diagnostico, cierra el intento
-        dialogBox.GetComponent<DialogSystem>().diagnosisController.GetComponent<DiagnosisSystem>().RegisterDecision(selectedOption);
+        dialogBox.GetComponent<DialogSystem>().diagnosisController.GetComponent<DiagnosisSystem>().RegisterDecision(selectedOption, currentCategory);
+        currentCategory = ExamCategory.None;
         searchTimes = 0;
 
         SearchPath(selectedOption);

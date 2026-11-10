@@ -35,6 +35,76 @@ MonoBehaviour:
   - "S\xEDndrome de bulbar mediano"
   - "Malformaci\xF3n de Chiari tipo 2"
   - "Esclerosis m\xFAltiple"
+  inspectionRelevances:
+  - examName: Observar el Rostro
+    isRelevant: 1
+  - examName: "Observar el T\xF3rax"
+    isRelevant: 0
+  - examName: Observar Abdomen
+    isRelevant: 0
+  - examName: Observar la Postura
+    isRelevant: 0
+  - examName: 'Observar la Marcha '
+    isRelevant: 0
+  listeningRelevances:
+  - examName: "Auscultar coraz\xF3n"
+    isRelevant: 0
+  - examName: Auscultar pulmones
+    isRelevant: 0
+  touchingRelevances:
+  - examName: "Palpar t\xF3rax"
+    isRelevant: 0
+  - examName: Palpar abdomen
+    isRelevant: 0
+  - examName: Palpar cuello
+    isRelevant: 0
+  - examName: Palpar miembro superior
+    isRelevant: 0
+  - examName: Palpar miembro inferior
+    isRelevant: 0
+  mentalRelevances:
+  - examName: "Orientaci\xF3n"
+    isRelevant: 0
+  - examName: Habla
+    isRelevant: 0
+  - examName: Lenguaje
+    isRelevant: 0
+  - examName: Juicio
+    isRelevant: 0
+  - examName: Pensamiento abstracto
+    isRelevant: 0
+  - examName: "C\xE1lculo"
+    isRelevant: 0
+  nervesRelevances:
+  - examName: Olfatorio
+    isRelevant: 0
+  - examName: "\xD3ptico"
+    isRelevant: 0
+  - examName: Oculomotor
+    isRelevant: 0
+  - examName: Troclear
+    isRelevant: 0
+  - examName: "Trig\xE9mino"
+    isRelevant: 1
+  - examName: Abducens
+    isRelevant: 0
+  - examName: Facial
+    isRelevant: 0
+  - examName: Vestibulococlear
+    isRelevant: 0
+  - examName: "Glosofar\xEDngeo"
+    isRelevant: 0
+  - examName: Vago
+    isRelevant: 0
+  - examName: Accesorio
+    isRelevant: 0
+  - examName: Hipogloso
+    isRelevant: 1
+  sensitivityRelevances:
+  - examName: Columna dorsal
+    isRelevant: 0
+  - examName: Dolor y temperatura
+    isRelevant: 1
   correctExtraExams:
   - "AngioTC de cuello y cr\xE1neo"
   - Electroencefalograma
