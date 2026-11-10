@@ -235,36 +235,35 @@ public class DialogSystem : MonoBehaviour
             gameObject.GetComponent<Button>().interactable = false;
             choiceBox.SetActive(true);
         }
-        if (actualPhrase.Contains("{main}"))
+       if (actualPhrase.Contains("{main}"))
+{
+    int timesToSkip = 0;
+    foreach (string dialog in queueDialogs)
+    {
+        timesToSkip++;
+        if (dialog.Contains("{m}"))
         {
-            int timesToSkip = 0;
-            foreach (string dialog in queueDialogs)
+            bool examsOver = inspectionButton.GetComponent<ExamSystem>().ExamLoop();
+            bool extraOver = extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
+
+            actualPhrase = dialog.Replace("{m}", "");
+            interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
+            SkipPhrase(timesToSkip);
+
+            if (examsOver || extraOver)
             {
-                timesToSkip++;
-                if (dialog.Contains("{m}"))
-                {
-                    //TODO refactorizar todo el sistema de examenes para integrar los limites de examenes
-                    inspectionButton.GetComponent<ExamSystem>().ExamLoop();
-                    touchingButton.GetComponent<ExamSystem>().ExamLoop();
-                    listeningButton.GetComponent<ExamSystem>().ExamLoop();
-                    extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
-                    var regex = new Regex(@"\{m\}");
-                    if (regex.Match(dialog).Success)
-                    {
-                        actualPhrase = regex.Replace(dialog, "");
-                    }
-                    else
-                    {
-
-                        actualPhrase = dialog;
-
-                    }
-                    interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
-                    SkipPhrase(timesToSkip);
-                    break;
-                }
+                // se descarta el "¿Qué debería hacer?" y se pasa a la siguiente línea
+                actionMenu.SetActive(false);
+                extraMenu.SetActive(false);
+                actualPhrase = "{Ndname}" + (examsOver
+                    ? "(No puedo realizarle mas examenes al paciente)"
+                    : "(creo que ya tengo todo lo que necesito)");
+                PushFront("{nLine}");
             }
+            break;
         }
+    }
+}
         //chapuza historica
         if (actualPhrase.Contains("{m}"))
         {
@@ -397,5 +396,12 @@ if (actualPhrase.Contains("{ch:"))
         texto.ChangeLine(clinicalCase.scriptPath);
         ShowText();
     }
+    private void PushFront(string phrase)
+{
+    var q = new Queue<string>();
+    q.Enqueue(phrase);
+    foreach (string p in queueDialogs) q.Enqueue(p);
+    queueDialogs = q;
+}
     // TODO que el texto pueda salir a diferentes velocidades
 }

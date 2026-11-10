@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/CaseSelection.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/RetroCambios.unity
-    guid: a3ded677f7a524d4b9bbe6a6eebf76bc
+    path: Assets/Scenes/Consultorio.unity
+    guid: 65f34d5d91bafa107a3caf40c43c86df
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 294b05b2f2fff8b4184f3f3e22bc6466, type: 2}
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}

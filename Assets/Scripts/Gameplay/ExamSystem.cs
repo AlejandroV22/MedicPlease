@@ -10,16 +10,28 @@ public class ExamSystem : MonoBehaviour
     public GameObject choiceBox;
     private TMP_Dropdown choiceOptions;
     public string[] exams;
+    public ExamCategory category;       // tuyo
     public GameObject dialogSystem;
     public GameObject diagnosisController;
     public GameObject actionMenu;
-    public Panel extraMenu;
+    public Panel extraMenu;             // remota
 
     public void ShowExam()
     {
         if (ExamManager.Instance.CanStartExam())
         {
             ExamManager.Instance.StartExam();
+
+            // Los examenes de este boton salen de la lista de su categoria en el ClinicalCase.
+            // Si la categoria es None o la lista esta vacia, se usan los exams del inspector.
+            if (category != ExamCategory.None)
+            {
+                string[] namesFromCase = GameManager.Instance.SelectedCase.GetExamNames(category);
+                if (namesFromCase.Length > 0)
+                {
+                    exams = namesFromCase;
+                }
+            }
 
             string rawChoices = "{choice}{choicest2 c:";
             foreach (string exam in exams)
@@ -29,47 +41,44 @@ public class ExamSystem : MonoBehaviour
             rawChoices = rawChoices + "} ";
 
             choiceBox.SetActive(true);
+            choiceBox.GetComponent<ChoiceSystem>().currentCategory = category;
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-        }
-        else
-        {
-            ExamManager.Instance.StopExam();
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("(No puedo realizarle mas examenes al paciente)");
-            //chapuza historica parte 3
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("{nLine}");
         }
     }
 
-    public void ExamLoop()
+    public void IsExaminationOver(string examinationType)
     {
-        if (ExamManager.Instance.ExamTime && ExamManager.Instance.CanStartExam())
+        if (ExamManager.Instance.CanStartExam())
         {
-            ExamManager.Instance.RegisterTry();
-            actionMenu.SetActive(true);//examinationMenu.Open() Luego
+            dialogSystem.GetComponent<DialogSystem>().AddPhrase("¿Qué debería " + examinationType + "?");
         }
-        else
-        {
-            ExamManager.Instance.StopExam();
-        }
+        ShowExam();
     }
-    public void IsExaminationOver(string examinationType){
-        if (ExamManager.Instance.CanStartExam()){
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("¿Qué debería "+ examinationType +"?");
-            ShowExam();
-        }else{
-            ShowExam();
-        }
-    
-    }
-    public void ExtraExamLoop()
+
+    public bool ExamLoop()
     {
-        if (ExamManager.Instance.extraExamTime && ExamManager.Instance.CanStartExtraExam())
-        {
-            ExamManager.Instance.RegisterTry();
-            extraMenu.Open();   // antes: actionMenu.SetActive(true)
-        }
-        else ExamManager.Instance.StopExtraExam();
+        var mgr = ExamManager.Instance;
+        if (!mgr.ExamTime) return false;       // la respuesta no era de un examen (interrogatorio, lab...)
+
+        mgr.RegisterTry();
+        if (!mgr.CanStartExam()) return true;  // era el último examen permitido
+
+        actionMenu.SetActive(true);//examinationMenu.Open() Luego
+        return false;
     }
+
+    public bool ExtraExamLoop()
+    {
+        var mgr = ExamManager.Instance;
+        if (!mgr.extraExamTime) return false;
+
+        mgr.RegisterExtraTry();               // ya apaga extraExamTime
+        if (!mgr.CanStartExtraExam()) return true;
+
+        extraMenu.Open();                     // antes: actionMenu.SetActive(true)
+        return false;
+    }
+
     public void IsExtraExaminationOver(string examinationType){
         if (ExamManager.Instance.CanStartExtraExam()){
             dialogSystem.GetComponent<DialogSystem>().AddPhrase("¿Qué debería "+ examinationType +"?");
@@ -77,8 +86,9 @@ public class ExamSystem : MonoBehaviour
         }else{
             ShowExtraExam();
         }
-    
+
     }
+
     public void ShowExtraExam()
     {
         if (ExamManager.Instance.CanStartExtraExam())
@@ -92,7 +102,7 @@ public class ExamSystem : MonoBehaviour
             }else{
                 exams = clinicalCase.wrongExtraExams;
             }
-            
+
             string rawChoices = "{choice}{choicest2 c:";
             foreach (string exam in exams)
             {
@@ -101,14 +111,14 @@ public class ExamSystem : MonoBehaviour
             rawChoices = rawChoices + "} ";
 
             choiceBox.SetActive(true);
+            choiceBox.GetComponent<ChoiceSystem>().currentCategory = ExamCategory.Extra;
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
         }
-        else
-        {
-            ExamManager.Instance.StopExtraExam();
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("(creo que ya tengo todo lo que necesito)");
-            //chapuza historica parte 3
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("{nLine}");
-        }
+    }
+
+    public void ExamSelected()
+    {
+        choiceBox.GetComponent<ChoiceSystem>().GetStart();
+        //TODO agregar a clinical case los resultados de los examenes.
     }
 }

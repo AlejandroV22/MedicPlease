@@ -47,7 +47,7 @@ public class ExamManager : MonoBehaviour
         extraExamTime = true;
     }
        public void StopExtraExam(){
-        examTime = false;
+        extraExamTime = false;
     }
 
 
@@ -58,27 +58,17 @@ public class ExamManager : MonoBehaviour
     }
 
 
-    public void RegisterTry()
-    {
-        if (examTime && examinationTries <= maxExamTries)
-        {
-            examinationTries++;
-//            Debug.Log("examTimeValue " + examTime);
-        }
-        else
-        {
-            examTime = false;
-        }
-        if (extraExamTime && extraExaminationTries <= maxExtraExamTries)
-        {
-            extraExaminationTries++;
-            Debug.Log("extraExamTimeValue " + extraExamTime);
-        }
-        else
-        {
-            examTime = false;
-        }
-    }
+public void RegisterTry()
+{
+    if (examTime) examinationTries++;
+    examTime = false;
+}
+
+public void RegisterExtraTry()
+{
+    if (extraExamTime) extraExaminationTries++;
+    extraExamTime = false;
+}
 
    
     public void StopExam()
