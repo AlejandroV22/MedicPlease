@@ -24,6 +24,7 @@ public class ChoiceSystem : MonoBehaviour
     private List<string> badChoices = new List<string>();
     private readonly List<Button> spawnedButtons = new List<Button>();
     private int searchTimes = 0;
+    public bool IsOpen => gameObject.activeSelf;
 
     private void Start()
     {
