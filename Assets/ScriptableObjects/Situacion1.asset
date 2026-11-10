@@ -32,8 +32,9 @@ MonoBehaviour:
   correctTreatment: Este es el tratamiento correcto
   minimumCorrectExams: 4
   wrongDiagnosis:
-  - "Malformaci\xF3n de Chiari tipo 2"
   - "S\xEDndrome de bulbar mediano"
+  - "Malformaci\xF3n de Chiari tipo 2"
+  - "Esclerosis m\xFAltiple"
   correctExtraExams:
   - "AngioTC de cuello y cr\xE1neo"
   - Electroencefalograma

@@ -77,11 +77,11 @@ public class DiagnosisSystem : MonoBehaviour
         string[] wrongs = clinicalCase.wrongDiagnosis;
         string correct = clinicalCase.correctDiagnosis;
         List<bool> tempRelevant = new List<bool>();
-        for (int i = 0; i < wrongs.Length; i++)
+        for (int i = 0; i <= wrongs.Length; i++)
         {
             diagnosisWithoutCorrect.Add(wrongs[i]);
-
-            if (i != wrongs.Length - 1)
+            Debug.Log(i + " total: " + wrongs.Length);
+            if(i <= wrongs.Length - 1)
             {
                 diagnosisWithCorrect.Add(wrongs[i]);
             }
