@@ -32,18 +32,19 @@ public class DialogSystem : MonoBehaviour
     public GameObject listeningButton;
     public GameObject touchingButton;
     public GameObject extraExamButton;
-    public GameObject actionMenu;
+    public Panel actionMenu;
     public GameObject bgController;
     public GameObject audioController;
-    public float texSpeed = 0.05f;
+    public float textSpeed = 0.05f;
     public GameObject clinicalHistoryButton;
-    public GameObject extraMenu;
+    public Panel extraMenu;
     public GameObject diagnosisController;
     public FinalFeedbackSystem finalFeedback; 
 
     public void Awake()
     {
-        FinalFeedbackSystem.ResetState();
+        Debug.Assert(actionMenu != null, "actionMenu no asignado en DialogSystem", this);
+        Debug.Assert(extraMenu != null, "extraMenu no asignado en DialogSystem", this);
         GetVariables();
         saveFileController.StartAttempt(clinicalCase.name);
         texto.GetTextToFile(clinicalCase.scriptPath);
@@ -108,7 +109,7 @@ public class DialogSystem : MonoBehaviour
             //actualPhrase = actualPhrase[1..^0];
             isWriting = true;
             //screenImage.sprite = expretion;
-            StartCoroutine(ShowCharts(actualPhrase, texSpeed));
+            StartCoroutine(ShowCharts(actualPhrase, textSpeed));
 
         }
     }
@@ -236,35 +237,36 @@ public class DialogSystem : MonoBehaviour
             gameObject.GetComponent<Button>().interactable = false;
             choiceBox.SetActive(true);
         }
-       if (actualPhrase.Contains("{main}"))
-{
-    int timesToSkip = 0;
-    foreach (string dialog in queueDialogs)
-    {
-        timesToSkip++;
-        if (dialog.Contains("{m}"))
+        if (actualPhrase.Contains("{main}"))
         {
-            bool examsOver = inspectionButton.GetComponent<ExamSystem>().ExamLoop();
-            bool extraOver = extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
-
-            actualPhrase = dialog.Replace("{m}", "");
-            interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
-            SkipPhrase(timesToSkip);
-
-            if (examsOver || extraOver)
+            int timesToSkip = 0;
+            foreach (string dialog in queueDialogs)
             {
-                // se descarta el "¿Qué debería hacer?" y se pasa a la siguiente línea
-                actionMenu.SetActive(false);
-                extraMenu.SetActive(false);
-                actualPhrase = "{Ndname}" + (examsOver
-                    ? "(No puedo realizarle mas examenes al paciente)"
-                    : "(creo que ya tengo todo lo que necesito)");
-                PushFront("{nLine}");
+                timesToSkip++;
+                if (dialog.Contains("{m}"))
+                {
+                    //TODO refactorizar todo el sistema de examenes para integrar los limites de examenes
+                    inspectionButton.GetComponent<ExamSystem>().ExamLoop();
+                    //touchingButton.GetComponent<ExamSystem>().ExamLoop();
+                    //listeningButton.GetComponent<ExamSystem>().ExamLoop();
+                    extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
+                    var regex = new Regex(@"\|{m\}");
+                    if (regex.Match(dialog).Success)
+                    {
+                        actualPhrase = regex.Replace(dialog, "");
+                    }
+                    else
+                    {
+
+                        actualPhrase = dialog;
+
+                    }
+                    interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
+                    SkipPhrase(timesToSkip);
+                    break;
+                }
             }
-            break;
         }
-    }
-}
         //chapuza historica
         if (actualPhrase.Contains("{m}"))
         {
@@ -274,7 +276,7 @@ public class DialogSystem : MonoBehaviour
         {
             if (interrogationButton.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
             {
-                actionMenu.SetActive(true);
+                actionMenu.Open(); //actionMenu.SetActive(true); antes
             }
             clinicalHistoryButton.SetActive(true);
             actualPhrase = actualPhrase.Replace("{a}", "");
@@ -283,7 +285,7 @@ public class DialogSystem : MonoBehaviour
         {
             if (interrogationButton.GetComponent<InterrogationSystem>().GetInterrogationTime() == false)
             {
-                extraMenu.SetActive(true);
+                extraMenu.Open();//extraMenu.SetActive(true); Antes
             }
             clinicalHistoryButton.SetActive(true);
             actualPhrase = actualPhrase.Replace("{extra}", "");
@@ -312,7 +314,8 @@ public class DialogSystem : MonoBehaviour
             }
 //            Debug.Log("bgValue " + bgValue);
             bgController.GetComponent<BackgroundSystem>().ChangeBg(bgValue);
-        }//https://www.twitch.tv/CriticalRed22
+        }//https://www.twitch.tv/doctorfefe
+        //https://www.twitch.tv/retrohipplayer
 if (actualPhrase.Contains("{ch:"))
 {
     var regex = new Regex(@"\{ch:\s*""([^""]*)""\s*\}");
@@ -397,12 +400,5 @@ if (actualPhrase.Contains("{ch:"))
         texto.ChangeLine(clinicalCase.scriptPath);
         ShowText();
     }
-    private void PushFront(string phrase)
-{
-    var q = new Queue<string>();
-    q.Enqueue(phrase);
-    foreach (string p in queueDialogs) q.Enqueue(p);
-    queueDialogs = q;
-}
     // TODO que el texto pueda salir a diferentes velocidades
 }

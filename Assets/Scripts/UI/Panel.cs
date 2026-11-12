@@ -6,11 +6,9 @@ public class Panel : MonoBehaviour
         ? null
         : transform.parent.GetComponentInParent<Panel>();
 
-    public bool IsOpen => gameObject.activeInHierarchy;
-
     public void Open()
     {
-        ParentPanel?.Open();      
+        ParentPanel?.Open();
         gameObject.SetActive(true);
     }
 
@@ -21,4 +19,7 @@ public class Panel : MonoBehaviour
 
         gameObject.SetActive(false);
     }
+
+    // Diagnóstico temporal: avisa cada vez que este panel se desactiva
+    void OnDisable() => Debug.Log($"[Panel] Disabled {name}", this);
 }

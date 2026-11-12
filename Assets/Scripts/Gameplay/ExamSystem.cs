@@ -10,6 +10,7 @@ public class ExamSystem : MonoBehaviour
     public GameObject choiceBox;
     private TMP_Dropdown choiceOptions;
     public string[] exams;
+    [SerializeField] Panel examinationMenu;
     public ExamCategory category;       // tuyo
     public GameObject dialogSystem;
     public GameObject diagnosisController;
@@ -63,7 +64,7 @@ public class ExamSystem : MonoBehaviour
         mgr.RegisterTry();
         if (!mgr.CanStartExam()) return true;  // era el último examen permitido
 
-        actionMenu.SetActive(true);//examinationMenu.Open() Luego
+        examinationMenu.Open();// Luego actionMenu.SetActive(true);
         return false;
     }
 
