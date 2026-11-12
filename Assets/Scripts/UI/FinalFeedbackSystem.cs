@@ -139,4 +139,5 @@ public class FinalFeedbackSystem : MonoBehaviour
         feedbackPanel.SetActive(false);
         IsShowing = false;
     }
+    public static void ResetState() => IsShowing = false;
 }

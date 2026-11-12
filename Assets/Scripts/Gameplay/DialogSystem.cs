@@ -43,6 +43,7 @@ public class DialogSystem : MonoBehaviour
 
     public void Awake()
     {
+        FinalFeedbackSystem.ResetState();
         GetVariables();
         saveFileController.StartAttempt(clinicalCase.name);
         texto.GetTextToFile(clinicalCase.scriptPath);
