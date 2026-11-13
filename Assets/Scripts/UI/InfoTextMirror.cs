@@ -19,7 +19,6 @@ public class InfoTextMirror : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Se ejecuta después de que el panel original haya escrito su texto
         bool changed = false;
         changed |= CopyText(sourceInterrogation, targetInterrogation);
         changed |= CopyText(sourceExamination, targetExamination);

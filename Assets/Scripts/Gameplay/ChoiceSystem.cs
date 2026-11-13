@@ -17,7 +17,7 @@ public class ChoiceSystem : MonoBehaviour
     public List<string> choices = new List<string>();
     public string rawChoices;
 
-    private GameObject dialogBox;
+    public GameObject dialogBox;
     private bool isInteractable;
     private string correctAnswer;
     private bool menuGenerated = false;
@@ -28,11 +28,11 @@ public class ChoiceSystem : MonoBehaviour
 
     // Categoria del examen que abrio este menu (la fija ExamSystem antes de llamar a ChoiceMenu)
     public ExamCategory currentCategory = ExamCategory.None;
-
+    
     private void Start()
     {
         dialogBox = GameObject.Find("DialogBox");
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void GetStart()

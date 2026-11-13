@@ -2,24 +2,26 @@ using UnityEngine;
 
 public class Panel : MonoBehaviour
 {
-    Panel ParentPanel => transform.parent == null
+    // Panel más cercano hacia arriba (excluye este objeto)
+    public Panel Parent => transform.parent == null
         ? null
         : transform.parent.GetComponentInParent<Panel>();
 
+    public bool IsOpen => gameObject.activeSelf;
+
+    // Abre este panel y asegura que sus padres también estén abiertos
     public void Open()
     {
-        ParentPanel?.Open();
+        Parent?.Open();
         gameObject.SetActive(true);
     }
 
+    // Cierra este panel y sus submenús. El padre queda abierto (eso es "volver atrás")
     public void Close()
     {
-        foreach (var child in GetComponentsInChildren<Panel>(true))
-            if (child != this) child.gameObject.SetActive(false);
+        foreach (var sub in GetComponentsInChildren<Panel>(true))
+            if (sub != this) sub.gameObject.SetActive(false);
 
         gameObject.SetActive(false);
     }
-
-    // Diagnóstico temporal: avisa cada vez que este panel se desactiva
-    void OnDisable() => Debug.Log($"[Panel] Disabled {name}", this);
 }

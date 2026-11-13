@@ -10,7 +10,6 @@ public class ExamSystem : MonoBehaviour
     public GameObject choiceBox;
     private TMP_Dropdown choiceOptions;
     public string[] exams;
-    [SerializeField] Panel examinationMenu;
     public ExamCategory category;       // tuyo
     public GameObject dialogSystem;
     public GameObject diagnosisController;
@@ -64,7 +63,7 @@ public class ExamSystem : MonoBehaviour
         mgr.RegisterTry();
         if (!mgr.CanStartExam()) return true;  // era el último examen permitido
 
-        examinationMenu.Open();// Luego actionMenu.SetActive(true);
+        actionMenu.SetActive(true);//examinationMenu.Open() Luego
         return false;
     }
 
@@ -116,7 +115,7 @@ public class ExamSystem : MonoBehaviour
             choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
         }
     }
-
+    //Que hace ExamSelected? Por qué llama a GetStart si GetStart lo único que hacía era ocultar la caja de diálogo lo cual en la lógica actual es un problema? 
     public void ExamSelected()
     {
         choiceBox.GetComponent<ChoiceSystem>().GetStart();
