@@ -1,124 +1,130 @@
-using UnityEngine;
-using TMPro;
-using System.Linq;
-using UnityEngine.UI;
-using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class ExamSystem : MonoBehaviour
 {
+    [Header("Referencias")]
     public GameObject choiceBox;
-    private TMP_Dropdown choiceOptions;
-    public string[] exams;
-    public ExamCategory category;       // tuyo
     public GameObject dialogSystem;
     public GameObject diagnosisController;
-    public GameObject actionMenu;
-    public Panel extraMenu;             // remota
+    [Tooltip("Solo en el ExamSystem que DialogSystem llama en {main} (inspección)")]
+    public Panel examinationMenu;
+    [Tooltip("Solo en el ExamSystem del botón de examen extra")]
+    public Panel extraMenu;
 
-    public void ShowExam()
+    [Header("Opciones")]
+    public ExamCategory category;
+    public string[] exams;
+
+    private void Awake()
     {
-        if (ExamManager.Instance.CanStartExam())
-        {
-            ExamManager.Instance.StartExam();
-
-            // Los examenes de este boton salen de la lista de su categoria en el ClinicalCase.
-            // Si la categoria es None o la lista esta vacia, se usan los exams del inspector.
-            if (category != ExamCategory.None)
-            {
-                string[] namesFromCase = GameManager.Instance.SelectedCase.GetExamNames(category);
-                if (namesFromCase.Length > 0)
-                {
-                    exams = namesFromCase;
-                }
-            }
-
-            string rawChoices = "{choice}{choicest2 c:";
-            foreach (string exam in exams)
-            {
-                rawChoices = rawChoices + "\"" + exam + "\"" + " ";
-            }
-            rawChoices = rawChoices + "} ";
-
-            choiceBox.SetActive(true);
-            choiceBox.GetComponent<ChoiceSystem>().currentCategory = category;
-            choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-        }
+        Debug.Assert(choiceBox != null, "choiceBox no asignado en ExamSystem", this);
+        Debug.Assert(dialogSystem != null, "dialogSystem no asignado en ExamSystem", this);
     }
+
+    // ---------- Botones de examen ----------
 
     public void IsExaminationOver(string examinationType)
     {
-        if (ExamManager.Instance.CanStartExam())
+        var dialog = dialogSystem.GetComponent<DialogSystem>();
+        if (!ExamManager.Instance.CanStartExam())
         {
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("¿Qué debería " + examinationType + "?");
+            dialog.AddPhrase("(No puedo realizarle mas examenes al paciente)");
+            dialog.AddPhrase("{nLine}");
+            return;
         }
+        dialog.AddPhrase("¿Qué debería " + examinationType + "?");
         ShowExam();
     }
 
-    public bool ExamLoop()
+    public void ShowExam()
     {
-        var mgr = ExamManager.Instance;
-        if (!mgr.ExamTime) return false;       // la respuesta no era de un examen (interrogatorio, lab...)
+        if (!ExamManager.Instance.CanStartExam()) return;
 
-        mgr.RegisterTry();
-        if (!mgr.CanStartExam()) return true;  // era el último examen permitido
-
-        actionMenu.SetActive(true);//examinationMenu.Open() Luego
-        return false;
+        ExamManager.Instance.StartExam();
+        OpenChoice(ResolveExams(), category);
     }
 
-    public bool ExtraExamLoop()
+    string[] ResolveExams()
     {
-        var mgr = ExamManager.Instance;
-        if (!mgr.extraExamTime) return false;
-
-        mgr.RegisterExtraTry();               // ya apaga extraExamTime
-        if (!mgr.CanStartExtraExam()) return true;
-
-        extraMenu.Open();                     // antes: actionMenu.SetActive(true)
-        return false;
-    }
-
-    public void IsExtraExaminationOver(string examinationType){
-        if (ExamManager.Instance.CanStartExtraExam()){
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("¿Qué debería "+ examinationType +"?");
-            ShowExtraExam();
-        }else{
-            ShowExtraExam();
+        if (category != ExamCategory.None)
+        {
+            string[] fromCase = GameManager.Instance.SelectedCase.GetExamNames(category);
+            if (fromCase.Length > 0) return fromCase;
         }
+        return exams;
+    }
 
+    // ---------- Examen extra ----------
+
+    public void IsExtraExaminationOver(string examinationType)
+    {
+        var dialog = dialogSystem.GetComponent<DialogSystem>();
+        if (!ExamManager.Instance.CanStartExtraExam())
+        {
+            dialog.AddPhrase("(creo que ya tengo todo lo que necesito)");
+            dialog.AddPhrase("{nLine}");
+            return;
+        }
+        dialog.AddPhrase("¿Qué debería " + examinationType + "?");
+        ShowExtraExam();
     }
 
     public void ShowExtraExam()
     {
-        if (ExamManager.Instance.CanStartExtraExam())
+        var mgr = ExamManager.Instance;
+        if (!mgr.CanStartExtraExam()) return;
+
+        mgr.StartExtraExam();
+
+        var clinicalCase = GameManager.Instance.SelectedCase;
+        var diagnosis = diagnosisController.GetComponent<DiagnosisSystem>();
+        diagnosis.GetRelevantDecisions();
+
+        string[] options;
+        if (diagnosis.relevantDecisionMade.Count() >= clinicalCase.minimumCorrectExams)
         {
-            ExamManager.Instance.StartExtraExam();
-            ClinicalCase clinicalCase = GameManager.Instance.SelectedCase;
-            diagnosisController.GetComponent<DiagnosisSystem>().GetRelevantDecisions();
-            if(diagnosisController.GetComponent<DiagnosisSystem>().relevantDecisionMade.Count() >= clinicalCase.minimumCorrectExams){
-                exams = clinicalCase.correctExtraExams;
-                diagnosisController.GetComponent<DiagnosisSystem>().totalRelevantBeforeExtraExams = diagnosisController.GetComponent<DiagnosisSystem>().relevantDecisionMade.Count();
-            }else{
-                exams = clinicalCase.wrongExtraExams;
-            }
-
-            string rawChoices = "{choice}{choicest2 c:";
-            foreach (string exam in exams)
-            {
-                rawChoices = rawChoices + "\"" + exam + "\"" + " ";
-            }
-            rawChoices = rawChoices + "} ";
-
-            choiceBox.SetActive(true);
-            choiceBox.GetComponent<ChoiceSystem>().currentCategory = ExamCategory.Extra;
-            choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
+            options = clinicalCase.correctExtraExams;
+            diagnosis.totalRelevantBeforeExtraExams = diagnosis.relevantDecisionMade.Count();
         }
+        else
+        {
+            options = clinicalCase.wrongExtraExams;
+        }
+
+        OpenChoice(options, ExamCategory.Extra);
     }
-    //Que hace ExamSelected? Por qué llama a GetStart si GetStart lo único que hacía era ocultar la caja de diálogo lo cual en la lógica actual es un problema? 
-    public void ExamSelected()
+
+    // ---------- Llamadas desde DialogSystem en {main} ----------
+
+
+    public void ExamLoop()
     {
-        choiceBox.GetComponent<ChoiceSystem>().GetStart();
-        //TODO agregar a clinical case los resultados de los examenes.
+        var mgr = ExamManager.Instance;
+        if (!mgr.ExamTime) return;
+
+        mgr.RegisterTry();
+        examinationMenu.Open();
+    }
+
+    public void ExtraExamLoop()
+    {
+        var mgr = ExamManager.Instance;
+        if (!mgr.extraExamTime) return;
+
+        mgr.RegisterExtraTry();
+        extraMenu.Open();
+    }
+
+    // ---------- Auxiliares ----------
+
+    void OpenChoice(IEnumerable<string> options, ExamCategory cat)
+    {
+        var choice = choiceBox.GetComponent<ChoiceSystem>();
+        choice.currentCategory = cat;
+        choice.cancelable = true;               // los exámenes sí se pueden cancelar
+        choiceBox.SetActive(true);
+        choice.ChoiceMenu(ChoiceSystem.BuildRawChoices(options));
     }
 }

@@ -223,48 +223,42 @@ public class DialogSystem : MonoBehaviour
         {
             rawChoices = actualPhrase;
             var regext1 = new Regex(@"\{choice\}\{choicest1\s+b:\s*((?:""[^""]*""\s*)*)c:\s*""[^""]*""\}");
-            Debug.Log("match estado" + regext1.Match(actualPhrase).Success);
             if (regext1.Match(actualPhrase).Success)
-            {
                 actualPhrase = regext1.Replace(actualPhrase, "");
-            }
+
             var regext2 = new Regex(@"\{choice\}\{choicest2\s+c:\s*((?:""[^""]*""\s*)*)\}");
             if (regext2.Match(actualPhrase).Success)
-            {
                 actualPhrase = regext2.Replace(actualPhrase, "");
-            }
 
             gameObject.GetComponent<Button>().interactable = false;
+
+            var choice = choiceBox.GetComponent<ChoiceSystem>();
+            choice.cancelable = false;              // las preguntas del guion no se cancelan
             choiceBox.SetActive(true);
+            choice.ChoiceMenu(rawChoices);          // antes lo hacía ChoiceSystem.Update
         }
         if (actualPhrase.Contains("{main}"))
         {
-            int timesToSkip = 0;
+            // Busca el primer {m} pendiente y cuántas frases hay que saltar hasta él
+            int skip = 0;
+            string mLine = null;
             foreach (string dialog in queueDialogs)
             {
-                timesToSkip++;
-                if (dialog.Contains("{m}"))
-                {
-                    //TODO refactorizar todo el sistema de examenes para integrar los limites de examenes
-                    inspectionButton.GetComponent<ExamSystem>().ExamLoop();
-                    //touchingButton.GetComponent<ExamSystem>().ExamLoop();
-                    //listeningButton.GetComponent<ExamSystem>().ExamLoop();
-                    extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
-                    var regex = new Regex(@"\|{m\}");
-                    if (regex.Match(dialog).Success)
-                    {
-                        actualPhrase = regex.Replace(dialog, "");
-                    }
-                    else
-                    {
+                skip++;
+                if (dialog.Contains("{m}")) { mLine = dialog; break; }
+            }
 
-                        actualPhrase = dialog;
+            if (mLine != null)
+            {
+                // Si el último paso fue un examen, ExamLoop lo registra y reabre su menú
+                inspectionButton.GetComponent<ExamSystem>().ExamLoop();
+                extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
 
-                    }
-                    interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
-                    SkipPhrase(timesToSkip);
-                    break;
-                }
+                // Saltar ANTES del interrogatorio: InterrogationLoop puede encolar frases al frente
+                SkipPhrase(skip);
+                interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
+
+                actualPhrase = mLine.Replace("{m}", "");
             }
         }
         //chapuza historica

@@ -1,81 +1,103 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System.Text.RegularExpressions;
 
 public class ChoiceSystem : MonoBehaviour
 {
-    [Header("UI de opciones (botones)")]
+    [Header("UI")]
     [Tooltip("Objeto con VerticalLayoutGroup donde se crean los botones")]
     public Transform buttonContainer;
     [Tooltip("Prefab de boton con un TMP_Text como hijo")]
     public Button optionButtonPrefab;
+    [Tooltip("Botón Cerrar de este ChoiceBox")]
+    public GameObject cancelButton;
 
-    [Header("Datos")]
-    public List<string> choices = new List<string>();
-    public string rawChoices;
-
+    [Header("Referencias")]
     public GameObject dialogBox;
-    private bool isInteractable;
+
+    [Header("Estado")]
+    public ExamCategory currentCategory;
+    [Tooltip("Solo las elecciones de examen se pueden cancelar")]
+    public bool cancelable;
+
+    public List<string> choices = new List<string>();
+
+    private const int MaxSearchPasses = 100;
     private string correctAnswer;
-    private bool menuGenerated = false;
     private List<string> badChoices = new List<string>();
     private readonly List<Button> spawnedButtons = new List<Button>();
-    private int searchTimes = 0;
-    public bool IsOpen => gameObject.activeSelf;
 
-    // Categoria del examen que abrio este menu (la fija ExamSystem antes de llamar a ChoiceMenu)
-    public ExamCategory currentCategory = ExamCategory.None;
-    
-    private void Start()
+    private DialogSystem Dialog => dialogBox.GetComponent<DialogSystem>();
+    private Button DialogButton => dialogBox.GetComponent<Button>();
+
+    private void Awake()
     {
-        dialogBox = GameObject.Find("DialogBox");
-        //gameObject.SetActive(false);
+        Debug.Assert(dialogBox != null, "dialogBox no asignado en ChoiceSystem", this);
     }
 
-    public void GetStart()
+    // ---------- Texto de elección ----------
+
+    public static string BuildRawChoices(IEnumerable<string> options)
     {
-        Start();
+        var sb = new System.Text.StringBuilder("{choice}{choicest2 c:");
+        foreach (string option in options)
+            sb.Append('"').Append(option).Append("\" ");
+        sb.Append("} ");
+        return sb.ToString();
     }
 
-    private void Update()
+    // ---------- Menú ----------
+
+    public void ChoiceMenu(string rawChoices)
     {
-        rawChoices = dialogBox.GetComponent<DialogSystem>().rawChoices;
-        isInteractable = dialogBox.GetComponent<Button>().interactable;
-        if (!isInteractable)
+        ClearButtons();
+        if (cancelButton != null) cancelButton.SetActive(cancelable);
+
+        if (rawChoices.Contains("choicest1"))
         {
-            if (!menuGenerated)
-            {
-                currentCategory = ExamCategory.None; // menu que viene del dialogo, no de un examen
-                ChoiceMenu(rawChoices);
-                menuGenerated = true;
-            }
+            var matchBad = Regex.Match(rawChoices, @"\{choice\}\{choicest1 b:(.*?) c:");
+            badChoices = Regex.Matches(matchBad.Groups[1].Value, "\"([^\"]+)\"")
+                              .Select(m => m.Groups[1].Value)
+                              .ToList();
+
+            var matchCorrect = Regex.Match(rawChoices, @"\{choice\}\{choicest1 b:.*? c:""([^""]+)""\}");
+            correctAnswer = matchCorrect.Groups[1].Value;
+
+            RandomChoices(correctAnswer);
+            BuildButtons(choices, ConfirmChoice);
         }
-        else
+        else if (rawChoices.Contains("choicest2"))
         {
-            menuGenerated = false;
+            var matchChoices = Regex.Match(rawChoices, @"\{choice\}\{choicest2\s+c:\s*(.*?)\}");
+            choices = Regex.Matches(matchChoices.Groups[1].Value, "\"([^\"]*)\"")
+                           .Select(m => m.Groups[1].Value)
+                           .ToList();
+            BuildButtons(choices, changePath);
         }
+
+        DialogButton.interactable = false;
     }
 
-    private void OnDisable()
+    public void RandomChoices(string rightAnswer)
     {
-        menuGenerated = false;
+        choices = new List<string> { rightAnswer };
+        choices.AddRange(badChoices);
+        choices = choices.OrderBy(_ => UnityEngine.Random.value).ToList();
     }
 
-    // ---------- Manejo de botones ----------
+    // ---------- Botones ----------
 
-    private void ClearButtons()
+    void ClearButtons()
     {
         foreach (Button b in spawnedButtons)
-        {
             if (b != null) Destroy(b.gameObject);
-        }
         spawnedButtons.Clear();
     }
 
-    private void BuildButtons(List<string> options, System.Action<string> onSelected)
+    void BuildButtons(List<string> options, System.Action<string> onSelected)
     {
         ClearButtons();
         foreach (string option in options)
@@ -91,118 +113,82 @@ public class ChoiceSystem : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)buttonContainer);
     }
 
-    // ---------- Logica del menu ----------
+    // ---------- Respuestas ----------
 
-    public void ChoiceMenu(string rawChoices)
-    {
-        ClearButtons();
-
-        // TODO hacer que vayan a distintos caminos dependiendo de la decision
-        if (rawChoices.Contains("choicest1"))
-        {
-            var regexBadChoices = new Regex(@"\{choice\}\{choicest1 b:(.*?) c:");
-            var matchBadChoices = regexBadChoices.Match(rawChoices);
-            badChoices = Regex.Matches(matchBadChoices.Groups[1].Value, @"""([^""]+)""")
-                        .Select(m => m.Groups[1].Value)
-                        .ToList();
-
-            var regexCorrectAnswer = new Regex(@"\{choice\}\{choicest1 b:.*? c:""([^""]+)""\}");
-            var matchCorrectAnswer = regexCorrectAnswer.Match(rawChoices);
-            correctAnswer = matchCorrectAnswer.Groups[1].Value;
-
-            RandomChoices(correctAnswer);
-            BuildButtons(choices, ConfirmChoice);
-        }
-        else if (rawChoices.Contains("choicest2"))
-        {
-            var regexChoices = new Regex(@"\{choice\}\{choicest2\s+c:\s*(.*?)\}");
-            var matchChoices = regexChoices.Match(rawChoices);
-            choices = Regex.Matches(matchChoices.Groups[1].Value, @"""([^""]*)""")
-                        .Select(m => m.Groups[1].Value)
-                        .ToList();
-            BuildButtons(choices, changePath);
-        }
-
-        dialogBox.GetComponent<Button>().interactable = false;
-        menuGenerated = true;
-    }
-
-    public void RandomChoices(string rchoise)
-    {
-        choices.Clear();
-        choices.Add(rchoise);
-        foreach (string choice in badChoices)
-        {
-            choices.Add(choice);
-        }
-        choices = choices.OrderBy(x => UnityEngine.Random.value).ToList();
-    }
-
+    // Preguntas de quiz del guion (choicest1)
     public void ConfirmChoice(string selected)
     {
         if (selected == correctAnswer)
         {
-            dialogBox.GetComponent<DialogSystem>().correctAnswer += 1;
+            Dialog.correctAnswer += 1;
             Debug.Log("respuesta correcta");
         }
-        dialogBox.GetComponent<Button>().interactable = true;
-        gameObject.SetActive(false);
-        dialogBox.GetComponent<DialogSystem>().NextPhrase();
+        FinishChoice();
     }
 
+    // Exámenes, preguntas de interrogatorio (choicest2)
     public void changePath(string selectedOption)
     {
-        if(dialogBox.GetComponent<DialogSystem>().GetIsWriting()){
-            dialogBox.GetComponent<DialogSystem>().SkipWriting();
-        }// Registra la decision (con su relevancia) en el intento activo y, si es un diagnostico, cierra el intento
-        dialogBox.GetComponent<DialogSystem>().diagnosisController.GetComponent<DiagnosisSystem>().RegisterDecision(selectedOption, currentCategory);
-        currentCategory = ExamCategory.None;
-        searchTimes = 0;
+        if (Dialog.GetIsWriting()) Dialog.SkipWriting();
 
+        Dialog.diagnosisController.GetComponent<DiagnosisSystem>().RegisterDecision(selectedOption);
         SearchPath(selectedOption);
     }
 
     public void SearchPath(string selectedOption)
     {
-        searchTimes++; // TODO agregar un identificador de caminos y un identificador de donde termina el texto
-        Texto fullText = dialogBox.GetComponent<DialogSystem>().texto;
-        Queue<string> queueDialogs = dialogBox.GetComponent<DialogSystem>().queueDialogs;
-        int timesToSkip = 0;
-        bool dialogFound = false;
+        string tag = "{" + selectedOption + "}";
+        Queue<string> queue = Dialog.queueDialogs;
 
-        foreach (string dialog in queueDialogs)
+        for (int pass = 0; pass < MaxSearchPasses; pass++)
         {
-            timesToSkip++;
-            if (dialog.Contains("{" + selectedOption + "}"))
+            int found = -1;
+            string line = null;
+            int index = 0;
+
+            foreach (string candidate in queue)
             {
-                dialogBox.GetComponent<DialogSystem>().SkipPhrase(timesToSkip);
-                var regex = new Regex(@"\{" + Regex.Escape(selectedOption) + @"\}");
-                if (regex.Match(dialog).Success)
+                index++;
+                if (candidate.Contains(tag))
                 {
-                    dialogFound = true;
-                    dialogBox.GetComponent<DialogSystem>().AddPhrase(regex.Replace(dialog, ""));
-                    dialogBox.GetComponent<Button>().interactable = true;
-                    gameObject.SetActive(false);
-                    dialogBox.GetComponent<DialogSystem>().NextPhrase();
+                    found = index;
+                    line = candidate;
+                    break;
                 }
-                break;
             }
+
+            if (found > 0)
+            {
+                Dialog.SkipPhrase(found);
+                Dialog.AddPhrase(line.Replace(tag, ""));
+                FinishChoice();
+                return;
+            }
+
+            // No está más adelante: vuelve a encolar el guion completo y busca otra vez
+            foreach (string textBuffer in Dialog.texto.textArray)
+                queue.Enqueue(textBuffer);
         }
 
-        if (dialogFound == false)
-        {
-            foreach (string textBuffer in fullText.textArray)
-            {
-                queueDialogs.Enqueue(textBuffer);
-            }
-            dialogBox.GetComponent<DialogSystem>().queueDialogs = queueDialogs;
-            if (searchTimes < 100)
-            {
-                SearchPath(selectedOption);
-            }
-            dialogBox.GetComponent<Button>().interactable = true;
-            gameObject.SetActive(false);
-            dialogBox.GetComponent<DialogSystem>().NextPhrase();
-        }
+        Debug.LogWarning($"No se encontró el tag {tag} en el guion");
+        FinishChoice();
+    }
+
+    // Cierra la elección y devuelve el control al diálogo
+    void FinishChoice()
+    {
+        DialogButton.interactable = true;
+        gameObject.SetActive(false);
+        Dialog.NextPhrase();
+    }
+
+    // Botón Cerrar. Solo cancela exámenes: el menú queda abierto para volver a elegir.
+    public void CancelChoice()
+    {
+        if (!cancelable) return;
+
+        ExamManager.Instance.StopExam();
+        ExamManager.Instance.StopExtraExam();
+        gameObject.SetActive(false);
     }
 }

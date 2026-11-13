@@ -440,18 +440,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 0
   exams:
   - Observar el Rostro
   - "Observar el T\xF3rax"
   - Observar el Abdomen
   - Observar la Postura
   - Observar la Marcha
-  examinationMenu: {fileID: 1191500787}
-  category: 0
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 1919622047}
-  actionMenu: {fileID: 1665938181}
-  extraMenu: {fileID: 1429336732}
 --- !u!114 &129051943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,15 +1427,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 0
   exams:
   - "Auscultar coraz\xF3n"
   - Auscultar pulmones
-  examinationMenu: {fileID: 1191500787}
-  category: 0
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 1919622047}
-  actionMenu: {fileID: 1665938181}
-  extraMenu: {fileID: 1429336732}
 --- !u!1 &325367723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,18 +2151,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 0
   exams:
   - "RM cerebral con difusi\xF3n"
   - Angio-TC de cabeza y cuello
   - ECG
   - "Punci\xF3n lumbar"
   - EEG
-  examinationMenu: {fileID: 1191500787}
-  category: 0
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 1919622047}
-  actionMenu: {fileID: 1665938181}
-  extraMenu: {fileID: 1429336732}
 --- !u!114 &386338098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2798,6 +2795,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494673767}
   m_CullTransparentMesh: 1
+--- !u!1 &503892213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5900998477358589107, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+  m_PrefabInstance: {fileID: 451066411}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &518420799
 GameObject:
   m_ObjectHideFlags: 0
@@ -3743,6 +3745,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 0
   exams:
   - Olfatorio
   - "\xD3ptico"
@@ -3756,12 +3763,6 @@ MonoBehaviour:
   - Vago
   - Accesorio
   - Hipogloso
-  examinationMenu: {fileID: 1191500787}
-  category: 0
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 1919622047}
-  actionMenu: {fileID: 1665938181}
-  extraMenu: {fileID: 1429336732}
 --- !u!114 &666488047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4521,18 +4522,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 0
   exams:
   - "Palpar t\xF3rax"
   - Palpar abdomen
   - Palpar cuello
   - Palpar miembro superior
   - Palpar miembro inferior
-  examinationMenu: {fileID: 1191500787}
-  category: 0
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 1919622047}
-  actionMenu: {fileID: 1665938181}
-  extraMenu: {fileID: 1429336732}
 --- !u!1 &740102468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4801,10 +4801,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceSystem
   buttonContainer: {fileID: 755733341}
   optionButtonPrefab: {fileID: 1967135811351940474, guid: 6b5453ec9ddb24441bd8e63c435aa5fb, type: 3}
-  choices: []
-  rawChoices: 
+  cancelButton: {fileID: 503892213}
   dialogBox: {fileID: 579118547}
   currentCategory: 0
+  cancelable: 0
+  choices: []
 --- !u!114 &769830928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8069,8 +8070,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
-  actionMenu: {fileID: 1665938181}
   ClinicalCaseButton: {fileID: 0}
+  actionMenu: {fileID: 1665938185}
 --- !u!114 &1418570440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8896,8 +8897,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
-  actionMenu: {fileID: 1665938181}
   ClinicalCaseButton: {fileID: 1970883121}
+  actionMenu: {fileID: 1665938185}
 --- !u!114 &1540525727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9175,14 +9176,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamManager
   maxExamTries: 5
+  maxExtraExamTries: 1
   examinationTries: 0
-  examMenu: {fileID: 1191500783}
+  extraExaminationTries: 0
+  extraExamTime: 0
+  actionMenu: {fileID: 1665938185}
+  examinationMenu: {fileID: 1191500787}
   interrogationSystem: {fileID: 1540525724}
   dialogSystem: {fileID: 579118547}
-  actionMenu: {fileID: 1665938181}
-  maxExtraExamTries: 0
-  extraExamTime: 0
-  extraExaminationTries: 0
 --- !u!4 &1557059214
 Transform:
   m_ObjectHideFlags: 0
@@ -10328,8 +10329,8 @@ MonoBehaviour:
   interrogationText: {fileID: 494673769}
   examinationText: {fileID: 1553110413}
   gameDataController: {fileID: 1503416845}
-  scrollRect: {fileID: 0}
-  contentRect: {fileID: 0}
+  scrollRect: {fileID: 1320824075}
+  contentRect: {fileID: 603063826}
   relevantThreshold: 6
   unscoredDecisions: []
   showRelevance: 0
@@ -10748,15 +10749,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 0
   exams:
   - Columna dorsal
   - Dolor y temperatura
-  examinationMenu: {fileID: 1191500787}
-  category: 0
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 1919622047}
-  actionMenu: {fileID: 1665938181}
-  extraMenu: {fileID: 1429336732}
 --- !u!114 &1937649412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11173,6 +11173,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 0
   exams:
   - "Orientaci\xF3n"
   - Habla
@@ -11180,12 +11185,6 @@ MonoBehaviour:
   - Juicio
   - Pensamiento abstracto
   - "C\xE1lculo"
-  examinationMenu: {fileID: 1191500787}
-  category: 0
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 1919622047}
-  actionMenu: {fileID: 1665938181}
-  extraMenu: {fileID: 1429336732}
 --- !u!114 &1969399737
 MonoBehaviour:
   m_ObjectHideFlags: 0

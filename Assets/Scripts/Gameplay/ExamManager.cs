@@ -1,97 +1,79 @@
-using UnityEngine.UI;
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
 
 public class ExamManager : MonoBehaviour
 {
     public static ExamManager Instance { get; private set; }
- // Chapuza historica parte 6 es 18 porque cada que pasaba un examen sumaba 3 intentos en vez de uno xd (esto se arreglo por arte de magia)
-    [SerializeField] private int maxExamTries = 5;
+
+    // Total de exámenes permitidos. Se compara con "<" (con 6, se pueden hacer 6 exámenes).
+    [SerializeField] private int maxExamTries = 6;
+    // Total de exámenes extra permitidos.
+    public int maxExtraExamTries = 1;
 
     public int examinationTries;
+    public int extraExaminationTries;
+    public bool extraExamTime;
     private bool examTime;
-    public GameObject examMenu;
+
     public int ExaminationTries => examinationTries;
     public bool ExamTime => examTime;
     public int MaxExamTries => maxExamTries;
+
+    public Panel actionMenu;
+    public Panel examinationMenu;
     public GameObject interrogationSystem;
     public GameObject dialogSystem;
-    public GameObject actionMenu;
-    public int maxExtraExamTries = 0;
-    public bool extraExamTime;
-    public int extraExaminationTries;
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-
     }
 
-    public bool CanStartExam()
+    public bool CanStartExam() => examinationTries < maxExamTries;
+    public bool CanStartExtraExam() => extraExaminationTries < maxExtraExamTries;
+
+    public void StartExam() => examTime = true;
+    public void StopExam() => examTime = false;
+
+    public void RegisterTry()
     {
-        return examinationTries <= maxExamTries;
-    }
-    public bool CanStartExtraExam()
-    {
-        return extraExaminationTries <= maxExtraExamTries;
-    }
-    public void StartExtraExam(){
-        extraExamTime = true;
-    }
-       public void StopExtraExam(){
-        extraExamTime = false;
-    }
-
-
-
-    public void StartExam()
-    {
-        examTime = true;
-    }
-
-
-public void RegisterTry()
-{
-    if (examTime) examinationTries++;
-    examTime = false;
-}
-
-public void RegisterExtraTry()
-{
-    if (extraExamTime) extraExaminationTries++;
-    extraExamTime = false;
-}
-
-   
-    public void StopExam()
-    {
+        if (examTime) examinationTries++;
         examTime = false;
+    }
+
+    public void StartExtraExam() => extraExamTime = true;
+    public void StopExtraExam() => extraExamTime = false;
+
+    public void RegisterExtraTry()
+    {
+        if (extraExamTime) extraExaminationTries++;
+        extraExamTime = false;
     }
 
     public void ResetTries()
     {
         examinationTries = 0;
+        extraExaminationTries = 0;
         examTime = false;
-    }
-    public void IsInterrogationOver(){
-        if(interrogationSystem.GetComponent<InterrogationSystem>().GetInterrogationOver() == true){
-//            Debug.Log("duro dos");
-            examMenu.SetActive(true);
-            examMenu.transform.GetChild(0).gameObject.SetActive(true);
-        }else{
-//            Debug.Log("horas haciendolo bien rico");
-            actionMenu.SetActive(false);
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("{Ndname}(Necesito interrogar primero)");
-            dialogSystem.GetComponent<DialogSystem>().AddPhrase("{a}(¿Qué debería hacer?)");
-        }
+        extraExamTime = false;
     }
 
+    public void IsInterrogationOver()
+    {
+        var dialog = dialogSystem.GetComponent<DialogSystem>();
+        if (interrogationSystem.GetComponent<InterrogationSystem>().GetInterrogationOver())
+        {
+            examinationMenu.Open();
+        }
+        else
+        {
+            actionMenu.Close();
+            dialog.AddPhrase("{Ndname}(Necesito interrogar primero)");
+            dialog.AddPhrase("{a}(¿Qué debería hacer?)");
+        }
+    }
 }
