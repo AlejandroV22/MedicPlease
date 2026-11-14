@@ -8733,18 +8733,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1191500787}
-        m_TargetAssemblyTypeName: Panel, Assembly-CSharp
-        m_MethodName: Open
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1473279397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10611,7 +10599,7 @@ MonoBehaviour:
   contentRect: {fileID: 603063826}
   relevantThreshold: 6
   unscoredDecisions: []
-  showRelevance: 0
+  showRelevance: 1
   summaryText: {fileID: 1256441005}
   resultText: {fileID: 1974724780}
   diagnosisText: {fileID: 31516876}
