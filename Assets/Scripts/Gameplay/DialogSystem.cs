@@ -40,6 +40,7 @@ public class DialogSystem : MonoBehaviour
     public Panel extraMenu;
     public GameObject diagnosisController;
     public FinalFeedbackSystem finalFeedback; 
+    public GameObject charaImage;
 
     public void Awake()
     {
@@ -61,7 +62,7 @@ public class DialogSystem : MonoBehaviour
     {
         saveFile = saveFileController.Data;
         clinicalCase = GameManager.Instance.SelectedCase;
-        transform.GetChild(1).GetComponent<Image>().sprite = clinicalCase.retratoPaciente;
+        charaImage.GetComponent<Image>().sprite = clinicalCase.retratoPaciente;
         Type tipo = clinicalCase.GetType();
         FieldInfo[] campos = tipo.GetFields();
         List<string> lista = new List<string> { };
@@ -136,24 +137,21 @@ public class DialogSystem : MonoBehaviour
     IEnumerator ShowCharts(string textToShow, float textSpeed)
     {
         screenText.text = "";
-//        Debug.Log("corutina iniciada");
         isWritingPhrase = textToShow;
-        int characterCount = 0;
+
+        if (!string.IsNullOrWhiteSpace(textToShow))
+        {
+            audioController.GetComponent<AudioSystem>().PlayCharSound();
+        }
+
         foreach (char character in textToShow.ToCharArray())
         {
-//            Debug.Log("corutina iniciada");
             screenText.text += character;
-            if (character != ' ' && characterCount % 2 == 0)
-            {
-                audioController.GetComponent<AudioSystem>().PlayCharSound();
-            }
-
-            characterCount++;
             yield return new WaitForSeconds(textSpeed);
         }
+
         isWriting = false;
         blinkingSprite = StartCoroutine(SpriteBlinking());
-
     }
     IEnumerator SpriteBlinking()
     {
@@ -184,6 +182,7 @@ public class DialogSystem : MonoBehaviour
         if (isWriting==true){
 //            Debug.Log("skipeado");
             StopAllCoroutines();
+            audioController.GetComponent<AudioSystem>().StopCharSound();
             screenText.text = isWritingPhrase;
             isWriting=false;
             blinkingSprite = StartCoroutine(SpriteBlinking());

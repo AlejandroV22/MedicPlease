@@ -20,7 +20,8 @@ public class FinalFeedbackSystem : MonoBehaviour
     [Tooltip("Número mínimo de decisiones relevantes para desbloquear el diagnóstico.")]
     [SerializeField] private int relevantThreshold = 3;
 
-    [Tooltip("Nombres exactos de las decisiones que no puntúan (examen extra, diagnóstico). No cuentan en el resumen.")]
+    [Tooltip("Nombres exactos de decisiones que NO puntúan (por ejemplo, el diagnóstico si se registra como decisión). " +
+             "Los exámenes normales, los extra y las preguntas de interrogatorio sí puntúan y no deben estar aquí.")]
     [SerializeField] private List<string> unscoredDecisions = new List<string>();
 
     [Tooltip("Si está activado, muestra [Relevante]/[No relevante] en cada decisión y el total. Si está desactivado, solo muestra las decisiones y el número de aciertos.")]
@@ -29,6 +30,17 @@ public class FinalFeedbackSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI summaryText;    // Ej: "Decisiones relevantes: 4 / 9" o "Aciertos: 4"
     [SerializeField] private TextMeshProUGUI resultText;     // "Enhorabuena" o "Sigue intentando"
     [SerializeField] private TextMeshProUGUI diagnosisText;  // Ej: "Diagnóstico seleccionado: incorrecto"
+
+    [Header("Puntaje y rango")]
+    [Tooltip("Si está activado, un diagnóstico incorrecto da rango F sin importar el puntaje.")]
+    [SerializeField] private bool requireCorrectDiagnosis = true;
+    [Tooltip("Puntaje mínimo (0 a 100) para cada rango. Se evalúan de mayor a menor.")]
+    [SerializeField] private int minScoreA = 90;
+    [SerializeField] private int minScoreB = 75;
+    [SerializeField] private int minScoreC = 60;
+    [SerializeField] private int minScoreD = 45;
+    [SerializeField] private TextMeshProUGUI scoreText;      // Ej: "Puntaje: 75 / 100"
+    [SerializeField] private TextMeshProUGUI gradeText;      // Ej: "Rango: B"
 
     private void Awake()
     {
@@ -44,7 +56,7 @@ public class FinalFeedbackSystem : MonoBehaviour
         AttemptRecord attempt = caseRecord?.LastAttempt;
 
         List<DecisionRecord> interrogation = new List<DecisionRecord>();
-        List<DecisionRecord> examination = new List<DecisionRecord>();
+        List<DecisionRecord> examination = new List<DecisionRecord>();   // incluye exámenes normales y extra
         HashSet<string> seen = new HashSet<string>();
 
         if (attempt != null)
@@ -63,7 +75,7 @@ public class FinalFeedbackSystem : MonoBehaviour
         interrogationText.text = BuildText(interrogation);
         examinationText.text = BuildText(examination);
 
-        // Solo cuentan las decisiones que puntúan
+        // Puntúan interrogatorio, exámenes normales y exámenes extra.
         List<DecisionRecord> scored = interrogation.Concat(examination)
             .Where(r => IsScored(r.decision))
             .ToList();
@@ -73,6 +85,10 @@ public class FinalFeedbackSystem : MonoBehaviour
 
         bool reachedThreshold = relevant >= relevantThreshold;
         bool success = reachedThreshold && diagnosisCorrect;
+
+        // Puntaje: porcentaje de decisiones relevantes entre las que puntúan
+        int score = total > 0 ? Mathf.RoundToInt(100f * relevant / total) : 0;
+        string grade = CalculateGrade(score, diagnosisCorrect);
 
         string relevantNumber = success
             ? "<color=#2ECC71>" + relevant + "</color>"
@@ -84,6 +100,12 @@ public class FinalFeedbackSystem : MonoBehaviour
                 ? "Decisiones relevantes: " + relevantNumber + " / " + total
                 : "Aciertos: " + relevantNumber;
         }
+
+        if (scoreText != null)
+            scoreText.text = "Puntaje: " + score + " / 100";
+
+        if (gradeText != null)
+            gradeText.text = "Rango: " + grade;
 
         if (resultText != null)
             resultText.text = success ? "Enhorabuena" : "Sigue intentando";
@@ -98,6 +120,17 @@ public class FinalFeedbackSystem : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(contentRect);
         scrollRect.verticalNormalizedPosition = 1f;
+    }
+
+    // Convierte el puntaje en rango. El diagnóstico incorrecto puede forzar F.
+    private string CalculateGrade(int score, bool diagnosisCorrect)
+    {
+        if (requireCorrectDiagnosis && !diagnosisCorrect) return "F";
+        if (score >= minScoreA) return "A";
+        if (score >= minScoreB) return "B";
+        if (score >= minScoreC) return "C";
+        if (score >= minScoreD) return "D";
+        return "F";
     }
 
     private bool IsScored(string decision)
@@ -118,7 +151,6 @@ public class FinalFeedbackSystem : MonoBehaviour
         StringBuilder sb = new StringBuilder();
         foreach (DecisionRecord record in records)
         {
-            // Sin relevancia, o decisión sin puntaje: solo el nombre
             if (!showRelevance || !IsScored(record.decision))
             {
                 sb.AppendLine(record.decision);
@@ -139,5 +171,6 @@ public class FinalFeedbackSystem : MonoBehaviour
         feedbackPanel.SetActive(false);
         IsShowing = false;
     }
+
     public static void ResetState() => IsShowing = false;
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   sexo: Hombre
   ocupacion: "mec\xE1nico (cl\xE1sico) automotriz "
   lugarProcedencia: Floridablanca
-  retratoPaciente: {fileID: -398683985530898636, guid: d55a04b7e085eaf4eaa8c681142b925b, type: 3}
+  retratoPaciente: {fileID: 21300000, guid: 733d108c9a12261479e20380c238f8dc, type: 3}
   motivoConsulta: Siento rara la cara.
   enfermedadActual: _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
   questions:
