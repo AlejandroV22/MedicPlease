@@ -344,7 +344,11 @@ MonoBehaviour:
   m_HandleRect: {fileID: 295417440}
   m_Direction: 3
   m_Value: 1
+<<<<<<< HEAD
   m_Size: 0.76105183
+=======
+  m_Size: 0.7610518
+>>>>>>> 96b1cd1281f70855afeaee6badc4f4f793fe3410
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10681,6 +10685,7 @@ MonoBehaviour:
   relevantDiagnosis: 
   totalRelevant: 0
   totalRelevantBeforeExtraExams: 0
+  isDiagnosisCorrect: 0
 --- !u!4 &1919622049
 Transform:
   m_ObjectHideFlags: 0

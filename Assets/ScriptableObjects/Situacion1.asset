@@ -111,7 +111,7 @@ MonoBehaviour:
   - "Resonancia magn\xE9tica de columna vertebral"
   extraExamsNecessaryForDiagnosis: 010000
   wrongExtraExams:
-  - Cuadro Hematico
+  - "Cuadro Hem\xE1tico"
   - "Tomograf\xEDa de cr\xE1neo simple"
   - "Gammagraf\xEDa de perfusi\xF3n pulmonar"
   feedback: Hola soy la realimentacion
