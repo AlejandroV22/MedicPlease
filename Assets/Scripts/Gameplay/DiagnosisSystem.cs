@@ -145,32 +145,31 @@ public class DiagnosisSystem : MonoBehaviour
             attempt.decisions.Where(d => d.isRelevant).Select(d => d.decision));
     }
 
-    public void SelectDiagnosis()
-    {
-        Start();
-        GetRelevantDecisions();
-        rawChoices = "{choice}{choicest2 c:";
-        if (relevantDecisionMade.Count() == totalRelevantBeforeExtraExams + 1)
-        {
-            foreach (string diagnosis in diagnosisWithCorrect)
-            {
-                rawChoices = @rawChoices + "\"" + diagnosis + "\"" + " ";
-            }
-            rawChoices = rawChoices + "} ";
-            Debug.Log(rawChoices);
-            choiceBox.SetActive(true);
-            choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-        }
-        else
-        {
-            foreach (string diagnosis in diagnosisWithoutCorrect)
-            {
-                rawChoices = @rawChoices + "\"" + diagnosis + "\"" + " ";
-            }
-            rawChoices = rawChoices + "} ";
-            Debug.Log(rawChoices);
-            choiceBox.SetActive(true);
-            choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-        }
-    }
+    /// <summary>True si en el intento activo el jugador ya eligió el examen extra necesario para el diagnóstico.</summary>
+public bool DidNecessaryExtraExam()
+{
+    EnsureCase();
+    AttemptRecord attempt = gameDataController.CurrentAttempt;
+    if (attempt == null) return false;
+
+    return attempt.decisions.Any(d =>
+        clinicalCase.IsExamRelevant(ExamCategory.Extra, d.decision));
+}
+
+public void SelectDiagnosis()
+{
+    Start();
+    GetRelevantDecisions();   // también llama a OptainDiagnosis() para llenar las listas
+
+    List<string> source = DidNecessaryExtraExam() ? diagnosisWithCorrect : diagnosisWithoutCorrect;
+
+    rawChoices = "{choice}{choicest2 c:";
+    foreach (string diagnosis in source)
+        rawChoices += "\"" + diagnosis + "\" ";
+    rawChoices += "} ";
+
+    Debug.Log(rawChoices);
+    choiceBox.SetActive(true);
+    choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
+}
 }
