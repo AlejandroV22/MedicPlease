@@ -21,7 +21,7 @@ public class DialogSystem : MonoBehaviour
     private string isWritingPhrase;
     public ClinicalCase clinicalCase;
     private string[] textVariables;
-    public int correctAnswer = 0;
+    public int correctAnswer = 0; // ya no se usa para la logica de diagnostico, esta solo porque si no se rompe choice system
     public GameObject choiceBox;
     public GameObject interrogationButton;
     public string rawChoices;
@@ -45,6 +45,7 @@ public class DialogSystem : MonoBehaviour
     {
         Debug.Assert(actionMenu != null, "actionMenu no asignado en DialogSystem", this);
         Debug.Assert(extraMenu != null, "extraMenu no asignado en DialogSystem", this);
+        FinalFeedbackSystem.ResetState();
         GetVariables();
         saveFileController.StartAttempt(clinicalCase.name);
         texto.GetTextToFile(clinicalCase.scriptPath);
@@ -201,7 +202,7 @@ public class DialogSystem : MonoBehaviour
                     object value = field.GetValue(clinicalCase);
                     actualPhrase = actualPhrase.Replace("{" + variable + "}", value?.ToString() ?? "");
                     //TODO feedback pero ahora si feedback
-                    if (variable == "feedback")
+                    /*if (variable == "feedback")
                     {
                         if (correctAnswer == 2)
                         {
@@ -211,7 +212,7 @@ public class DialogSystem : MonoBehaviour
                         {
                             actualPhrase = "El paciente murio";
                         }
-                    }
+                    }*/
                 }
             }
         }
@@ -250,15 +251,29 @@ public class DialogSystem : MonoBehaviour
 
             if (mLine != null)
             {
-                // Si el último paso fue un examen, ExamLoop lo registra y reabre su menú
-                inspectionButton.GetComponent<ExamSystem>().ExamLoop();
-                extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
+                // Si el último paso fue un examen, ExamLoop lo registra y reabre su menú.
+                // Devuelven true si ese era el último examen permitido.
+                bool examsOver = inspectionButton.GetComponent<ExamSystem>().ExamLoop();
+                bool extraOver = extraExamButton.GetComponent<ExamSystem>().ExtraExamLoop();
 
                 // Saltar ANTES del interrogatorio: InterrogationLoop puede encolar frases al frente
                 SkipPhrase(skip);
                 interrogationButton.GetComponent<InterrogationSystem>().InterrogationLoop();
 
-                actualPhrase = mLine.Replace("{m}", "");
+                if (examsOver || extraOver)
+                {
+                    // Se descarta el "¿Qué debería hacer?" y se pasa directo a la siguiente línea del guion
+                    actionMenu.Close();
+                    extraMenu.Close();
+                    actualPhrase = "{Ndname}" + (examsOver
+                        ? "(No puedo realizarle mas examenes al paciente)"
+                        : "(creo que ya tengo todo lo que necesito)");
+                    PushFront("{nLine}");
+                }
+                else
+                {
+                    actualPhrase = mLine.Replace("{m}", "");
+                }
             }
         }
         //chapuza historica
@@ -289,7 +304,7 @@ public class DialogSystem : MonoBehaviour
             saveFileController.GetComponent<SaveUploader>().Upload();
             queueDialogs.Clear();
             actualPhrase = "";
-            finalFeedback.ShowFinalPanel(correctAnswer == 2);
+            finalFeedback.ShowFinalPanel(diagnosisController.GetComponent<DiagnosisSystem>().isDiagnosisCorrect);
         }
         if(actualPhrase.Contains("{diag}")){
             choiceBox.transform.GetChild(1).gameObject.SetActive(false);
@@ -393,6 +408,14 @@ if (actualPhrase.Contains("{ch:"))
     {
         texto.ChangeLine(clinicalCase.scriptPath);
         ShowText();
+    }
+    // Pone una frase al inicio de la cola SIN llamar a NextPhrase (a diferencia de AddPhrase)
+    private void PushFront(string phrase)
+    {
+        var q = new Queue<string>();
+        q.Enqueue(phrase);
+        foreach (string p in queueDialogs) q.Enqueue(p);
+        queueDialogs = q;
     }
     // TODO que el texto pueda salir a diferentes velocidades
 }

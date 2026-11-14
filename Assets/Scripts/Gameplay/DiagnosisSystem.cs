@@ -21,6 +21,7 @@ public class DiagnosisSystem : MonoBehaviour
     public int totalRelevant = 0;
     public int totalRelevantBeforeExtraExams = 0;
     private string rawChoices;
+    public bool isDiagnosisCorrect = false;
     private List<string> diagnosisWithCorrect = new List<string>();
     private List<string> diagnosisWithoutCorrect = new List<string>();
 
@@ -73,6 +74,11 @@ public class DiagnosisSystem : MonoBehaviour
         if (IsDiagnosisOption(decision))
         {
             gameDataController.FinishAttempt(decision == clinicalCase.correctDiagnosis);
+            if(decision == clinicalCase.correctDiagnosis){
+                isDiagnosisCorrect = true;
+            }else{
+                isDiagnosisCorrect = false;
+            }
         }
     }
 

@@ -99,22 +99,31 @@ public class ExamSystem : MonoBehaviour
     // ---------- Llamadas desde DialogSystem en {main} ----------
 
 
-    public void ExamLoop()
+    // Devuelven true cuando el examen que se acaba de registrar era el ultimo permitido.
+    // En ese caso NO reabren el menu: DialogSystem salta directo a la siguiente linea.
+
+    public bool ExamLoop()
     {
         var mgr = ExamManager.Instance;
-        if (!mgr.ExamTime) return;
+        if (!mgr.ExamTime) return false;        // la respuesta no era de un examen (interrogatorio, etc.)
 
         mgr.RegisterTry();
+        if (!mgr.CanStartExam()) return true;   // era el ultimo examen permitido
+
         examinationMenu.Open();
+        return false;
     }
 
-    public void ExtraExamLoop()
+    public bool ExtraExamLoop()
     {
         var mgr = ExamManager.Instance;
-        if (!mgr.extraExamTime) return;
+        if (!mgr.extraExamTime) return false;
 
-        mgr.RegisterExtraTry();
+        mgr.RegisterExtraTry();                 // ya apaga extraExamTime
+        if (!mgr.CanStartExtraExam()) return true;
+
         extraMenu.Open();
+        return false;
     }
 
     // ---------- Auxiliares ----------
