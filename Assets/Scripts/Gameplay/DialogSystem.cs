@@ -160,7 +160,7 @@ public class DialogSystem : MonoBehaviour
         while (gameObject.GetComponent<Button>().interactable)
         {
             string baseText = screenText.text;
-            string spriteName = "<sprite=0>";
+            string spriteName = " <sprite=0>";
             screenText.text += spriteName;
             yield return new WaitForSeconds(0.5f);
             screenText.text = baseText;
