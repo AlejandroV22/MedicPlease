@@ -344,7 +344,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 295417440}
   m_Direction: 3
   m_Value: 1
-  m_Size: 0.7610518
+  m_Size: 0.67377895
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -422,10 +422,10 @@ RectTransform:
   - {fileID: 1304065217}
   m_Father: {fileID: 537508767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 93.27289, y: -35}
+  m_SizeDelta: {x: 118.54578, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129051942
 MonoBehaviour:
@@ -440,16 +440,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 1
   exams:
   - Observar el Rostro
   - "Observar el T\xF3rax"
   - Observar el Abdomen
   - Observar la Postura
   - Observar la Marcha
-  relevantExams: 0100000000
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 0}
-  actionMenu: {fileID: 1665938181}
 --- !u!114 &129051943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,10 +1291,10 @@ RectTransform:
   - {fileID: 724127073}
   m_Father: {fileID: 537508767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 93.27289, y: -135}
+  m_SizeDelta: {x: 118.54578, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &306905413
 MonoBehaviour:
@@ -1426,13 +1427,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 2
   exams:
   - "Auscultar coraz\xF3n"
   - Auscultar pulmones
-  relevantExams: 0000
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 0}
-  actionMenu: {fileID: 1665938181}
 --- !u!1 &325367723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,9 +1470,9 @@ RectTransform:
   m_Father: {fileID: 979670060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: -20.38, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &325367725
 MonoBehaviour:
@@ -1515,7 +1517,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1817588466}
   m_HandleRect: {fileID: 1817588465}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1738,7 +1740,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 197211313}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.19994001
+  m_Size: 0.19994003
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2110,7 +2112,7 @@ GameObject:
   - component: {fileID: 386338098}
   - component: {fileID: 386338097}
   m_Layer: 5
-  m_Name: EExamButton
+  m_Name: ExtraExamButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2149,16 +2151,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 7
   exams:
   - "RM cerebral con difusi\xF3n"
   - Angio-TC de cabeza y cuello
   - ECG
   - "Punci\xF3n lumbar"
   - EEG
-  relevantExams: 
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 1919622047}
-  actionMenu: {fileID: 1429336728}
 --- !u!114 &386338098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2792,6 +2795,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494673767}
   m_CullTransparentMesh: 1
+--- !u!1 &503892213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5900998477358589107, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+  m_PrefabInstance: {fileID: 451066411}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &518420799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,10 +2958,9 @@ GameObject:
   - component: {fileID: 537508767}
   - component: {fileID: 537508771}
   - component: {fileID: 537508770}
-  - component: {fileID: 537508769}
   - component: {fileID: 537508768}
   m_Layer: 5
-  m_Name: ExaminationImage
+  m_Name: ExaminationPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2978,10 +2985,10 @@ RectTransform:
   - {fileID: 90427862}
   m_Father: {fileID: 1191500784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 108.27289, y: -120}
+  m_SizeDelta: {x: 182.54578, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &537508768
 MonoBehaviour:
@@ -3009,22 +3016,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &537508769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537508766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd0bc837a6b13d54822002b22c80984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChoiceSystem
-  buttonContainer: {fileID: 0}
-  optionButtonPrefab: {fileID: 0}
-  choices: []
-  rawChoices: 
 --- !u!114 &537508770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3182,13 +3173,14 @@ GameObject:
   - component: {fileID: 546786147}
   - component: {fileID: 546786149}
   - component: {fileID: 546786148}
+  - component: {fileID: 546786150}
   m_Layer: 5
   m_Name: NeurologicMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &546786147
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3198,15 +3190,15 @@ RectTransform:
   m_GameObject: {fileID: 546786146}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1226846215}
-  m_Father: {fileID: 1592640731}
+  m_Father: {fileID: 1418570438}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 133, y: 114}
+  m_AnchoredPosition: {x: 3, y: 22.000015}
   m_SizeDelta: {x: 199.54578, y: 249.59999}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &546786148
@@ -3249,6 +3241,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &546786150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546786146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e8e43ade8e1048ac389e0c2e16191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!1 &554731757
 GameObject:
   m_ObjectHideFlags: 0
@@ -3421,7 +3425,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1329691527}
-  - {fileID: 1656998241}
   - {fileID: 1574189098}
   m_Father: {fileID: 1592640731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3514,14 +3517,15 @@ MonoBehaviour:
   listeningButton: {fileID: 306905410}
   touchingButton: {fileID: 739864174}
   extraExamButton: {fileID: 386338095}
-  actionMenu: {fileID: 1665938181}
+  actionMenu: {fileID: 1665938185}
   bgController: {fileID: 716670067}
   audioController: {fileID: 992738930}
-  texSpeed: 0.035
+  textSpeed: 0.05
   clinicalHistoryButton: {fileID: 1970883121}
-  extraMenu: {fileID: 1429336728}
+  extraMenu: {fileID: 1429336732}
   diagnosisController: {fileID: 1919622047}
   finalFeedback: {fileID: 1824651430}
+  charaImage: {fileID: 1656998240}
 --- !u!114 &579118551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3638,6 +3642,8 @@ RectTransform:
   - {fileID: 494673768}
   - {fileID: 1553110412}
   - {fileID: 1256441004}
+  - {fileID: 1768575385}
+  - {fileID: 1143988087}
   - {fileID: 1974724779}
   - {fileID: 31516875}
   - {fileID: 1678673708}
@@ -3723,10 +3729,10 @@ RectTransform:
   - {fileID: 356114140}
   m_Father: {fileID: 1226846215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 45}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 93.27289, y: -124.8}
+  m_SizeDelta: {x: 118.54578, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &666488046
 MonoBehaviour:
@@ -3741,6 +3747,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 5
   exams:
   - Olfatorio
   - "\xD3ptico"
@@ -3754,10 +3765,6 @@ MonoBehaviour:
   - Vago
   - Accesorio
   - Hipogloso
-  relevantExams: 000000000100000000000001
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 0}
-  actionMenu: {fileID: 1665938181}
 --- !u!114 &666488047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4381,10 +4388,10 @@ RectTransform:
   - {fileID: 705798598}
   m_Father: {fileID: 537508767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 93.27289, y: -85}
+  m_SizeDelta: {x: 118.54578, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &739864177
 MonoBehaviour:
@@ -4517,16 +4524,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 3
   exams:
   - "Palpar t\xF3rax"
   - Palpar abdomen
   - Palpar cuello
   - Palpar miembro superior
   - Palpar miembro inferior
-  relevantExams: 0000000000
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 0}
-  actionMenu: {fileID: 1665938181}
 --- !u!1 &740102468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4720,7 +4728,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.00005601028}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &755733342
 MonoBehaviour:
@@ -4780,7 +4788,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &769830927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4795,8 +4803,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceSystem
   buttonContainer: {fileID: 755733341}
   optionButtonPrefab: {fileID: 1967135811351940474, guid: 6b5453ec9ddb24441bd8e63c435aa5fb, type: 3}
+  cancelButton: {fileID: 503892213}
+  dialogBox: {fileID: 579118547}
+  currentCategory: 0
+  cancelable: 0
   choices: []
-  rawChoices: 
 --- !u!114 &769830928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5498,7 +5509,7 @@ GameObject:
   - component: {fileID: 929381681}
   - component: {fileID: 929381680}
   m_Layer: 5
-  m_Name: ActionImage
+  m_Name: ActionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6052,7 +6063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff4fee356ce25b45939d77ebe7ebf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioSystem
-  charSound: {fileID: 8300000, guid: 619dcf767993f914591c9bf149c28feb, type: 3}
+  charSound: {fileID: 8300000, guid: ab661e3355d455243a8cba7bc4277345, type: 3}
+  IsPitchable: 0
 --- !u!4 &992738933
 Transform:
   m_ObjectHideFlags: 0
@@ -6239,7 +6251,7 @@ RectTransform:
   m_Father: {fileID: 871499590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6281,6 +6293,143 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122229462}
   m_CullTransparentMesh: 1
+--- !u!1 &1143988086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1143988087}
+  - component: {fileID: 1143988089}
+  - component: {fileID: 1143988088}
+  m_Layer: 5
+  m_Name: gradeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1143988087
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143988086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 603063826}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1143988088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143988086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Decisiones relevantes: 2 / 9'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 32
+  m_fontSizeBase: 32
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 8
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1143988089
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143988086}
+  m_CullTransparentMesh: 1
 --- !u!1 &1191500783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6292,13 +6441,14 @@ GameObject:
   - component: {fileID: 1191500784}
   - component: {fileID: 1191500786}
   - component: {fileID: 1191500785}
+  - component: {fileID: 1191500787}
   m_Layer: 5
   m_Name: ExaminationMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1191500784
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6308,16 +6458,16 @@ RectTransform:
   m_GameObject: {fileID: 1191500783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 537508767}
-  m_Father: {fileID: 1592640731}
+  m_Father: {fileID: 1473279395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 79, y: 157}
-  m_SizeDelta: {x: 199.54578, y: 0}
+  m_AnchoredPosition: {x: 31.000015, y: 29.19999}
+  m_SizeDelta: {x: 199.54578, y: 240}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1191500785
 MonoBehaviour:
@@ -6359,6 +6509,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1191500787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191500783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e8e43ade8e1048ac389e0c2e16191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!1 &1226846214
 GameObject:
   m_ObjectHideFlags: 0
@@ -6370,10 +6532,9 @@ GameObject:
   - component: {fileID: 1226846215}
   - component: {fileID: 1226846219}
   - component: {fileID: 1226846218}
-  - component: {fileID: 1226846217}
   - component: {fileID: 1226846216}
   m_Layer: 5
-  m_Name: NeurologicImage
+  m_Name: NeurologicPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6397,10 +6558,10 @@ RectTransform:
   - {fileID: 1281988479}
   m_Father: {fileID: 546786147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 108.27289, y: -124.799995}
+  m_SizeDelta: {x: 182.54578, y: 249.59999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1226846216
 MonoBehaviour:
@@ -6428,22 +6589,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1226846217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1226846214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd0bc837a6b13d54822002b22c80984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChoiceSystem
-  buttonContainer: {fileID: 0}
-  optionButtonPrefab: {fileID: 0}
-  choices: []
-  rawChoices: 
 --- !u!114 &1226846218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6800,6 +6945,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1226846215}
     m_Modifications:
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 546786150}
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Panel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538664134810866736, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5900998477358589107, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
       propertyPath: m_Name
       value: CerrarBoton
@@ -7174,9 +7335,9 @@ RectTransform:
   m_Father: {fileID: 979670060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 20, y: -30.17}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1324226542
 MonoBehaviour:
@@ -8027,12 +8188,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2110860541}
+  - {fileID: 546786147}
   m_Father: {fileID: 537508767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 30}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 93.27289, y: -185}
+  m_SizeDelta: {x: 118.54578, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1418570439
 MonoBehaviour:
@@ -8041,15 +8203,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418570437}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64a89a144a622b7408b113e6b0a06e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
-  actionMenu: {fileID: 1665938181}
   ClinicalCaseButton: {fileID: 0}
+  actionMenu: {fileID: 1665938185}
 --- !u!114 &1418570440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8094,34 +8256,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 537508766}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 546786146}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1226846214}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 546786150}
+        m_TargetAssemblyTypeName: Panel, Assembly-CSharp
+        m_MethodName: Open
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8179,6 +8317,7 @@ GameObject:
   - component: {fileID: 1429336729}
   - component: {fileID: 1429336731}
   - component: {fileID: 1429336730}
+  - component: {fileID: 1429336732}
   m_Layer: 5
   m_Name: ExtraMenu
   m_TagString: Untagged
@@ -8246,6 +8385,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1429336732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429336728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e8e43ade8e1048ac389e0c2e16191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!1 &1449831804
 GameObject:
   m_ObjectHideFlags: 0
@@ -8396,7 +8547,7 @@ GameObject:
   - component: {fileID: 1469674351}
   - component: {fileID: 1469674350}
   m_Layer: 5
-  m_Name: ExtraImage
+  m_Name: ExtraPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8499,7 +8650,7 @@ GameObject:
   - component: {fileID: 1473279397}
   - component: {fileID: 1473279396}
   m_Layer: 5
-  m_Name: AExamButton
+  m_Name: ExaminarButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8518,6 +8669,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1501998012}
+  - {fileID: 1191500784}
   m_Father: {fileID: 929381679}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -8833,7 +8985,7 @@ GameObject:
   - component: {fileID: 1540525727}
   - component: {fileID: 1540525726}
   m_Layer: 5
-  m_Name: AChoiceButton
+  m_Name: InterrogarButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8873,8 +9025,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InterrogationSystem
   dialogBox: {fileID: 579118547}
   choiceBox: {fileID: 769830926}
-  actionMenu: {fileID: 1665938181}
   ClinicalCaseButton: {fileID: 1970883121}
+  actionMenu: {fileID: 1665938185}
 --- !u!114 &1540525727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9152,14 +9304,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamManager
   maxExamTries: 5
+  maxExtraExamTries: 1
   examinationTries: 0
-  examMenu: {fileID: 1191500783}
+  extraExaminationTries: 0
+  extraExamTime: 0
+  actionMenu: {fileID: 1665938185}
+  examinationMenu: {fileID: 1191500787}
   interrogationSystem: {fileID: 1540525724}
   dialogSystem: {fileID: 579118547}
-  actionMenu: {fileID: 1665938181}
-  maxExtraExamTries: 0
-  extraExamTime: 0
-  extraExaminationTries: 0
 --- !u!4 &1557059214
 Transform:
   m_ObjectHideFlags: 0
@@ -9527,7 +9679,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -9603,13 +9755,12 @@ RectTransform:
   m_Children:
   - {fileID: 1064008782}
   - {fileID: 518420804}
+  - {fileID: 1656998241}
   - {fileID: 579118548}
   - {fileID: 1970883122}
   - {fileID: 769830930}
   - {fileID: 1665938182}
   - {fileID: 1429336729}
-  - {fileID: 1191500784}
-  - {fileID: 546786147}
   m_Father: {fileID: 1625670206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9651,8 +9802,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2029118705}
   - {fileID: 1592640731}
+  - {fileID: 2029118705}
   - {fileID: 1824651427}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9797,17 +9948,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656998240}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 579118548}
+  m_Father: {fileID: 1592640731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14, y: 285}
-  m_SizeDelta: {x: 239.3331, y: 265.2092}
+  m_AnchoredPosition: {x: -14, y: 76.89336}
+  m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1656998242
 MonoBehaviour:
@@ -9858,6 +10009,7 @@ GameObject:
   - component: {fileID: 1665938182}
   - component: {fileID: 1665938184}
   - component: {fileID: 1665938183}
+  - component: {fileID: 1665938185}
   m_Layer: 5
   m_Name: ActionMenu
   m_TagString: Untagged
@@ -9925,6 +10077,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1665938185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665938181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4e8e43ade8e1048ac389e0c2e16191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Panel
 --- !u!1 &1678673707
 GameObject:
   m_ObjectHideFlags: 0
@@ -9989,6 +10153,143 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1768575384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1768575385}
+  - component: {fileID: 1768575387}
+  - component: {fileID: 1768575386}
+  m_Layer: 5
+  m_Name: scoreText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1768575385
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768575384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 603063826}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1768575386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768575384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Decisiones relevantes: 2 / 9'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 32
+  m_fontSizeBase: 32
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 8
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1768575387
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768575384}
+  m_CullTransparentMesh: 1
 --- !u!1 &1799269664
 GameObject:
   m_ObjectHideFlags: 0
@@ -10159,7 +10460,7 @@ RectTransform:
   m_Father: {fileID: 806307521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10294,14 +10595,21 @@ MonoBehaviour:
   interrogationText: {fileID: 494673769}
   examinationText: {fileID: 1553110413}
   gameDataController: {fileID: 1503416845}
-  scrollRect: {fileID: 0}
-  contentRect: {fileID: 0}
+  scrollRect: {fileID: 1320824075}
+  contentRect: {fileID: 603063826}
   relevantThreshold: 6
   unscoredDecisions: []
-  showRelevance: 0
+  showRelevance: 1
   summaryText: {fileID: 1256441005}
   resultText: {fileID: 1974724780}
   diagnosisText: {fileID: 31516876}
+  requireCorrectDiagnosis: 1
+  minScoreA: 90
+  minScoreB: 75
+  minScoreC: 60
+  minScoreD: 45
+  scoreText: {fileID: 1768575386}
+  gradeText: {fileID: 1143988088}
 --- !u!1 &1888636305
 GameObject:
   m_ObjectHideFlags: 0
@@ -10401,9 +10709,9 @@ RectTransform:
   m_Father: {fileID: 979670060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -20.38, y: -30.17}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1889002945
 MonoBehaviour:
@@ -10646,6 +10954,7 @@ MonoBehaviour:
   relevantDiagnosis: 
   totalRelevant: 0
   totalRelevantBeforeExtraExams: 0
+  isDiagnosisCorrect: 0
 --- !u!4 &1919622049
 Transform:
   m_ObjectHideFlags: 0
@@ -10696,10 +11005,10 @@ RectTransform:
   - {fileID: 483568774}
   m_Father: {fileID: 1226846215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 45}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 93.27289, y: -207.1}
+  m_SizeDelta: {x: 118.54578, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1937649411
 MonoBehaviour:
@@ -10714,13 +11023,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 6
   exams:
   - Columna dorsal
   - Dolor y temperatura
-  relevantExams: 0001
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 0}
-  actionMenu: {fileID: 1665938181}
 --- !u!114 &1937649412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11119,10 +11429,10 @@ RectTransform:
   - {fileID: 1799269665}
   m_Father: {fileID: 1226846215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 45}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 93.27289, y: -42.5}
+  m_SizeDelta: {x: 118.54578, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1969399736
 MonoBehaviour:
@@ -11137,6 +11447,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamSystem
   choiceBox: {fileID: 769830926}
+  dialogSystem: {fileID: 579118547}
+  diagnosisController: {fileID: 1919622047}
+  examinationMenu: {fileID: 1191500787}
+  extraMenu: {fileID: 1429336732}
+  category: 4
   exams:
   - "Orientaci\xF3n"
   - Habla
@@ -11144,10 +11459,6 @@ MonoBehaviour:
   - Juicio
   - Pensamiento abstracto
   - "C\xE1lculo"
-  relevantExams: 000000000000
-  dialogSystem: {fileID: 579118547}
-  diagnosisController: {fileID: 0}
-  actionMenu: {fileID: 1665938181}
 --- !u!114 &1969399737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12637,6 +12948,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 537508767}
     m_Modifications:
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1191500787}
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 532056561943251920, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Panel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538664134810866736, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5900998477358589107, guid: 43181f62b2556f148b1c3430cd4b4e6f, type: 3}
       propertyPath: m_Name
       value: CerrarBoton

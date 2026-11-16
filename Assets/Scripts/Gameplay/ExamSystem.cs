@@ -63,7 +63,7 @@ public class ExamSystem : MonoBehaviour
         var dialog = dialogSystem.GetComponent<DialogSystem>();
         if (!ExamManager.Instance.CanStartExtraExam())
         {
-            dialog.AddPhrase("(creo que ya tengo todo lo que necesito)");
+            dialog.AddPhrase("{ch: \"default\" 0}(creo que ya tengo todo lo que necesito)");
             dialog.AddPhrase("{nLine}");
             return;
         }
