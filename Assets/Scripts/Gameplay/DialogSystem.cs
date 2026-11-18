@@ -333,7 +333,7 @@ if (actualPhrase.Contains("{ch:"))
     var matchVisibility = regexVisibility.Match(actualPhrase);
 
     string chValue = String.Empty;
-    bool chVisibility = true;
+    bool chVisibility = false;
 
     if (match.Success)
     {

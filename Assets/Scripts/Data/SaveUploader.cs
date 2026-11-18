@@ -14,8 +14,8 @@ public class SaveUploader : MonoBehaviour
     public static SaveUploader Instance { get; private set; }
 
     [Header("Servidor")]
-    [Tooltip("URL completa del endpoint, p. ej. http://192.168.1.50/api/saves/")]
-    [SerializeField] private string endpointUrl = "http://localhost/api/saves/";
+    [Tooltip("URL completa del endpoint (Tailscale Funnel), debe terminar en /api/saves/")]
+    [SerializeField] private string endpointUrl = "https://medicplease.tail8caff4.ts.net/api/saves/";
 
     [Tooltip("Debe ser igual a GAME_API_KEY del archivo .env del servidor")]
     [SerializeField] private string apiKey = Environment.GetEnvironmentVariable("GAME_API_KEY");
@@ -47,6 +47,14 @@ public class SaveUploader : MonoBehaviour
         if (!File.Exists(SavePath))
         {
             onError?.Invoke("No existe el archivo de guardado: " + SavePath);
+            yield break;
+        }
+
+        if (string.IsNullOrWhiteSpace(apiKey))
+        {
+            string noKey = "[SaveUploader] Falta la API key: define la variable de entorno GAME_API_KEY en este equipo o escríbela en el Inspector.";
+            Debug.LogWarning(noKey);
+            onError?.Invoke(noKey);
             yield break;
         }
 
