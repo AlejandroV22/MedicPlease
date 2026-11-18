@@ -13,27 +13,77 @@ MonoBehaviour:
   m_Name: Tutorial
   m_EditorClassIdentifier: Assembly-CSharp::ClinicalCase
   nombrePaciente: Nikola Tesla
-  edad: 55
-  sexo: Masculino
-  ocupacion: Electricista
+  edad: 54
+  sexo: Hombre
+  ocupacion: 'Electricista '
   lugarProcedencia: "Gir\xF3n"
-  retratoPaciente: {fileID: 0}
-  motivoConsulta: 
-  enfermedadActual: 
-  questions: []
-  relevantQuestions: 
-  correctDiagnosis: 
-  correctTreatment: 
-  minimumCorrectExams: 0
-  wrongDiagnosis: []
-  inspectionRelevances: []
-  listeningRelevances: []
-  touchingRelevances: []
-  mentalRelevances: []
-  nervesRelevances: []
-  sensitivityRelevances: []
-  correctExtraExams: []
-  extraExamsNecessaryForDiagnosis: 
-  wrongExtraExams: []
-  feedback: 
-  scriptPath: {fileID: 0}
+  retratoPaciente: {fileID: 21300000, guid: 8f80492cb2c035b40bc2555cf5c12bf0, type: 3}
+  motivoConsulta: "Desde hace unos d\xEDas tengo un dolor de cabeza bastante fuerte,
+    doctor."
+  enfermedadActual: _____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+  questions:
+  - "\xBFHace cu\xE1nto comenz\xF3 el dolor?"
+  - "\xBFEn qu\xE9 parte de la cabeza siente el dolor?"
+  - "\xBFHa perdido la fuerza o la sensibilidad en alguna parte del cuerpo?"
+  - "\xBFHa notado cambios importantes en su peso?"
+  - "\xBFHa tenido fiebre o rigidez en el cuello?"
+  - "\xBFC\xF3mo describir\xEDa el dolor?"
+  relevantQuestions: 010100000001
+  correctDiagnosis: "Migra\xF1a sin aura"
+  correctTreatment: Este es el tratamiento correcto
+  minimumCorrectExams: 4
+  wrongDiagnosis:
+  - Cefalea tensional
+  - Cefalea en racimos
+  - Meningitis
+  inspectionRelevances:
+  - examName: Observar el rostro
+    isRelevant: 1
+  - examName: Observar los ojos
+    isRelevant: 0
+  - examName: Observar la postura
+    isRelevant: 0
+  listeningRelevances:
+  - examName: "Auscultar coraz\xF3n"
+    isRelevant: 0
+  - examName: Auscultar pulmones
+    isRelevant: 0
+  touchingRelevances:
+  - examName: Palpar abdomen
+    isRelevant: 0
+  - examName: Palpar cuello
+    isRelevant: 1
+  - examName: "Palpar regi\xF3n temporal"
+    isRelevant: 1
+  mentalRelevances:
+  - examName: "Orientaci\xF3n"
+    isRelevant: 1
+  - examName: Lenguaje
+    isRelevant: 1
+  - examName: Juicio
+    isRelevant: 0
+  nervesRelevances:
+  - examName: "\xD3ptico"
+    isRelevant: 1
+  - examName: Oculomotor
+    isRelevant: 1
+  - examName: "Trig\xE9mino"
+    isRelevant: 0
+  - examName: Facial
+    isRelevant: 0
+  sensitivityRelevances:
+  - examName: Sensibilidad superficial
+    isRelevant: 1
+  - examName: Dolor y temperatura
+    isRelevant: 0
+  correctExtraExams:
+  - "Medici\xF3n de signos vitales"
+  - Fondo de ojo
+  - "Tomograf\xEDa cerebral"
+  extraExamsNecessaryForDiagnosis: 010100
+  wrongExtraExams:
+  - "Cuadro Hem\xE1tico"
+  - "Tomograf\xEDa de cr\xE1neo simple"
+  - "Gammagraf\xEDa de perfusi\xF3n pulmonar"
+  feedback: Hola soy la realimentacion
+  scriptPath: {fileID: 4900000, guid: db72964a9f5e81142b3e584467605b50, type: 3}
