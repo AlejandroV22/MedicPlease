@@ -170,6 +170,7 @@ public void SelectDiagnosis()
 
     Debug.Log(rawChoices);
     choiceBox.SetActive(true);
+    
     choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
 }
 }
