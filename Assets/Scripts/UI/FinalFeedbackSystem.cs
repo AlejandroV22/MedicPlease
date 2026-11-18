@@ -10,6 +10,9 @@ public class FinalFeedbackSystem : MonoBehaviour
 {
     public static bool IsShowing { get; private set; }
 
+    private const string GreenHex = "#2ECC71";
+    private const string RedHex = "#E74C3C";
+
     [SerializeField] private GameObject feedbackPanel;
     [SerializeField] private TextMeshProUGUI interrogationText;
     [SerializeField] private TextMeshProUGUI examinationText;
@@ -23,6 +26,9 @@ public class FinalFeedbackSystem : MonoBehaviour
     [Tooltip("Nombres exactos de decisiones que NO puntúan (por ejemplo, el diagnóstico si se registra como decisión). " +
              "Los exámenes normales, los extra y las preguntas de interrogatorio sí puntúan y no deben estar aquí.")]
     [SerializeField] private List<string> unscoredDecisions = new List<string>();
+
+    [Tooltip("Total fijo de decisiones que puntúan. Si es 0, el total se calcula automáticamente.")]
+    [SerializeField] private int totalScoredOverride = 9;
 
     [Tooltip("Si está activado, muestra [Relevante]/[No relevante] en cada decisión y el total. Si está desactivado, solo muestra las decisiones y el número de aciertos.")]
     public bool showRelevance = true;
@@ -80,7 +86,7 @@ public class FinalFeedbackSystem : MonoBehaviour
             .Where(r => IsScored(r.decision))
             .ToList();
 
-        int total = scored.Count;
+        int total = totalScoredOverride > 0 ? totalScoredOverride : scored.Count;
         int relevant = scored.Count(r => r.isRelevant);
 
         bool reachedThreshold = relevant >= relevantThreshold;
@@ -90,9 +96,8 @@ public class FinalFeedbackSystem : MonoBehaviour
         int score = total > 0 ? Mathf.RoundToInt(100f * relevant / total) : 0;
         string grade = CalculateGrade(score, diagnosisCorrect);
 
-        string relevantNumber = success
-            ? "<color=#2ECC71>" + relevant + "</color>"
-            : relevant.ToString();
+        // Número de relevantes: verde si es un éxito, rojo si no
+        string relevantNumber = Colorize(relevant.ToString(), success);
 
         if (summaryText != null)
         {
@@ -105,13 +110,20 @@ public class FinalFeedbackSystem : MonoBehaviour
             scoreText.text = "Puntaje: " + score + " / 100";
 
         if (gradeText != null)
-            gradeText.text = "Rango: " + grade;
+        {
+            // Verde desde el rango B
+            bool gradeIsGood = grade == "A" || grade == "B";
+            gradeText.text = "Rango: " + Colorize(grade, gradeIsGood);
+        }
 
         if (resultText != null)
             resultText.text = success ? "Enhorabuena" : "Sigue intentando";
 
         if (diagnosisText != null)
-            diagnosisText.text = "Diagnóstico seleccionado: " + (diagnosisCorrect ? "correcto" : "incorrecto");
+        {
+            string diagnosisWord = Colorize(diagnosisCorrect ? "correcto" : "incorrecto", diagnosisCorrect);
+            diagnosisText.text = "Diagnóstico seleccionado: " + diagnosisWord;
+        }
 
         feedbackPanel.SetActive(true);
         feedbackPanel.transform.SetAsLastSibling();
@@ -120,6 +132,13 @@ public class FinalFeedbackSystem : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(contentRect);
         scrollRect.verticalNormalizedPosition = 1f;
+    }
+
+    // Envuelve el texto en verde o rojo según la condición
+    private string Colorize(string text, bool good)
+    {
+        string hex = good ? GreenHex : RedHex;
+        return "<color=" + hex + ">" + text + "</color>";
     }
 
     // Convierte el puntaje en rango. El diagnóstico incorrecto puede forzar F.
@@ -158,8 +177,8 @@ public class FinalFeedbackSystem : MonoBehaviour
             }
 
             string tag = record.isRelevant
-                ? "<color=#2ECC71>[Relevante]</color>"
-                : "<color=#E74C3C>[No relevante]</color>";
+                ? "<color=" + GreenHex + ">[Relevante]</color>"
+                : "<color=" + RedHex + ">[No relevante]</color>";
 
             sb.AppendLine(record.decision + " " + tag);
         }

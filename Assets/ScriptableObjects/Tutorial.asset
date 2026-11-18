@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b78f49bd330594faca30e030b9579c, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: Assembly-CSharp::ClinicalCase
+  nombrePaciente: Nikola Tesla
+  edad: 55
+  sexo: Masculino
+  ocupacion: Electricista
+  lugarProcedencia: "Gir\xF3n"
+  retratoPaciente: {fileID: 0}
+  motivoConsulta: 
+  enfermedadActual: 
+  questions: []
+  relevantQuestions: 
+  correctDiagnosis: 
+  correctTreatment: 
+  minimumCorrectExams: 0
+  wrongDiagnosis: []
+  inspectionRelevances: []
+  listeningRelevances: []
+  touchingRelevances: []
+  mentalRelevances: []
+  nervesRelevances: []
+  sensitivityRelevances: []
+  correctExtraExams: []
+  extraExamsNecessaryForDiagnosis: 
+  wrongExtraExams: []
+  feedback: 
+  scriptPath: {fileID: 0}

@@ -749,11 +749,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1586190658}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: 241}
-  m_SizeDelta: {x: 431.6965, y: 46.1384}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -124.15}
+  m_SizeDelta: {x: 431.6965, y: 46.138397}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &807652130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +774,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MedicPlease
+  m_text: Synapsis
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -808,8 +808,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -948,7 +948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4299699994867760995, guid: 1183e638a42b027209cf4f1e1e145b40, type: 3}
       propertyPath: m_text
-      value: Creditos
+      value: "Cr\xE9ditos"
       objectReference: {fileID: 0}
     - target: {fileID: 8176675964968922899, guid: 1183e638a42b027209cf4f1e1e145b40, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

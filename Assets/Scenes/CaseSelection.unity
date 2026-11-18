@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec329b956e79ce4b8f95bba802d4db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaseButton
-  clinicalCase: {fileID: 11400000, guid: 868daee1d58082d4c9badd69732bdfc8, type: 2}
+  clinicalCase: {fileID: 11400000, guid: ed0fd73e52d74e343ace703c083c79c7, type: 2}
   sceneToLoad: Consultorio
 --- !u!1 &380333985
 GameObject:
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec329b956e79ce4b8f95bba802d4db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaseButton
-  clinicalCase: {fileID: 11400000, guid: ed0fd73e52d74e343ace703c083c79c7, type: 2}
+  clinicalCase: {fileID: 0}
   sceneToLoad: Consultorio
 --- !u!114 &1358243813
 MonoBehaviour:
