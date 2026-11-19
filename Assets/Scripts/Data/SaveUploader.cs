@@ -14,8 +14,8 @@ public class SaveUploader : MonoBehaviour
     public static SaveUploader Instance { get; private set; }
 
     [Header("Servidor")]
-    [Tooltip("URL completa del endpoint (Tailscale Funnel), debe terminar en /api/saves/")]
-    [SerializeField] private string endpointUrl = "https://medicplease.tail8caff4.ts.net/api/saves/";
+    [Tooltip("URL completa del endpoint, debe terminar en /api/saves/")]
+    [SerializeField] private string endpointUrl = "https://medicpleasedashboard.onrender.com/";
 
     [Tooltip("Debe ser igual a GAME_API_KEY del archivo .env del servidor")]
     [SerializeField] private string apiKey = Environment.GetEnvironmentVariable("GAME_API_KEY");
@@ -23,7 +23,7 @@ public class SaveUploader : MonoBehaviour
     [Header("Archivo")]
     [SerializeField] private string fileName = "saveFile.json";
 
-    [SerializeField] private int timeoutSeconds = 10;
+    [SerializeField] private int timeoutSeconds = 90;
 
     private bool isUploading;
 

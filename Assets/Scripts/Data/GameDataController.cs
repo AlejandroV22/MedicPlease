@@ -72,6 +72,7 @@ public class GameDataController : MonoBehaviour
     public void DeleteData(){
         SetPlayerName(DefaultPlayerName);
         SetActualCase(DefaultCase);
+        data.caseHistory = new List<CaseRecord>();
         isSaveFileDefault = true;
     }
 

@@ -266,7 +266,7 @@ public class DialogSystem : MonoBehaviour
                     extraMenu.Close();
                     actualPhrase = "{Ndname}" + (examsOver
                         ? "(No puedo realizarle mas examenes al paciente)"
-                        : "(creo que ya tengo todo lo que necesito)");
+                        : "{ch: \"default\" 0}(creo que ya tengo todo lo que necesito)");
                     PushFront("{nLine}");
                 }
                 else
