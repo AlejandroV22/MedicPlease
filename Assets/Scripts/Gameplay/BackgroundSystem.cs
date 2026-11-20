@@ -34,16 +34,17 @@ public class BackgroundSystem : MonoBehaviour
     }
     public void ChangeCh(string chName, bool chVisibility = true)
     {
-        if(chVisibility == false)
+        charaImage.SetActive(chVisibility);
+
+        Image img = charaImage.GetComponent<Image>();
+        img.preserveAspect = true; // Mantiene la proporción del sprite dentro del recuadro
+
+        if (chName == "default")
         {
-            charaImage.SetActive(false);
-        }else if (chVisibility == true)
-        {
-            charaImage.SetActive(true);
+            img.sprite = defaultCh;
+            return;
         }
-    if(chName == "default"){
-       charaImage.GetComponent<Image>().sprite = defaultCh;
-    }else{
+
         var handle = Addressables.LoadAssetAsync<Texture2D>("Assets/Art/" + chName + ".png");
         ch = handle.WaitForCompletion();
 
@@ -52,9 +53,8 @@ public class BackgroundSystem : MonoBehaviour
             Debug.LogError($"No se cargó: {chName}");
             return;
         }
-        Sprite chSprite = ConvertTextureToSprite(ch);
-        charaImage.GetComponent<Image>().sprite = chSprite;
-    }
+
+        img.sprite = ConvertTextureToSprite(ch);
     }
     public Sprite ConvertTextureToSprite(Texture2D texture)
     {

@@ -12,6 +12,7 @@ public class ExamSystem : MonoBehaviour
     public Panel examinationMenu;
     [Tooltip("Solo en el ExamSystem del botón de examen extra")]
     public Panel extraMenu;
+    public string ultimoExamen;
 
     [Header("Opciones")]
     public ExamCategory category;

@@ -82,8 +82,8 @@ MonoBehaviour:
   - "Tomograf\xEDa cerebral"
   extraExamsNecessaryForDiagnosis: 010100
   wrongExtraExams:
-  - "Cuadro Hem\xE1tico"
-  - "Tomograf\xEDa de cr\xE1neo simple"
-  - "Gammagraf\xEDa de perfusi\xF3n pulmonar"
+  - "Resonancia magn\xE9tica cerebral"
+  - Electroencefalograma
+  - "Cuadro hem\xE1tico"
   feedback: Hola soy la realimentacion
   scriptPath: {fileID: 4900000, guid: db72964a9f5e81142b3e584467605b50, type: 3}
