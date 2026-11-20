@@ -178,10 +178,10 @@ public class ChoiceSystem : MonoBehaviour
     void FinishChoice()
     {
         DialogButton.interactable = true;
+        cancelable = false;                 // la siguiente elección decide su propio valor
         gameObject.SetActive(false);
         Dialog.NextPhrase();
     }
-
     // Botón Cerrar. Solo cancela exámenes: el menú queda abierto para volver a elegir.
     public void CancelChoice()
     {

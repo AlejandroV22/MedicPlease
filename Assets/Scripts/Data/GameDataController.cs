@@ -3,83 +3,145 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Controla el archivo de guardado. Es un singleton persistente:
+/// solo existe una instancia durante toda la sesión, aunque haya cambios de escena.
+/// </summary>
 public class GameDataController : MonoBehaviour
 {
+    public static GameDataController Instance { get; private set; }
+
     private const string SaveFileName = "saveFile.json";
     private const string DefaultPlayerName = "Esternocleidomastoideo";
     private const string DefaultCase = "Sivesestohubounerrorenenlosguardadossorry";
 
-    private string saveFile;
     private GameData data;
     private AttemptRecord currentAttempt;
+
+    private string SaveFilePath => Path.Combine(Application.persistentDataPath, SaveFileName);
 
     /// <summary>Datos actuales en memoria. Se cargan una sola vez.</summary>
     public GameData Data => LoadData();
 
     /// <summary>Intento activo (null si no hay ninguno en curso).</summary>
     public AttemptRecord CurrentAttempt => currentAttempt;
+
     public bool isSaveFileExist = false;
     public bool isSaveFileDefault = false;
+
     private void Awake()
     {
+        Debug.Log("GameDataController Awake id=" + GetEntityId() + " esInstancia=" + (Instance == this));
+        // Si ya existe una instancia persistente (por ejemplo, la del menú principal),
+        // esta copia se destruye para no tener datos duplicados.
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        Debug.Log("Archivo de guardado: " + SaveFilePath);
         LoadData();
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 
     // ───────────────────────── Carga / guardado ─────────────────────────
 
     /// <summary>
     /// Devuelve los datos en memoria. Solo lee el archivo la primera vez
-    /// (o si forceReload es true), para no perder las referencias al intento activo.
+    /// (o si forceReload es true).
     /// </summary>
     public GameData LoadData(bool forceReload = false)
     {
         if (data != null && !forceReload) return data;
 
-        saveFile = Path.Combine(Application.persistentDataPath, SaveFileName);
-
-        if (File.Exists(saveFile))
+        if (File.Exists(SaveFilePath))
         {
-            data = JsonUtility.FromJson<GameData>(File.ReadAllText(saveFile));
+            data = JsonUtility.FromJson<GameData>(File.ReadAllText(SaveFilePath));
+
+            // Archivo vacío o corrupto: se usa una partida nueva
+            if (data == null)
+                data = CreateDefaultData();
+
             isSaveFileExist = true;
-            GameData defaultData = new GameData
-            {
-                playerName = DefaultPlayerName,
-                actualCase = DefaultCase
-            };
-            if(data == defaultData){
-                isSaveFileDefault = true;
-            }else{
-                isSaveFileDefault = false;
-            }
-            
+            isSaveFileDefault = false;
+
             // Los guardados antiguos pueden no traer el historial
-            if (data.caseHistory == null) data.caseHistory = new List<CaseRecord>();
+            if (data.caseHistory == null)
+                data.caseHistory = new List<CaseRecord>();
         }
         else
         {
+            data = CreateDefaultData();
             isSaveFileExist = false;
-            data = new GameData
-            {
-                playerName = DefaultPlayerName,
-                actualCase = DefaultCase
-            };
             isSaveFileDefault = true;
         }
 
         currentAttempt = null;
         return data;
     }
-    public void DeleteData(){
-        SetPlayerName(DefaultPlayerName);
-        SetActualCase(DefaultCase);
-        data.caseHistory = new List<CaseRecord>();
+
+    /// <summary>Borra el progreso y crea una partida nueva desde cero.</summary>
+    public void NewGame()
+    {
+        if (File.Exists(SaveFilePath))
+        {
+            File.Delete(SaveFilePath);
+            Debug.Log("NewGame: archivo anterior eliminado.");
+        }
+
+        data = CreateDefaultData();
+        currentAttempt = null;
+        isSaveFileExist = false;
         isSaveFileDefault = true;
+
+        SaveData();
+        Debug.Log("NewGame ejecutado. Casos en memoria: " + data.caseHistory.Count);
+        Debug.Log("NewGame: partida nueva creada. Casos: " + data.caseHistory.Count);
+    }
+    /// <summary>Inicia una partida nueva. Se puede llamar desde OnClick sin referencias del Inspector.</summary>
+    public static void StartNewGame()
+        {
+            if (Instance == null)
+            {
+                Debug.LogError("StartNewGame: no hay GameDataController activo.");
+                return;
+            }
+
+            Instance.NewGame();
+        }
+
+    /// <summary>Se mantiene por compatibilidad. Equivale a NewGame().</summary>
+    public void DeleteData()
+    {
+        NewGame();
+    }
+
+    private GameData CreateDefaultData()
+    {
+        return new GameData
+        {
+            playerName = DefaultPlayerName,
+            actualCase = DefaultCase,
+            caseHistory = new List<CaseRecord>()
+        };
     }
 
     public void SaveData()
     {
-        File.WriteAllText(saveFile, JsonUtility.ToJson(Data, true));
+        if (data == null) LoadData();
+
+        File.WriteAllText(SaveFilePath, JsonUtility.ToJson(data, true));
         isSaveFileDefault = false;
+        isSaveFileExist = true;
     }
 
     // ───────────────────────── Datos generales ─────────────────────────
@@ -107,8 +169,8 @@ public class GameDataController : MonoBehaviour
     }
 
     /// <summary>
-    /// Inicia un nuevo intento del caso. El guion se reinicia cada vez que se carga el caso,
-    /// por lo que cualquier intento que haya quedado sin cerrar se marca como abandonado.
+    /// Inicia un nuevo intento del caso. Cualquier intento que haya quedado sin cerrar
+    /// se marca como abandonado.
     /// </summary>
     public AttemptRecord StartAttempt(string caseId)
     {

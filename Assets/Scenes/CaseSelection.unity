@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 232780315}
   - component: {fileID: 232780314}
   - component: {fileID: 232780313}
-  - component: {fileID: 232780312}
+  - component: {fileID: 232780316}
   m_Layer: 5
   m_Name: NewGameButton
   m_TagString: Untagged
@@ -264,20 +264,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0007482, y: 37}
   m_SizeDelta: {x: 299.4384, y: 61.93799}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &232780312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232780310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec329b956e79ce4b8f95bba802d4db7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CaseButton
-  clinicalCase: {fileID: 0}
-  sceneToLoad: MainMenu
 --- !u!114 &232780313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,9 +308,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 232780312}
-        m_TargetAssemblyTypeName: CaseButton, Assembly-CSharp
-        m_MethodName: SelectCase
+      - m_Target: {fileID: 232780316}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -372,6 +358,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 232780310}
   m_CullTransparentMesh: 1
+--- !u!114 &232780316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232780310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c3e4e6e92ce3b4fbbecc99a87bb350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuButton
+  sceneToLoad: MainMenu
+  resetProgress: 0
 --- !u!1 &292197206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec329b956e79ce4b8f95bba802d4db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CaseButton
-  clinicalCase: {fileID: 0}
+  clinicalCase: {fileID: 11400000, guid: ed0fd73e52d74e343ace703c083c79c7, type: 2}
   sceneToLoad: Consultorio
 --- !u!114 &1358243813
 MonoBehaviour:
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Volver
+  m_text: "Volver al men\xFA principal"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

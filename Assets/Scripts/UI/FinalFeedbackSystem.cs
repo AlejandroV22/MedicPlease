@@ -16,7 +16,7 @@ public class FinalFeedbackSystem : MonoBehaviour
     [SerializeField] private GameObject feedbackPanel;
     [SerializeField] private TextMeshProUGUI interrogationText;
     [SerializeField] private TextMeshProUGUI examinationText;
-    [SerializeField] private GameDataController gameDataController;
+    //[SerializeField] private GameDataController gameDataController;
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private RectTransform contentRect;
 
@@ -58,7 +58,7 @@ public class FinalFeedbackSystem : MonoBehaviour
     public void ShowFinalPanel(bool diagnosisCorrect)
     {
         ClinicalCase clinicalCase = GameManager.Instance.SelectedCase;
-        CaseRecord caseRecord = gameDataController.GetCaseRecord(clinicalCase.name);
+        CaseRecord caseRecord = GameDataController.Instance.GetCaseRecord(clinicalCase.name);
         AttemptRecord attempt = caseRecord?.LastAttempt;
 
         List<DecisionRecord> interrogation = new List<DecisionRecord>();
@@ -91,6 +91,7 @@ public class FinalFeedbackSystem : MonoBehaviour
 
         bool reachedThreshold = relevant >= relevantThreshold;
         bool success = reachedThreshold && diagnosisCorrect;
+
 
         // Puntaje: porcentaje de decisiones relevantes entre las que puntúan
         int score = total > 0 ? Mathf.RoundToInt(100f * relevant / total) : 0;

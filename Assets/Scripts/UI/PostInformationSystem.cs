@@ -7,7 +7,7 @@ using System.Linq;
 
 public class PostInformationSystem : MonoBehaviour
 {
-    public GameObject gameDataController;
+    //public GameObject gameDataController;
     public GameData saveData;
     public ClinicalCase clinicalCase;
     public Texto guion;
@@ -22,7 +22,7 @@ public class PostInformationSystem : MonoBehaviour
     private void Start()
     {
         clinicalCase = GameManager.Instance.SelectedCase;
-        saveData = gameDataController.GetComponent<GameDataController>().Data;
+        saveData = GameDataController.Instance.Data;
         guion.GetTextToFile(clinicalCase.scriptPath);
         GetLastDecisions();
     }
@@ -41,7 +41,7 @@ public class PostInformationSystem : MonoBehaviour
         if (clinicalCase == null || saveData == null) return;
 
         // Solo las decisiones del intento mas reciente de este caso
-        CaseRecord caseRecord = gameDataController.GetComponent<GameDataController>().GetCaseRecord(clinicalCase.name);
+        CaseRecord caseRecord = GameDataController.Instance.GetCaseRecord(clinicalCase.name);
         AttemptRecord attempt = caseRecord?.LastAttempt;
         List<DecisionRecord> attemptDecisions = attempt != null ? attempt.decisions : new List<DecisionRecord>();
 

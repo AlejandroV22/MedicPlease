@@ -5,7 +5,7 @@ using UnityEngine;
 public class DiagnosisSystem : MonoBehaviour
 {
     public ClinicalCase clinicalCase;
-    public GameDataController gameDataController;
+    //public GameDataController gameDataController;
     private string[] questions;
     private bool[] isRelevantQuestions;
     public List<string> relevantDecisionMade;
@@ -69,11 +69,11 @@ public class DiagnosisSystem : MonoBehaviour
     public void RegisterDecision(string decision, ExamCategory category = ExamCategory.None)
     {
         EnsureCase();
-        gameDataController.RegisterDecision(decision, IsRelevantDecision(decision, category));
+        GameDataController.Instance.RegisterDecision(decision, IsRelevantDecision(decision, category));
 
         if (IsDiagnosisOption(decision))
         {
-            gameDataController.FinishAttempt(decision == clinicalCase.correctDiagnosis);
+            GameDataController.Instance.FinishAttempt(decision == clinicalCase.correctDiagnosis);
             if(decision == clinicalCase.correctDiagnosis){
                 isDiagnosisCorrect = true;
             }else{
@@ -138,7 +138,7 @@ public class DiagnosisSystem : MonoBehaviour
         OptainDiagnosis();
         totalRelevant = clinicalCase.minimumCorrectExams;
 
-        AttemptRecord attempt = gameDataController.CurrentAttempt;
+        AttemptRecord attempt = GameDataController.Instance.CurrentAttempt;
         if (attempt == null) return;
 
         relevantDecisionMade.AddRange(
@@ -149,28 +149,25 @@ public class DiagnosisSystem : MonoBehaviour
 public bool DidNecessaryExtraExam()
 {
     EnsureCase();
-    AttemptRecord attempt = gameDataController.CurrentAttempt;
+    AttemptRecord attempt = GameDataController.Instance.CurrentAttempt;
     if (attempt == null) return false;
 
     return attempt.decisions.Any(d =>
         clinicalCase.IsExamRelevant(ExamCategory.Extra, d.decision));
 }
 
-public void SelectDiagnosis()
-{
-    Start();
-    GetRelevantDecisions();   // también llama a OptainDiagnosis() para llenar las listas
+    public void SelectDiagnosis()
+    {
+        Start();
+        GetRelevantDecisions();
 
-    List<string> source = DidNecessaryExtraExam() ? diagnosisWithCorrect : diagnosisWithoutCorrect;
+        var options = relevantDecisionMade.Count() == totalRelevantBeforeExtraExams + 1
+            ? diagnosisWithCorrect
+            : diagnosisWithoutCorrect;
 
-    rawChoices = "{choice}{choicest2 c:";
-    foreach (string diagnosis in source)
-        rawChoices += "\"" + diagnosis + "\" ";
-    rawChoices += "} ";
-
-    Debug.Log(rawChoices);
-    choiceBox.SetActive(true);
-    
-    choiceBox.GetComponent<ChoiceSystem>().ChoiceMenu(rawChoices);
-}
+        var choice = choiceBox.GetComponent<ChoiceSystem>();
+        choice.cancelable = false;          // el diagnóstico no se puede cancelar
+        choiceBox.SetActive(true);
+        choice.ChoiceMenu(ChoiceSystem.BuildRawChoices(options));
+    }
 }

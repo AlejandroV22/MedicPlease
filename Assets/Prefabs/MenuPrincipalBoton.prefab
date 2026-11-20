@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 802036843349198828}
   - component: {fileID: 4933602686128514686}
   - component: {fileID: 8176675964968922899}
-  - component: {fileID: 2778935168765524458}
+  - component: {fileID: 244017219074093065}
   m_Layer: 5
   m_Name: MenuPrincipalBoton
   m_TagString: Untagged
@@ -121,8 +121,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4933602686128514686}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2778935168765524458
+      m_Calls:
+      - m_Target: {fileID: 244017219074093065}
+        m_TargetAssemblyTypeName: MainMenuButton, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &244017219074093065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,11 +143,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3586611453412054588}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec329b956e79ce4b8f95bba802d4db7, type: 3}
+  m_Script: {fileID: 11500000, guid: 15c3e4e6e92ce3b4fbbecc99a87bb350, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CaseButton
-  clinicalCase: {fileID: 11400000, guid: 4d7b9605aa0fe32418a85a845fa68bdc, type: 2}
-  sceneToLoad: CaseSelection
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuButton
+  sceneToLoad: 
+  resetProgress: 0
 --- !u!1 &4522529669731691257
 GameObject:
   m_ObjectHideFlags: 0

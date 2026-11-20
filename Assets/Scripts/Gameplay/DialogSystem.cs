@@ -26,7 +26,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject interrogationButton;
     public string rawChoices;
     public GameData saveFile = new GameData();
-    public GameDataController saveFileController;
+    //public GameDataController saveFileController;
     private Coroutine blinkingSprite;
     public GameObject inspectionButton;
     public GameObject listeningButton;
@@ -41,6 +41,7 @@ public class DialogSystem : MonoBehaviour
     public GameObject diagnosisController;
     public FinalFeedbackSystem finalFeedback; 
     public GameObject charaImage;
+    public SaveUploader saveUploader;
 
     public void Awake()
     {
@@ -48,7 +49,7 @@ public class DialogSystem : MonoBehaviour
         Debug.Assert(extraMenu != null, "extraMenu no asignado en DialogSystem", this);
         FinalFeedbackSystem.ResetState();
         GetVariables();
-        saveFileController.StartAttempt(clinicalCase.name);
+        GameDataController.Instance.StartAttempt(clinicalCase.name);
         texto.GetTextToFile(clinicalCase.scriptPath);
         ShowText();
         GetComponent<Button>().onClick.AddListener(IsPressed);
@@ -60,7 +61,7 @@ public class DialogSystem : MonoBehaviour
     }
     public void GetVariables()
     {
-        saveFile = saveFileController.Data;
+        saveFile = GameDataController.Instance.Data;
         clinicalCase = GameManager.Instance.SelectedCase;
         charaImage.GetComponent<Image>().sprite = clinicalCase.retratoPaciente;
         Type tipo = clinicalCase.GetType();
@@ -300,10 +301,33 @@ public class DialogSystem : MonoBehaviour
         }
         if (actualPhrase.Contains("{end}"))
         {
-            saveFileController.GetComponent<SaveUploader>().Upload();
             queueDialogs.Clear();
             actualPhrase = "";
-            finalFeedback.ShowFinalPanel(diagnosisController.GetComponent<DiagnosisSystem>().isDiagnosisCorrect);
+
+            // Panel final
+            if (finalFeedback == null)
+            {
+                Debug.LogError("finalFeedback no está asignado en DialogSystem.", this);
+            }
+            else
+            {
+                DiagnosisSystem diagnosis = diagnosisController != null
+                    ? diagnosisController.GetComponent<DiagnosisSystem>()
+                    : null;
+
+                bool diagnosisOk = diagnosis != null && diagnosis.isDiagnosisCorrect;
+                finalFeedback.ShowFinalPanel(diagnosisOk);
+            }
+
+            // Subida del guardado
+            SaveUploader uploader = GameDataController.Instance != null
+                ? GameDataController.Instance.GetComponent<SaveUploader>()
+                : null;
+
+            if (uploader == null)
+                Debug.LogError("SaveUploader no está en el objeto del GameDataController persistente.", this);
+            else
+                uploader.Upload();
         }
         if(actualPhrase.Contains("{diag}")){
             choiceBox.transform.GetChild(1).gameObject.SetActive(false);

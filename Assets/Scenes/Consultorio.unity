@@ -444,6 +444,7 @@ MonoBehaviour:
   diagnosisController: {fileID: 1919622047}
   examinationMenu: {fileID: 1191500787}
   extraMenu: {fileID: 1429336732}
+  ultimoExamen: 
   category: 1
   exams:
   - Observar el Rostro
@@ -1431,6 +1432,7 @@ MonoBehaviour:
   diagnosisController: {fileID: 1919622047}
   examinationMenu: {fileID: 1191500787}
   extraMenu: {fileID: 1429336732}
+  ultimoExamen: 
   category: 2
   exams:
   - "Auscultar coraz\xF3n"
@@ -2155,6 +2157,7 @@ MonoBehaviour:
   diagnosisController: {fileID: 1919622047}
   examinationMenu: {fileID: 1191500787}
   extraMenu: {fileID: 1429336732}
+  ultimoExamen: 
   category: 7
   exams:
   - "RM cerebral con difusi\xF3n"
@@ -3649,7 +3652,7 @@ MonoBehaviour:
     playerName: 
     actualCase: 
     caseHistory: []
-  saveFileController: {fileID: 1503416845}
+  saveFileController: {fileID: 0}
   inspectionButton: {fileID: 129051940}
   listeningButton: {fileID: 306905410}
   touchingButton: {fileID: 739864174}
@@ -3888,6 +3891,7 @@ MonoBehaviour:
   diagnosisController: {fileID: 1919622047}
   examinationMenu: {fileID: 1191500787}
   extraMenu: {fileID: 1429336732}
+  ultimoExamen: 
   category: 5
   exams:
   - Olfatorio
@@ -4665,6 +4669,7 @@ MonoBehaviour:
   diagnosisController: {fileID: 1919622047}
   examinationMenu: {fileID: 1191500787}
   extraMenu: {fileID: 1429336732}
+  ultimoExamen: 
   category: 3
   exams:
   - "Palpar t\xF3rax"
@@ -6305,7 +6310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b70cfc2cd536d9428b987e05b250944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PostInformationSystem
-  gameDataController: {fileID: 1503416844}
+  gameDataController: {fileID: 0}
   saveData:
     playerName: 
     actualCase: 
@@ -9045,69 +9050,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501998011}
   m_CullTransparentMesh: 1
---- !u!1 &1503416844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1503416846}
-  - component: {fileID: 1503416845}
-  - component: {fileID: 1503416847}
-  m_Layer: 0
-  m_Name: GameDataController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1503416845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503416844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402443946f623154fbd8c6009543a145, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameDataController
-  isSaveFileExist: 0
-  isSaveFileDefault: 0
---- !u!4 &1503416846
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503416844}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 908.8004, y: 556.41675, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1503416847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503416844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b653ba24bcc985c9ba6220e982a63cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SaveUploader
-  endpointUrl: https://medicpleasedashboard.onrender.com/api/saves/
-  apiKey: 6e1921b0bbab43550592c4c394ee74bf449e128b3108177a
-  fileName: saveFile.json
-  timeoutSeconds: 10
 --- !u!1 &1540525724
 GameObject:
   m_ObjectHideFlags: 0
@@ -10731,7 +10673,6 @@ MonoBehaviour:
   feedbackPanel: {fileID: 1824651426}
   interrogationText: {fileID: 494673769}
   examinationText: {fileID: 1553110413}
-  gameDataController: {fileID: 1503416845}
   scrollRect: {fileID: 1320824075}
   contentRect: {fileID: 603063826}
   relevantThreshold: 6
@@ -10742,10 +10683,10 @@ MonoBehaviour:
   resultText: {fileID: 1974724780}
   diagnosisText: {fileID: 31516876}
   requireCorrectDiagnosis: 1
-  minScoreA: 90
-  minScoreB: 75
-  minScoreC: 60
-  minScoreD: 45
+  minScoreA: 80
+  minScoreB: 60
+  minScoreC: 40
+  minScoreD: 20
   scoreText: {fileID: 1768575386}
   gradeText: {fileID: 1143988088}
 --- !u!1 &1888636305
@@ -11079,7 +11020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiagnosisSystem
   clinicalCase: {fileID: 0}
-  gameDataController: {fileID: 1503416845}
+  gameDataController: {fileID: 0}
   relevantDecisionMade: []
   inspectionButton: {fileID: 129051940}
   listeningButton: {fileID: 306905410}
@@ -11165,6 +11106,7 @@ MonoBehaviour:
   diagnosisController: {fileID: 1919622047}
   examinationMenu: {fileID: 1191500787}
   extraMenu: {fileID: 1429336732}
+  ultimoExamen: 
   category: 6
   exams:
   - Columna dorsal
@@ -11589,6 +11531,7 @@ MonoBehaviour:
   diagnosisController: {fileID: 1919622047}
   examinationMenu: {fileID: 1191500787}
   extraMenu: {fileID: 1429336732}
+  ultimoExamen: 
   category: 4
   exams:
   - "Orientaci\xF3n"
@@ -12440,7 +12383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b70cfc2cd536d9428b987e05b250944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PostInformationSystem
-  gameDataController: {fileID: 1503416844}
+  gameDataController: {fileID: 0}
   saveData:
     playerName: 
     actualCase: 
@@ -13200,7 +13143,6 @@ SceneRoots:
   - {fileID: 1625670206}
   - {fileID: 858058376}
   - {fileID: 2045485709}
-  - {fileID: 1503416846}
   - {fileID: 716670069}
   - {fileID: 992738933}
   - {fileID: 1557059214}
