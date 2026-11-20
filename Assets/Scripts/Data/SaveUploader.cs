@@ -15,7 +15,7 @@ public class SaveUploader : MonoBehaviour
 
     [Header("Servidor")]
     [Tooltip("URL completa del endpoint, debe terminar en /api/saves/")]
-    [SerializeField] private string endpointUrl = "https://medicpleasedashboard.onrender.com/";
+    [SerializeField] private string endpointUrl = "https://medicpleasedashboard.onrender.com/api/saves/";
 
     [Tooltip("Debe ser igual a GAME_API_KEY del archivo .env del servidor")]
     [SerializeField] private string apiKey = Environment.GetEnvironmentVariable("GAME_API_KEY");
