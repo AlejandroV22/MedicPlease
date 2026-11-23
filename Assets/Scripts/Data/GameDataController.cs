@@ -32,8 +32,6 @@ public class GameDataController : MonoBehaviour
     private void Awake()
     {
         Debug.Log("GameDataController Awake id=" + GetEntityId() + " esInstancia=" + (Instance == this));
-        // Si ya existe una instancia persistente (por ejemplo, la del menú principal),
-        // esta copia se destruye para no tener datos duplicados.
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
